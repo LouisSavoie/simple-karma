@@ -15,25 +15,28 @@ client.on('ready', () => {
 const prefix = 'sk ';
 
 //COMMAND HANDLER
-client.on('message', msg => {
+client.on('message', message => {
     // if message doesn't start with the prefix or the message author is a bot, don't interact.
-    if(!msg.content.startsWith(prefix) || msg.author.bot) {
+    if(!message.content.startsWith(prefix) || message.author.bot) {
         return;
     }
     //PintDebug
-    console.log("msg content:" + msg.content)
+    console.log("message content:" + message.content)
     // remove prefix from message content and break up remaning command into parts seperated by a space
-    const args = msg.content.slice(prefix.length).split(' ');
+    const args = message.content.slice(prefix.length).split(' ');
     //PintDebug
-    console.log("msg args: " + args)
+    console.log("message args: " + args)
     const command = args[0]
     const userMentioned = args[1]
     //PintDebug
     console.log("command arg: " + command)
     console.log("userMentioned arg: " + userMentioned)
 
+    userID = client.users.cache.filter(user => user.username === userMentioned).first().id
+    console.log(userID)
+
     if(command === 'hey'){
-        msg.channel.send("Hi, " + msg.author.toString());
+        message.channel.send("Hi, " + message.author.toString());
     }
 });
 
