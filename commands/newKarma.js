@@ -4,9 +4,18 @@ module.exports = {
     name: 'newKarma',
     description: "Creates a new thing",
     execute(message, thing){
-        karma.new(thing);
-        message.channel.send([
-            '**' + thing + '** has been created!'
-        ]).catch(console.error);
+        karma.has(thing).then(res => {
+            console.log("karma thing exists: " + res);
+            if (!res) {
+                karma.new(thing);
+                message.channel.send([
+                    'New Karma thing, **' + thing + '**, has been created!'
+                ]).catch(console.error);
+            } else {
+                message.channel.send([
+                    'Karma thing, **' + thing + '**, already exists!'
+                ]).catch(console.error);
+            }
+        });
     }
 }

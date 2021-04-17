@@ -5,13 +5,19 @@ const jsoning = require('jsoning'),
 
 let karma = {};
 
+// Has
+karma.has = async function(thing) {
+    let res = await karmaDB.has(thing);
+    return res;
+};
 // New
 karma.new = async function(thing) {
     await karmaDB.set(thing, 0);
 };
 // Get
 karma.get = async function(thing) {
-    await karmaDB.get(thing);
+    let res = await karmaDB.get(thing);
+    return res;
 };
 // Increment
 karma.increment = async function(thing) {
