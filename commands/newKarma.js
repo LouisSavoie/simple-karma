@@ -1,7 +1,7 @@
-const karma = require("./karmaDB");
+const karma = require("../database/karmaDB");
 
 module.exports = {
-    name: 'new',
+    name: 'newKarma',
     description: "Creates a new thing",
     execute(message, thing){
         karma.new(thing);

@@ -1,5 +1,5 @@
 const jsoning = require('jsoning'),
-      karmaDB = new jsoning('./karma.json');
+      karmaDB = new jsoning('./database/karma.json');
 
 // DATABASE FUNCTIONS
 
@@ -7,7 +7,7 @@ let karma = {};
 
 // New
 karma.new = async function(thing) {
-    await karmaDB.set(thing, 1);
+    await karmaDB.set(thing, 0);
 };
 // Get
 karma.get = async function(thing) {

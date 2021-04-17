@@ -23,7 +23,7 @@ client.on('message', message => {
         return;
     }
     
-    const args = message.content.slice(prefix.length).split(' ');
+    const args = message.cleanContent.slice(prefix.length).split(' ');
 
     //PintDebug
     // console.log("message args: " + args)
@@ -39,8 +39,8 @@ client.on('message', message => {
         //ChannelPrintDebug
         // message.channel.send("Yes, I can help with, " + thing);
         client.commands.get('help').execute(message);
-    } else if (command == 'new'){
-        client.commands.get('new').execute(message, thing);
+    } else if (command == 'newkarma'){
+        client.commands.get('newKarma').execute(message, thing);
     }
     // TODO:
     // else if (command == '+'){

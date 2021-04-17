@@ -3,12 +3,15 @@ module.exports = {
     description: "DMs a list of all commands.",
     execute(msg){
         msg.author.send([
+            '.',
             '**Help**:',
-            'Here is a list of commands I respond to:',
+            '__**Commands:**__',
+            'Syntax: **<prefix> <command> <thing>(optional)**',
             '**`sk help`**: DMs this list to you',
-            '**`sk <thing>`**: shows <things>\'s karma',
-            '**`sk + <thing>`**: increments <things>\s karma',
-            '**`sk - <thing>`**: decrements <things>\s karma'
+            '**`sk newkarma <thing>`**: Creates a new <thing>',
+            '**`sk karma <thing>`**: Shows a <thing>\'s karma',
+            '**`sk +karma <thing>`**: Increments a <thing>\'s karma',
+            '**`sk -karma <thing>`**: Decrements a <thing>\'s karma'
         ]);
     }
 }
