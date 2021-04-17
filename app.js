@@ -1,7 +1,7 @@
 const Discord = require('discord.js'),
       client = new Discord.Client(),
       fs = require('fs'),
-      config = require('./config.json')
+      config = require('./config.json');
 
 // CREATE COMMANDS COLLECTION
 client.commands = new Discord.Collection();
@@ -39,7 +39,9 @@ client.on('message', message => {
         //ChannelPrintDebug
         // message.channel.send("Yes, I can help with, " + thing);
         client.commands.get('help').execute(message);
-    } 
+    } else if (command == 'new'){
+        client.commands.get('new').execute(message, thing);
+    }
     // TODO:
     // else if (command == '+'){
     //     client.commands.get('increment').execute(message, thing);
