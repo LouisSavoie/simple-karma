@@ -41,6 +41,8 @@ client.on('message', message => {
         client.commands.get('help').execute(message);
     } else if (command == 'newkarma'){
         client.commands.get('newKarma').execute(message, thing);
+    } else if (command == 'karma'){
+        client.commands.get('getKarma').execute(message, thing);
     }
     // TODO:
     // else if (command == '+'){

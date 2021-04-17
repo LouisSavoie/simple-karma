@@ -5,7 +5,8 @@ module.exports = {
     description: "Creates a new thing",
     execute(message, thing){
         karma.has(thing).then(res => {
-            console.log("karma thing exists: " + res);
+            //PrintDebug
+            // console.log("karma thing exists: " + res);
             if (!res) {
                 karma.new(thing);
                 message.channel.send([
