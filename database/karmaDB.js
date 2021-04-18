@@ -2,6 +2,7 @@ const jsoning = require('jsoning'),
       karmaDB = new jsoning('./database/karma.json');
 
 // DATABASE FUNCTIONS
+// these are passed to the karma command files
 
 let karma = {};
 

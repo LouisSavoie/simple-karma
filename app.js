@@ -17,27 +17,21 @@ for(const file of commandFiles){
 // COMMAND PREFIX
 const prefix = 'sk ';
 
-//COMMAND HANDLER
+// MESSAGE HANDLER
 client.on('message', message => {
+    // if message doesn't start with the prefix and is form a bot, return
     if(!message.content.startsWith(prefix) || message.author.bot) {
         return;
     }
-    
+    // remove the prefix from the message, convert mentions to plain strings, split the arguments into an array by spaces
     const args = message.cleanContent.slice(prefix.length).split(' ');
 
-    //PintDebug
-    // console.log("message args: " + args)
-
+    // split args array into command and thing strings
     const command = args[0]
     const thing = args[1]
 
-    //PintDebug
-    // console.log("command, arg[0]: " + command)
-    // console.log("thing, arg[1]: " + thing)
-
+    // COMMAND TREE
     if(command == 'help'){
-        //ChannelPrintDebug
-        // message.channel.send("Yes, I can help with, " + thing);
         client.commands.get('help').execute(message);
     } else if (command == 'newkarma'){
         client.commands.get('newKarma').execute(message, thing);
