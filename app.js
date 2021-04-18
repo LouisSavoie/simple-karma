@@ -53,4 +53,4 @@ client.on('ready', () => {
 });
 
 // LOGIN
-client.login(config.token)
+client.login(process.env.SKTOKEN || config.token)
