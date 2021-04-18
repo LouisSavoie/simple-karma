@@ -49,7 +49,7 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     //SET STATUS
-    client.user.setActivity(`for 'sk ' commands`, {type: "WATCHING"});
+    client.user.setActivity(`sk help`, {type: "WATCHING"});
 });
 
 // LOGIN
