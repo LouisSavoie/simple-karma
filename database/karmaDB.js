@@ -13,7 +13,8 @@ karma.has = async function(thing) {
 };
 // New
 karma.new = async function(thing) {
-    await karmaDB.set(thing, 0);
+    let res = await karmaDB.set(thing, 0);
+    return res;
 };
 // Get
 karma.get = async function(thing) {

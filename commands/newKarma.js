@@ -8,15 +8,24 @@ module.exports = {
         karma.has(thing).then(res => {
             // if it doesn't, create it and send confirmation to channel
             if (!res) {
-                karma.new(thing);
-                message.channel.send([
-                    'New Karma thing, **' + thing + '**, has been created!'
-                ]).catch(console.error);
+                karma.new(thing).then(res => {
+                    if (res) {
+                        message.reply({
+                            embed: {
+                              color: "BLUE",
+                              description: `New Karma thing, **${thing}**, has been created!`
+                            }
+                        }).catch(console.error);
+                    }
+                });
             // else, tell the channel it already exists
             } else {
-                message.channel.send([
-                    'Karma thing, **' + thing + '**, already exists!'
-                ]).catch(console.error);
+                message.reply({
+                    embed: {
+                      color: "RED",
+                      description: 'Karma thing, **' + thing + '**, already exists!'
+                    }
+                }).catch(console.error);
             }
         });
     }
