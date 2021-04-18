@@ -21,11 +21,13 @@ karma.get = async function(thing) {
 };
 // Increment
 karma.increment = async function(thing) {
-    await karmaDB.math(thing, "add", 1);
+    let res = await karmaDB.math(thing, "add", 1);
+    return res;
 };
 // Decrement
 karma.decrement = async function(thing) {
-    await karmaDB.math(thing, "subtract", 1);
+    let res = await karmaDB.math(thing, "subtract", 1);
+    return res;
 };
 
 module.exports = karma;

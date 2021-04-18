@@ -43,13 +43,11 @@ client.on('message', message => {
         client.commands.get('newKarma').execute(message, thing);
     } else if (command == 'karma'){
         client.commands.get('getKarma').execute(message, thing);
+    } else if (command == '+karma'){
+        client.commands.get('incrementKarma').execute(message, thing);
+    } else if (command == '-karma'){
+        client.commands.get('decrementKarma').execute(message, thing);
     }
-    // TODO:
-    // else if (command == '+'){
-    //     client.commands.get('increment').execute(message, thing);
-    // } else if (command == '-'){
-    //     client.commands.get('decrement').execute(message, thing);
-    // }
 });
 
 // CONFIRM LOGIN
