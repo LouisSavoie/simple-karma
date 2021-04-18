@@ -1,0 +1,24 @@
+{
+  "name": "simple-karma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LouisSavoie/simple-karma.git"
+  },
+  "author": "Louis Savoie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LouisSavoie/simple-karma/issues"
+  },
+  "homepage": "https://github.com/LouisSavoie/simple-karma#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "jsoning": "^0.10.21"
+  }
+}
