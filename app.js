@@ -1,8 +1,21 @@
-const Discord = require('discord.js'),
-      client = new Discord.Client(),
-      fs = require('fs');
+// REQUIRES
+const Discord   = require('discord.js'),
+      client    = new Discord.Client(),
+      // For reading command files
+      fs        = require('fs'),
+      // For database models
+      mongoose  = require('mongoose');
 
 require('dotenv').config();
+
+// CONNECT MONGOOSE TO MONGODB
+mongoose.connect(process.env.DATABASEURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(console.log('Mongoose connected to MongoDB'))
+.catch(error => console.log(error.message));
+mongoose.set('useFindAndModify', false);
 
 // CREATE COMMANDS COLLECTION
 client.commands = new Discord.Collection();
@@ -13,7 +26,7 @@ for(const file of commandFiles){
 };
 
 // COMMAND SYNTAX
-// <prefix> <command> <thing>(optional)
+// <prefix> <command> <thingName>(optional)
 
 // COMMAND PREFIX
 const prefix = 'sk ';
@@ -27,21 +40,21 @@ client.on('message', message => {
     // remove the prefix from the message, convert mentions to plain strings, split the arguments into an array by spaces
     const args = message.cleanContent.slice(prefix.length).split(' ');
 
-    // split args array into command and thing strings
+    // split args array into command and thingName strings
     const command = args[0]
-    const thing = args[1]
+    const thingName = args[1]
 
     // COMMAND TREE
     if(command == 'help'){
         client.commands.get('help').execute(message);
     } else if (command == 'newkarma'){
-        client.commands.get('newKarma').execute(message, thing);
+        client.commands.get('newKarma').execute(message, thingName);
     } else if (command == 'karma'){
-        client.commands.get('getKarma').execute(message, thing);
+        client.commands.get('getKarma').execute(message, thingName);
     } else if (command == '+karma'){
-        client.commands.get('incrementKarma').execute(message, thing);
+        client.commands.get('incrementKarma').execute(message, thingName);
     } else if (command == '-karma'){
-        client.commands.get('decrementKarma').execute(message, thing);
+        client.commands.get('decrementKarma').execute(message, thingName);
     }
 });
 
@@ -50,7 +63,7 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     //SET STATUS
-    client.user.setActivity(`sk help`, {type: "WATCHING"});
+    client.user.setActivity(`"sk help"`, {type: "WATCHING"});
 });
 
 // LOGIN
