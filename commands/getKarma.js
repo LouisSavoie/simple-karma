@@ -1,28 +1,27 @@
-const karma = require("../database/karmaDB");
+// Require Mongoose Model for Things
+const Thing = require("../models/thing");
 
 module.exports = {
     name: 'getKarma',
     description: "Displays karma for a thing",
-    execute(message, thing){
-        // check if the karma DB has the thing
-        karma.has(thing).then(res => {
-            // if it does, get it's value and send it to the channel
-            if (res) {
-                karma.get(thing).then(res => {
-                    message.reply({
-                        embed: {
-                          color: "BLUE",
-                          description: '**' + thing + '** has **' + res + '** karma.'
-                        }
-                    }).catch(console.error);
-                });
-            // else, tell the channel it doesn't exist and how to create it
+    execute(message, thingName){
+        // check if the database has the thing
+        Thing.findOne({name: thingName}, function(err, foundThing) {
+            // if it does, send reply to the message's channel with thing's karma
+            if (foundThing){
+                message.reply({
+                    embed: {
+                      color: "BLUE",
+                      description: '**' + foundThing.name + '** has **' + foundThing.karma + '** karma.'
+                    }
+                }).catch(console.error);
+            // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
             } else {
                 message.reply({
                     embed: {
                       color: "RED",
-                      description: `Karma thing, **${thing}**, doesn\'t exist!\n
-                      You can create it with: \`sk newkarma ${thing}\`\n
+                      description: `Karma thing, **${thingName}**, doesn\'t exist!\n
+                      You can create it with: \`sk newkarma ${thingName}\`\n
                       Or it might exist under a different name.`
                     }
                 }).catch(console.error);
