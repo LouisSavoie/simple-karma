@@ -1,7 +1,8 @@
 const Discord = require('discord.js'),
       client = new Discord.Client(),
-      fs = require('fs'),
-      config = require('./config.json');
+      fs = require('fs');
+
+require('dotenv').config();
 
 // CREATE COMMANDS COLLECTION
 client.commands = new Discord.Collection();
@@ -53,4 +54,4 @@ client.on('ready', () => {
 });
 
 // LOGIN
-client.login(process.env.SKTOKEN || config.token)
+client.login(process.env.SKTOKEN)

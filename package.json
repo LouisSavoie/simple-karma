@@ -19,6 +19,7 @@
   "homepage": "https://github.com/LouisSavoie/simple-karma#readme",
   "dependencies": {
     "discord.js": "^12.5.3",
+    "dotenv": "^8.2.0",
     "jsoning": "^0.10.21"
   }
 }
