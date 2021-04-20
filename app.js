@@ -55,6 +55,8 @@ client.on('message', message => {
         client.commands.get('incrementKarma').execute(message, thingName);
     } else if (command == '-karma'){
         client.commands.get('decrementKarma').execute(message, thingName);
+    } else if (command == 'listkarma'){
+        client.commands.get('listKarma').execute(message, thingName);
     }
 });
 
@@ -62,8 +64,10 @@ client.on('message', message => {
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
-    //SET STATUS
-    client.user.setActivity(`"sk help"`, {type: "WATCHING"});
+    // SET STATUS
+    // client.user.setActivity(`"sk help"`, {type: "WATCHING"});
+    // Status for testing
+    client.user.setActivity(`"TESTING"`, {});
 });
 
 // LOGIN

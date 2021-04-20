@@ -1,8 +1,8 @@
 module.exports = {
     name: 'help',
     description: "DMs a list of all commands.",
-    execute(msg){
-        msg.author.send([
+    execute(message){
+        message.author.send([
             '.',
             '**Help**:',
             '__**Commands:**__',
