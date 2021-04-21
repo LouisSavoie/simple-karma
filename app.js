@@ -55,8 +55,8 @@ client.on('message', message => {
         client.commands.get('incrementKarma').execute(message, thingName);
     } else if (command == '-karma'){
         client.commands.get('decrementKarma').execute(message, thingName);
-    } else if (command == 'list'){
-        client.commands.get('list').execute(message, thingName);
+    } else if (command == 'search'){
+        client.commands.get('searchThings').execute(message, thingName);
     }
 });
 

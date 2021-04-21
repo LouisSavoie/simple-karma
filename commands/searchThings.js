@@ -2,10 +2,10 @@
 const Thing = require("../models/thing");
 
 module.exports = {
-    name: 'list',
+    name: 'searchThings',
     description: "DMs list of things with names containing a string",
     execute(message, char){
-        // check if the database has things with names containing with the character
+        // Search the database for things with names containing with the character
         let regex = new RegExp(char,"i");
         Thing.find({name: regex}, function(err, foundThings) {
             // if it doesn't, send DM to message's author with error
