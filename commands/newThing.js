@@ -2,7 +2,7 @@
 const Thing = require("../models/thing");
 
 module.exports = {
-    name: 'newKarma',
+    name: 'newThing',
     description: "Creates a new thing",
     execute(message, thingName){
         // check if the database already has the thing

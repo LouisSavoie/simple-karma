@@ -47,16 +47,16 @@ client.on('message', message => {
     // COMMAND TREE
     if(command == 'help'){
         client.commands.get('help').execute(message);
-    } else if (command == 'newkarma'){
-        client.commands.get('newKarma').execute(message, thingName);
+    } else if (command == 'new'){
+        client.commands.get('newThing').execute(message, thingName);
     } else if (command == 'karma'){
         client.commands.get('getKarma').execute(message, thingName);
     } else if (command == '+karma'){
         client.commands.get('incrementKarma').execute(message, thingName);
     } else if (command == '-karma'){
         client.commands.get('decrementKarma').execute(message, thingName);
-    } else if (command == 'listkarma'){
-        client.commands.get('listKarma').execute(message, thingName);
+    } else if (command == 'list'){
+        client.commands.get('list').execute(message, thingName);
     }
 });
 

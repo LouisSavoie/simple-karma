@@ -2,8 +2,8 @@
 const Thing = require("../models/thing");
 
 module.exports = {
-    name: 'listKarma',
-    description: "DMs karma for things starting with a character",
+    name: 'list',
+    description: "DMs list of things with names containing a string",
     execute(message, char){
         // check if the database has things with names containing with the character
         let regex = new RegExp(char,"i");
