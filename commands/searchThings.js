@@ -13,7 +13,7 @@ module.exports = {
                 message.reply({
                     embed: {
                       color: "RED",
-                      description: `No things starting with **${char}** exist!`
+                      description: `No things containing **${char}** exist!`
                     }
                 }).catch(console.error);
             // if it does, send DM to the message's author with thing's karma

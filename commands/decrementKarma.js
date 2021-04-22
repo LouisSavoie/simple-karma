@@ -23,8 +23,9 @@ module.exports = {
                     embed: {
                       color: "RED",
                       description: `Karma thing, **${thingName}**, doesn\'t exist!\n
-                      You can create it with: \`sk newkarma ${thingName}\`\n
-                      Or it might exist under a different name.`
+                      You can create it with: \`sk new ${thingName}\`\n
+                      It could also exist under a different name.\n
+                      Use \`sk search <part of name>\` to see if it does.`
                     }
                 }).catch(console.error);
             }
