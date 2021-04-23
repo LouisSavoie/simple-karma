@@ -49,14 +49,14 @@ client.on('message', message => {
         client.commands.get('help').execute(message);
     } else if (command == 'new'){
         client.commands.get('newThing').execute(message, thingName);
-    } else if (command == 'karma'){
-        client.commands.get('getKarma').execute(message, thingName);
     } else if (command == '+karma'){
         client.commands.get('incrementKarma').execute(message, thingName);
     } else if (command == '-karma'){
         client.commands.get('decrementKarma').execute(message, thingName);
     } else if (command == 'search'){
         client.commands.get('searchThings').execute(message, thingName);
+    } else {
+        client.commands.get('getThing').execute(message, command);
     }
 });
 

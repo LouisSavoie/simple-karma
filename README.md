@@ -9,7 +9,7 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk help`**: DMs this list to you
 - **`sk new <thing>`**: Creates a new \<thing\>
 - **`sk search <strng>`**: DMs a list of \<thing\>s with names that include the given string.
-- **`sk karma <thing>`**: Shows a \<thing\>'s karma
+- **`sk <thing>`**: Shows a \<thing\>'s karma
 - **`sk +karma <thing>`**: Increments a \<thing\>'s karma
 - **`sk -karma <thing>`**: Decrements a \<thing\>'s karma
 
