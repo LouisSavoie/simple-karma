@@ -13,6 +13,8 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk +karma <thing>`**: Increments a \<thing\>'s karma
 - **`sk -karma <thing>`**: Decrements a \<thing\>'s karma
 
+*Note: Prefix and commands are case insensitive.*
+
 ## Current Scope
 - Help documentation
 - Persistant cloud database

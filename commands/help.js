@@ -12,7 +12,8 @@ module.exports = {
             '**`sk search <string>`**: DMs you a list of things with names that contain the string',
             '**`sk <thing>`**: Shows a thing\'s karma',
             '**`sk +karma <thing>`**: Increments a thing\'s karma',
-            '**`sk -karma <thing>`**: Decrements a thing\'s karma'
+            '**`sk -karma <thing>`**: Decrements a thing\'s karma',
+            '*Note: Prefix and commands are case insensitive.*'
         ]);
     }
 }

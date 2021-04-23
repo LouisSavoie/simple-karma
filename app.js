@@ -34,18 +34,19 @@ const prefix = 'sk ';
 // MESSAGE HANDLER
 client.on('message', message => {
     // if message doesn't start with the prefix and is form a bot, return
-    if(!message.content.startsWith(prefix) || message.author.bot) {
+    if(!message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
         return;
     }
     // remove the prefix from the message, convert mentions to plain strings, split the arguments into an array by spaces
     const args = message.cleanContent.slice(prefix.length).split(' ');
 
     // split args array into command and thingName strings
-    const command = args[0]
-    const thingName = args[1]
+    const command = args[0].toLowerCase();
+    const thingName = args[1];
+    const getThingName = args[0];
 
     // COMMAND TREE
-    if(command == 'help'){
+    if (command == 'help'){
         client.commands.get('help').execute(message);
     } else if (command == 'new'){
         client.commands.get('newThing').execute(message, thingName);
@@ -56,7 +57,7 @@ client.on('message', message => {
     } else if (command == 'search'){
         client.commands.get('searchThings').execute(message, thingName);
     } else {
-        client.commands.get('getThing').execute(message, command);
+        client.commands.get('getThing').execute(message, getThingName);
     }
 });
 
