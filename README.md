@@ -12,6 +12,7 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk <thing>`**: Shows a \<thing\>'s karma
 - **`sk +karma <thing>`**: Increments a \<thing\>'s karma
 - **`sk -karma <thing>`**: Decrements a \<thing\>'s karma
+- **`sk delete <thing>`**: Deletes a thing. Only bad people do this.
 
 *Note: Prefix and commands are case insensitive.*
 
@@ -22,6 +23,7 @@ Commands are formated and limited in scope such that users interact with the poi
 - Increment / decrement a thing's karma
 - Show a thing's karma
 - Search the database for things
+- Delete things. Don't do this...
 
 ## Future Scope
 - You cant give yourself points. (If a thing is a user, it has a user id, which is checked against the message author's id)
