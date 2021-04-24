@@ -5,11 +5,13 @@ module.exports = {
     name: 'trollDelete',
     description: "Transfers karma from user issuing the command to the thing they tried to delete.",
     execute(message, thingName){
+        // create regex for finding the command issuer
         const regex = new RegExp(message.member.displayName,"i");
         // check if the database has the the user that issued the command as a thing
         Thing.findOne({name: regex}, function(err, foundUser) {
             // if it does, continue
             if (foundUser) {
+                // if user has non-positive karma throw error, else continue
                 if (foundUser.karma <= 0) {
                     message.reply({
                         embed: {
