@@ -2,12 +2,12 @@
 const Thing = require("../models/thing");
 
 module.exports = {
-    name: 'getKarma',
-    description: "Displays karma for a thing",
+    name: 'getThing',
+    description: "Displays a thing",
     execute(message, thingName){
         // check if the database has the thing
         Thing.findOne({name: thingName}, function(err, foundThing) {
-            // if it does, send reply to the message's channel with thing's karma
+            // if it does, send reply to the message's channel with the thing
             if (foundThing){
                 message.reply({
                     embed: {
@@ -20,9 +20,10 @@ module.exports = {
                 message.reply({
                     embed: {
                       color: "RED",
-                      description: `Karma thing, **${thingName}**, doesn\'t exist!\n
-                      You can create it with: \`sk newkarma ${thingName}\`\n
-                      Or it might exist under a different name.`
+                      description: `Thing, **${thingName}**, doesn\'t exist!\n
+                      You can create it with: \`sk new ${thingName}\`\n
+                      It could also exist under a different name.\n
+                      Use \`sk search <part of name>\` to see if it does.`
                     }
                 }).catch(console.error);
             }
