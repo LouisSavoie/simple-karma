@@ -68,9 +68,9 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     // SET STATUS
-    client.user.setActivity(`"sk help"`, {type: "WATCHING"});
+    // client.user.setActivity(`"sk help"`, {type: "WATCHING"});
     // Status for testing
-    // client.user.setActivity(`"TESTING"`, {});
+    client.user.setActivity(`"TESTING"`, {});
 });
 
 // LOGIN

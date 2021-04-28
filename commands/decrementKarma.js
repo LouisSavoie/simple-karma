@@ -1,34 +1,25 @@
-// Require Mongoose Model for Things
-const Thing = require("../models/thing");
+// Require functions
+const db = require("../functions/findThing");
+const reply = require("../functions/reply");
 
 module.exports = {
     name: 'decrementKarma',
     description: "Decrements karma for a thing",
-    execute(message, thingName){
+    async execute(message, thingName){
         // check if the database has the thing
-        Thing.findOne({name: thingName}, function(err, foundThing) {
-            // if it does, decrement thing's karma then send reply to the message's channel with thing's karma
-            if (foundThing){
-                foundThing.karma -= 1;
-                foundThing.save();
-                message.reply({
-                    embed: {
-                      color: "BLUE",
-                      description: '**' + foundThing.name + '** has **' + foundThing.karma + '** karma.'
-                    }
-                }).catch(console.error);
-            // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
-            } else {
-                message.reply({
-                    embed: {
-                      color: "RED",
-                      description: `Thing, **${thingName}**, doesn\'t exist!\n
-                      You can create it with: \`sk new ${thingName}\`\n
-                      It could also exist under a different name.\n
-                      Use \`sk search <part of name>\` to see if it does.`
-                    }
-                }).catch(console.error);
-            }
-        });
+        let foundThing = await db.findOne(message, thingName);
+
+        // debug
+        console.log("DEBUG: 2. decrementKarma.js, foundThing: " + foundThing);
+
+        // if it does, decrement thing's karma then send reply to the message's channel with thing's karma
+        if (foundThing){
+            foundThing.karma -= 1;
+            foundThing.save();
+            reply.found(message, foundThing);
+        // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
+        } else {
+            reply.notFound(message, thingName);
+        }
     }
 }
