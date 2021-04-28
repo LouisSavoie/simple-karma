@@ -1,5 +1,5 @@
 // Require functions
-const db = require("../functions/findThing");
+const db = require("../functions/database");
 const reply = require("../functions/reply");
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
         // check if the command issuer is the thing being incremented
         if (!thingName.includes(message.member.displayName)) {
             // check if the database has the thing
-            let foundThing = await db.findOne(message, thingName);
+            let foundThing = await db.findOne(thingName);
 
             // debug
             console.log("DEBUG: 2. incrementKarma.js, foundThing: " + foundThing);

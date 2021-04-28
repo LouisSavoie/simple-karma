@@ -1,5 +1,5 @@
 // Require functions
-const db = require("../functions/findThing");
+const db = require("../functions/database");
 const reply = require("../functions/reply");
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
     description: "Decrements karma for a thing",
     async execute(message, thingName){
         // check if the database has the thing
-        let foundThing = await db.findOne(message, thingName);
+        let foundThing = await db.findOne(thingName);
 
         // debug
         console.log("DEBUG: 2. decrementKarma.js, foundThing: " + foundThing);

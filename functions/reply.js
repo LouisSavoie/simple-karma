@@ -1,7 +1,7 @@
 // Create reply object
 let replyObj = {};
 
-// THING FOUND
+// SUCCESS: THING FOUND
 replyObj.found = function(message, foundThing) {
     message.reply({
         embed: {
@@ -11,7 +11,52 @@ replyObj.found = function(message, foundThing) {
     }).catch(console.error);
 };
 
-// THING NOT FOUND
+// SUCCESS: THINGS FOUND
+replyObj.thingsFound = function(message, char, foundThings) {
+    // debug
+    // console.log("foundThings:\n" + foundThings);
+
+    text = `.\nThings containing **${char}**:`;
+    foundThings.forEach(thing => {
+        text += `\n--------------------\n**${thing.name}**: Karma - **${thing.karma}**`
+    });
+    console.log("text:\n" + text);
+    message.author.send([
+        `${text}`
+    ]).catch(console.error);
+};
+
+// ERROR: THING ALREADY EXISTS
+replyObj.thingAlreadyExists = function(message, foundThing) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: 'Thing, **' + foundThing.name + '**, already exists!'
+        }
+    }).catch(console.error);
+};
+
+// SUCCESS: THING CREATED
+replyObj.thingCreated = function(message, newThing) {
+    message.reply({
+        embed: {
+          color: "BLUE",
+          description: `New thing, **${newThing.name}**, has been created!`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: THING COULD NOT BE CREATED
+replyObj.thingNotCreated = function(message, thingName) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not created :('
+        }
+    }).catch(console.error);
+};
+
+// ERROR: THING NOT FOUND
 replyObj.notFound = function(message, thingName) {
     message.reply({
         embed: {
@@ -24,7 +69,17 @@ replyObj.notFound = function(message, thingName) {
     }).catch(console.error);
 };
 
-// KARMA CAPPED
+// ERROR: NO THINGS FOUND
+replyObj.noThingsFound = function(message, char) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `No things containing **${char}** exist!`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: KARMA CAPPED
 replyObj.capped = function(message, thingName) {
     message.reply({
         embed: {
@@ -35,7 +90,7 @@ replyObj.capped = function(message, thingName) {
     }).catch(console.error);
 };
 
-// CAN'T GIVE KARMA TO YOURSELF
+// ERROR: CAN'T GIVE KARMA TO YOURSELF
 replyObj.karmaYourselfError = function(message, thingName) {
     message.reply({
         embed: {
@@ -46,7 +101,7 @@ replyObj.karmaYourselfError = function(message, thingName) {
     }).catch(console.error);
 };
 
-// NOT ENOUGH KARMA
+// ERROR: NOT ENOUGH KARMA
 replyObj.notEnoughKarma = function(message) {
     message.reply({
         embed: {
@@ -67,7 +122,7 @@ replyObj.userNotInDatabase = function(message, displayName) {
     }).catch(console.error);
 };
 
-// DELETE TROLLED
+// SUCCESS: DELETE TROLLED
 replyObj.deleteTrolled = function(message, foundUser, foundThing) {
     message.reply({
         embed: {
