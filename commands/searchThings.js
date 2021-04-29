@@ -7,9 +7,7 @@ module.exports = {
     description: "DMs list of things with names containing a string",
     async execute(message, char){
         // Search the database for things with names containing with the character
-        let regex = new RegExp(char,"i");
-
-        let foundThings = await db.find(regex);
+        let foundThings = await db.find(char);
         
         // debug
         console.log("DEBUG: 2. searchThings.js, foundThings: " + foundThings);

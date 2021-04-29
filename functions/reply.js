@@ -20,7 +20,10 @@ replyObj.thingsFound = function(message, char, foundThings) {
     foundThings.forEach(thing => {
         text += `\n--------------------\n**${thing.name}**: Karma - **${thing.karma}**`
     });
-    console.log("text:\n" + text);
+
+    // debug
+    // console.log("text:\n" + text);
+    
     message.author.send([
         `${text}`
     ]).catch(console.error);

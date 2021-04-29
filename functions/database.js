@@ -6,8 +6,9 @@ let databaseObj = {};
 
 // FIND ONE
 databaseObj.findOne = async function(thingName) {
+    let regex = new RegExp(thingName,"i");
     // check if the database has the thing
-    let foundThing = await Thing.findOne({name: thingName}).exec();
+    let foundThing = await Thing.findOne({name: regex}).exec();
 
     // debug
     console.log("============= findOne in Database ===============");
@@ -23,7 +24,8 @@ databaseObj.findOne = async function(thingName) {
 };
 
 // FIND
-databaseObj.find = async function(regex) {
+databaseObj.find = async function(char) {
+    let regex = new RegExp(char,"i");
     // Search the database for things with names containing with the character
     let foundThings = await Thing.find({name: regex});
 
