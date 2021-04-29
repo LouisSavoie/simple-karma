@@ -6,7 +6,7 @@ let databaseObj = {};
 
 // FIND ONE
 databaseObj.findOne = async function(thingName) {
-    let regex = new RegExp(thingName,"i");
+    let regex = new RegExp("^" + thingName,"i");
     // check if the database has the thing
     let foundThing = await Thing.findOne({name: regex}).exec();
 
