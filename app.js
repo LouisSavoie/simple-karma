@@ -41,9 +41,33 @@ client.on('message', message => {
     const args = message.cleanContent.slice(prefix.length).split(' ');
 
     // split args array into command and thingName strings
-    const command = args[0].toLowerCase();
-    const thingName = args[1];
-    const getThingName = args[0];
+    let command = args[0];
+    let thingName = args[1];
+    let getThingName = args[0];
+
+    if (command) {
+        command = command.toLowerCase();
+    }
+
+    if (thingName && thingName.startsWith("@") && thingName.charCodeAt(1) == 8203) {
+        thingName = thingName.slice(0, 1) + thingName.slice(2);
+    }
+    if (getThingName.startsWith("@") && getThingName.charCodeAt(1) == 8203) {
+        getThingName = getThingName.slice(0, 1) + getThingName.slice(2);
+    }
+
+    // debug
+    // let getThingNameCharCodes = [];
+
+    // for (let i = 0; i < getThingName.length; i++) {
+    //     getThingNameCharCodes.push(getThingName.charCodeAt(i));
+    // };
+
+    // console.log("================= Command Args ==================");
+    // console.log("DEBUG: command: " + command);
+    // console.log("DEBUG: thingName: " + thingName);
+    // console.log("DEBUG: getThingName: " + getThingName);
+    // console.log("DEBUG: getThingNameCharCodes: " + getThingNameCharCodes);
 
     // COMMAND TREE
     if (command == 'help'){
