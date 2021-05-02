@@ -10,7 +10,7 @@ databaseObj.findOne = async function(thingName) {
     let foundThing = await Thing.findOne({name: thingName}).exec();
 
     // debug
-    console.log("============= findOne in Database ===============");
+    console.log("=== findOne in Database ===");
     console.log("DEBUG: 1. database.js, foundThing: " + foundThing);
 
     // if it does, return the thing
@@ -29,7 +29,7 @@ databaseObj.find = async function(char) {
     let foundThings = await Thing.find({name: regex});
 
     // debug
-    console.log("============= find in Database ===============");
+    console.log("=== find in Database ===");
     console.log("DEBUG: 1. database.js, foundThings: " + foundThings);
 
     // if success, return the things

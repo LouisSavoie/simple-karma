@@ -98,8 +98,7 @@ replyObj.karmaYourselfError = function(message, thingName) {
     message.reply({
         embed: {
         color: "RED",
-        description: `Thing, **${thingName}'s** karma is already **OVER 9000**!\n
-        **${thingName}** doesn't need anymore.`
+        description: `You can't give yourself karma!`
         }
     }).catch(console.error);
 };
@@ -134,6 +133,16 @@ replyObj.deleteTrolled = function(message, foundUser, foundThing) {
         **${foundUser.name}'s** karma has been transferred to **${foundThing.name}**.\n
         **${foundThing.name}** has **${foundThing.karma}** karma.\n
         and **${foundUser.name.toUpperCase()}** has **NONE**.`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: UNKNOWN COMMAND
+replyObj.unknownCommand = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `Command is unknown or conatins banned characters.`
         }
     }).catch(console.error);
 };

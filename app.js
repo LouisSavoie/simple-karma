@@ -41,18 +41,47 @@ client.on('message', message => {
     const args = message.cleanContent.slice(prefix.length).split(' ');
 
     // split args array into command and thingName strings
-    const command = args[0].toLowerCase();
-    const thingName = args[1];
-    const getThingName = args[0];
+    let command = args[0];
+    let thingName = args[1];
+    let getThingName = args[0];
+
+    if (command) {
+        command = command.toLowerCase();
+    }
+
+    if (thingName && thingName.startsWith("@") && thingName.charCodeAt(1) == 8203) {
+        thingName = thingName.slice(0, 1) + thingName.slice(2);
+    }
+    if (getThingName.startsWith("@") && getThingName.charCodeAt(1) == 8203) {
+        getThingName = getThingName.slice(0, 1) + getThingName.slice(2);
+    }
+
+    // debug
+    let getThingNameCharCodes = [];
+
+    for (let i = 0; i < getThingName.length; i++) {
+        getThingNameCharCodes.push(getThingName.charCodeAt(i));
+    };
+
+    console.log("================= Command Args ==================");
+    console.log("DEBUG: command: " + command);
+    console.log("DEBUG: thingName: " + thingName);
+    console.log("DEBUG: getThingName: " + getThingName);
+    console.log("DEBUG: getThingNameCharCodes: " + getThingNameCharCodes);
+
+    // BANNED CHARACTERS REGEX
+    const bannedCharsRegex = /[`*_\\]/g;
 
     // COMMAND TREE
-    if (command == 'help'){
+    if (bannedCharsRegex.test(getThingName) || bannedCharsRegex.test(thingName)){
+        client.commands.get('unknownCommand').execute(message);
+    } else if (command == 'help'){
         client.commands.get('help').execute(message);
     } else if (command == 'new'){
         client.commands.get('newThing').execute(message, thingName);
-    } else if (command == '+karma'){
+    } else if (command == '+'){
         client.commands.get('incrementKarma').execute(message, thingName);
-    } else if (command == '-karma'){
+    } else if (command == '-'){
         client.commands.get('decrementKarma').execute(message, thingName);
     } else if (command == 'search'){
         client.commands.get('searchThings').execute(message, thingName);
