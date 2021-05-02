@@ -57,20 +57,25 @@ client.on('message', message => {
     }
 
     // debug
-    // let getThingNameCharCodes = [];
+    let getThingNameCharCodes = [];
 
-    // for (let i = 0; i < getThingName.length; i++) {
-    //     getThingNameCharCodes.push(getThingName.charCodeAt(i));
-    // };
+    for (let i = 0; i < getThingName.length; i++) {
+        getThingNameCharCodes.push(getThingName.charCodeAt(i));
+    };
 
-    // console.log("================= Command Args ==================");
-    // console.log("DEBUG: command: " + command);
-    // console.log("DEBUG: thingName: " + thingName);
-    // console.log("DEBUG: getThingName: " + getThingName);
-    // console.log("DEBUG: getThingNameCharCodes: " + getThingNameCharCodes);
+    console.log("================= Command Args ==================");
+    console.log("DEBUG: command: " + command);
+    console.log("DEBUG: thingName: " + thingName);
+    console.log("DEBUG: getThingName: " + getThingName);
+    console.log("DEBUG: getThingNameCharCodes: " + getThingNameCharCodes);
+
+    // BANNED CHARACTERS REGEX
+    const bannedCharsRegex = /[`*_\\]/g;
 
     // COMMAND TREE
-    if (command == 'help'){
+    if (bannedCharsRegex.test(getThingName) || bannedCharsRegex.test(thingName)){
+        client.commands.get('unknownCommand').execute(message);
+    } else if (command == 'help'){
         client.commands.get('help').execute(message);
     } else if (command == 'new'){
         client.commands.get('newThing').execute(message, thingName);

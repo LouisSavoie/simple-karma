@@ -137,5 +137,15 @@ replyObj.deleteTrolled = function(message, foundUser, foundThing) {
     }).catch(console.error);
 };
 
+// ERROR: UNKNOWN COMMAND
+replyObj.unknownCommand = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `Command is unknown or conatins banned characters.`
+        }
+    }).catch(console.error);
+};
+
 //  Export reply object
 module.exports = replyObj;
