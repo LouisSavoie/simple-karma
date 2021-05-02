@@ -98,8 +98,7 @@ replyObj.karmaYourselfError = function(message, thingName) {
     message.reply({
         embed: {
         color: "RED",
-        description: `Thing, **${thingName}'s** karma is already **OVER 9000**!\n
-        **${thingName}** doesn't need anymore.`
+        description: `You can't give yourself karma!`
         }
     }).catch(console.error);
 };
