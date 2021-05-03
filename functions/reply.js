@@ -147,5 +147,15 @@ replyObj.unknownCommand = function(message) {
     }).catch(console.error);
 };
 
+// ERROR: NO THING GIVEN
+replyObj.noThing = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `Command did not include a thing!`
+        }
+    }).catch(console.error);
+};
+
 //  Export reply object
 module.exports = replyObj;
