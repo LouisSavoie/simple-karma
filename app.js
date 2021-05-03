@@ -59,15 +59,22 @@ client.on('message', message => {
     }
 
     // debug
+    // get char codes for thingNames
+    let thingNameCharCodes = [];
     let getThingNameCharCodes = [];
 
+    for (let i = 0; i < thingName.length; i++) {
+        thingNameCharCodes.push(thingName.charCodeAt(i));
+    };
     for (let i = 0; i < getThingName.length; i++) {
         getThingNameCharCodes.push(getThingName.charCodeAt(i));
     };
 
+    // console messages
     console.log("================= Command Args ==================");
     console.log("DEBUG: command: " + command);
     console.log("DEBUG: thingName: " + thingName);
+    console.log("DEBUG: thingNameCharCodes: " + thingNameCharCodes);
     console.log("DEBUG: getThingName: " + getThingName);
     console.log("DEBUG: getThingNameCharCodes: " + getThingNameCharCodes);
 
