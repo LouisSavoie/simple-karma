@@ -72,7 +72,7 @@ client.on('message', message => {
     console.log("DEBUG: getThingNameCharCodes: " + getThingNameCharCodes);
 
     // BANNED CHARACTERS REGEX
-    const bannedCharsRegex = /[`*_\\]/g;
+    const bannedCharsRegex = /[`\\]/g;
 
     // COMMAND NAMES ARRAY
     // an array containing the syntax of commands that include a thingName,
