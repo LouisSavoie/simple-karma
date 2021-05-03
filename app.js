@@ -38,13 +38,14 @@ client.on('message', message => {
         return;
     }
     // remove the prefix from the message, convert mentions to plain strings, split the arguments into an array by spaces
-    const args = message.cleanContent.slice(prefix.length).split(' ');
+    const argsArray = message.cleanContent.slice(prefix.length).split(' ');
 
-    // split args array into command and thingName strings
-    let command = args[0];
-    let thingName = args[1];
-    let getThingName = args[0];
+    // split args array into args
+    let command = argsArray[0];
+    let thingName = argsArray[1];
+    let getThingName = argsArray[0];
 
+    // args transformations
     if (command) {
         command = command.toLowerCase();
     }
@@ -52,6 +53,7 @@ client.on('message', message => {
     if (thingName && thingName.startsWith("@") && thingName.charCodeAt(1) == 8203) {
         thingName = thingName.slice(0, 1) + thingName.slice(2);
     }
+    
     if (getThingName.startsWith("@") && getThingName.charCodeAt(1) == 8203) {
         getThingName = getThingName.slice(0, 1) + getThingName.slice(2);
     }
@@ -72,24 +74,45 @@ client.on('message', message => {
     // BANNED CHARACTERS REGEX
     const bannedCharsRegex = /[`*_\\]/g;
 
+    // COMMAND NAMES ARRAY
+    // an array containing the syntax of commands that include a thingName,
+    // incase the thingName is omitted from the command,
+    // the getThingName can be checked against this array to verify if it was ment for the getThing command.
+    const commandNamesArray = ['new', '+', '-', 'search', 'delete'];
+
     // COMMAND TREE
     if (bannedCharsRegex.test(getThingName) || bannedCharsRegex.test(thingName)){
         client.commands.get('unknownCommand').execute(message);
-    } else if (command == 'help'){
-        client.commands.get('help').execute(message);
-    } else if (command == 'new'){
-        client.commands.get('newThing').execute(message, thingName);
-    } else if (command == '+'){
-        client.commands.get('incrementKarma').execute(message, thingName);
-    } else if (command == '-'){
-        client.commands.get('decrementKarma').execute(message, thingName);
-    } else if (command == 'search'){
-        client.commands.get('searchThings').execute(message, thingName);
-    } else if (command == 'delete'){
-        client.commands.get('trollDelete').execute(message, thingName);
-    } else {
-        client.commands.get('getThing').execute(message, getThingName);
     }
+    
+    // if the args include a thingName, check these commands
+    if (thingName){
+        if (command == 'new'){
+            client.commands.get('newThing').execute(message, thingName);
+        } else if (command == '+'){
+            client.commands.get('incrementKarma').execute(message, thingName);
+        } else if (command == '-'){
+            client.commands.get('decrementKarma').execute(message, thingName);
+        } else if (command == 'search'){
+            client.commands.get('searchThings').execute(message, thingName);
+        } else if (command == 'delete'){
+            client.commands.get('trollDelete').execute(message, thingName);
+        }
+    // if args does not include a thingName, check these commands
+    } else {
+        if (command == 'help'){
+            client.commands.get('help').execute(message);
+        } else {
+            //if getThingName is omitted and was a valid command, send error reply
+            if (commandNamesArray.includes(getThingName)) {
+                client.commands.get('noThing').execute(message);
+            // else, it was a getThing request
+            } else {
+                client.commands.get('getThing').execute(message, getThingName);
+            }
+        }
+    }
+    
 });
 
 // CONFIRM LOGIN
