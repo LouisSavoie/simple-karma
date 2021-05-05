@@ -33,10 +33,15 @@ const prefix = 'sk ';
 
 // MESSAGE HANDLER
 client.on('message', message => {
+
+    // FILTER OUT MESSAGES
+    // if message is a DM, it won't have the correct object methods for some commands and could cause a crash
     // if message doesn't start with the prefix and is form a bot, return
-    if(!message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
+    if(!message.guild || !message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
         return;
     }
+
+    // COMMAND ARGS PROCESSING
     // remove the prefix from the message, convert mentions to plain strings, split the arguments into an array by spaces
     const argsArray = message.cleanContent.slice(prefix.length).split(' ');
 
@@ -58,7 +63,7 @@ client.on('message', message => {
         getThingName = getThingName.slice(0, 1) + getThingName.slice(2);
     }
 
-    // debug
+    // DEBUG
     // get char codes for thingNames
     let thingNameCharCodes = [];
     let getThingNameCharCodes = [];
