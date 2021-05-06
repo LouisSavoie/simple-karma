@@ -157,5 +157,25 @@ replyObj.noThing = function(message) {
     }).catch(console.error);
 };
 
+// ERROR: NO PERMISSION
+replyObj.noPermission = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `You do not have the proper permission to use this command.`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: NOT A NUMBER
+replyObj.notANumber = function(message, value) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `That value is not a number.`
+        }
+    }).catch(console.error);
+};
+
 //  Export reply object
 module.exports = replyObj;

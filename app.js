@@ -49,6 +49,7 @@ client.on('message', message => {
     let command = argsArray[0];
     let thingName = argsArray[1];
     let getThingName = argsArray[0];
+    let value = argsArray[2];
 
     // args transformations
     if (command) {
@@ -59,21 +60,30 @@ client.on('message', message => {
         thingName = thingName.slice(0, 1) + thingName.slice(2);
     }
     
-    if (getThingName.startsWith("@") && getThingName.charCodeAt(1) == 8203) {
+    if (getThingName && getThingName.startsWith("@") && getThingName.charCodeAt(1) == 8203) {
         getThingName = getThingName.slice(0, 1) + getThingName.slice(2);
     }
 
+    if (value) {
+        value = parseInt(value, 10);
+    }
+
     // DEBUG
-    // get char codes for thingNames
+    // get char codes for thingName and getThingName
     let thingNameCharCodes = [];
     let getThingNameCharCodes = [];
 
-    for (let i = 0; i < thingName.length; i++) {
-        thingNameCharCodes.push(thingName.charCodeAt(i));
-    };
-    for (let i = 0; i < getThingName.length; i++) {
-        getThingNameCharCodes.push(getThingName.charCodeAt(i));
-    };
+    if (thingName) {
+        for (let i = 0; i < thingName.length; i++) {
+            thingNameCharCodes.push(thingName.charCodeAt(i));
+        };
+    }
+    
+    if (getThingName) {
+        for (let i = 0; i < getThingName.length; i++) {
+            getThingNameCharCodes.push(getThingName.charCodeAt(i));
+        };
+    }
 
     // console messages
     console.log("================= Command Args ==================");
@@ -82,6 +92,7 @@ client.on('message', message => {
     console.log("DEBUG: thingNameCharCodes: " + thingNameCharCodes);
     console.log("DEBUG: getThingName: " + getThingName);
     console.log("DEBUG: getThingNameCharCodes: " + getThingNameCharCodes);
+    console.log("DEBUG: value: " + value);
 
     // BANNED CHARACTERS REGEX
     const bannedCharsRegex = /[`\\]/g;
@@ -110,6 +121,8 @@ client.on('message', message => {
                 client.commands.get('searchThings').execute(message, thingName);
             } else if (command == 'delete'){
                 client.commands.get('trollDelete').execute(message, thingName);
+            } else if (command == 'adminset'){
+                client.commands.get('adminSet').execute(message, thingName, value);
             }
         // if args does not include a thingName, check these commands
         } else {
@@ -133,9 +146,9 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     // SET STATUS
-    client.user.setActivity(`"sk help"`, {type: "WATCHING"});
+    // client.user.setActivity(`"sk help"`, {type: "WATCHING"});
     // Status for testing
-    // client.user.setActivity(`"TESTING"`, {});
+    client.user.setActivity(`"TESTING"`, {});
 });
 
 // LOGIN
