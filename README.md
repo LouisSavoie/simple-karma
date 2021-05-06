@@ -17,6 +17,7 @@ Commands are formated and limited in scope such that users interact with the poi
 **Admin Commands**
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
 - **`sk adminset <thing> <value>`**: Sets a \<thing\>'s karma to the value
+- **`sk admindelete <thing>`**: Deletes a \<thing\>
 
 *Note: Prefix and commands are case insensitive.*
 

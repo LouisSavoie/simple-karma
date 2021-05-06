@@ -124,6 +124,8 @@ client.on('message', message => {
             // admin commands
             } else if (command == 'adminset'){
                 client.commands.get('adminSet').execute(message, thingName, value);
+            } else if (command == 'admindelete'){
+                client.commands.get('adminDelete').execute(message, thingName);
             }
         // if args does not include a thingName, check these commands
         } else {

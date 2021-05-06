@@ -177,5 +177,25 @@ replyObj.notANumber = function(message, value) {
     }).catch(console.error);
 };
 
+// SUCCESS: THING DELETED
+replyObj.thingDeleted = function(message, thingName) {
+    message.reply({
+        embed: {
+          color: "BLUE",
+          description: '**' + thingName + '**, has been deleted.'
+        }
+    }).catch(console.error);
+};
+
+// ERROR: THING COULD NOT BE DELETED
+replyObj.thingNotDeleted = function(message, thingName) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not deleted :('
+        }
+    }).catch(console.error);
+};
+
 //  Export reply object
 module.exports = replyObj;

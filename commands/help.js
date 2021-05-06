@@ -22,6 +22,7 @@ module.exports = {
                 '__**ADMIN Commands:**__',
                 'Syntax: **<prefix> <command> <thing> <value>**',
                 '**`sk adminset <thing> <value>`**: Sets a thing\'s karma to the value',
+                '**`sk admindelete <thing>`**: Deletes a thing',
                 '*Note: Prefix and commands are case insensitive.*'
             ]);
         }
