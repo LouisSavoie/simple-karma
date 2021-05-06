@@ -54,5 +54,16 @@ databaseObj.create = async function(thingName) {
     }
 };
 
+// DELETE THING
+databaseObj.deleteOne = async function(thingName) {
+    let res = await Thing.deleteOne({name: thingName});
+
+    // debug
+    console.log("=== deleteOne from Database ===");
+    console.log("DEBUG: 1. database.js, res: " + res.ok);
+
+    return res.ok;
+};
+
 //  Export find object
 module.exports = databaseObj;

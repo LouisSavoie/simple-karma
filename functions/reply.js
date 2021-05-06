@@ -157,5 +157,45 @@ replyObj.noThing = function(message) {
     }).catch(console.error);
 };
 
+// ERROR: NO PERMISSION
+replyObj.noPermission = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `You do not have the proper permission to use this command.`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: NOT A NUMBER
+replyObj.notANumber = function(message, value) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `That value is not a number.`
+        }
+    }).catch(console.error);
+};
+
+// SUCCESS: THING DELETED
+replyObj.thingDeleted = function(message, thingName) {
+    message.reply({
+        embed: {
+          color: "BLUE",
+          description: '**' + thingName + '**, has been deleted.'
+        }
+    }).catch(console.error);
+};
+
+// ERROR: THING COULD NOT BE DELETED
+replyObj.thingNotDeleted = function(message, thingName) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not deleted :('
+        }
+    }).catch(console.error);
+};
+
 //  Export reply object
 module.exports = replyObj;

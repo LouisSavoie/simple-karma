@@ -33,10 +33,15 @@ const prefix = 'sk ';
 
 // MESSAGE HANDLER
 client.on('message', message => {
+
+    // FILTER OUT MESSAGES
+    // if message is a DM, it won't have the correct object methods for some commands and could cause a crash
     // if message doesn't start with the prefix and is form a bot, return
-    if(!message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
+    if(!message.guild || !message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
         return;
     }
+
+    // COMMAND ARGS PROCESSING
     // remove the prefix from the message, convert mentions to plain strings, split the arguments into an array by spaces
     const argsArray = message.cleanContent.slice(prefix.length).split(' ');
 
@@ -44,6 +49,7 @@ client.on('message', message => {
     let command = argsArray[0];
     let thingName = argsArray[1];
     let getThingName = argsArray[0];
+    let value = argsArray[2];
 
     // args transformations
     if (command) {
@@ -54,22 +60,39 @@ client.on('message', message => {
         thingName = thingName.slice(0, 1) + thingName.slice(2);
     }
     
-    if (getThingName.startsWith("@") && getThingName.charCodeAt(1) == 8203) {
+    if (getThingName && getThingName.startsWith("@") && getThingName.charCodeAt(1) == 8203) {
         getThingName = getThingName.slice(0, 1) + getThingName.slice(2);
     }
 
-    // debug
+    if (value) {
+        value = parseInt(value, 10);
+    }
+
+    // DEBUG
+    // get char codes for thingName and getThingName
+    let thingNameCharCodes = [];
     let getThingNameCharCodes = [];
 
-    for (let i = 0; i < getThingName.length; i++) {
-        getThingNameCharCodes.push(getThingName.charCodeAt(i));
-    };
+    if (thingName) {
+        for (let i = 0; i < thingName.length; i++) {
+            thingNameCharCodes.push(thingName.charCodeAt(i));
+        };
+    }
+    
+    if (getThingName) {
+        for (let i = 0; i < getThingName.length; i++) {
+            getThingNameCharCodes.push(getThingName.charCodeAt(i));
+        };
+    }
 
+    // console messages
     console.log("================= Command Args ==================");
     console.log("DEBUG: command: " + command);
     console.log("DEBUG: thingName: " + thingName);
+    console.log("DEBUG: thingNameCharCodes: " + thingNameCharCodes);
     console.log("DEBUG: getThingName: " + getThingName);
     console.log("DEBUG: getThingNameCharCodes: " + getThingNameCharCodes);
+    console.log("DEBUG: value: " + value);
 
     // BANNED CHARACTERS REGEX
     const bannedCharsRegex = /[`\\]/g;
@@ -98,6 +121,11 @@ client.on('message', message => {
                 client.commands.get('searchThings').execute(message, thingName);
             } else if (command == 'delete'){
                 client.commands.get('trollDelete').execute(message, thingName);
+            // admin commands
+            } else if (command == 'adminset'){
+                client.commands.get('adminSet').execute(message, thingName, value);
+            } else if (command == 'admindelete'){
+                client.commands.get('adminDelete').execute(message, thingName);
             }
         // if args does not include a thingName, check these commands
         } else {
