@@ -14,6 +14,10 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk - <thing>`**: Decrements a \<thing\>'s karma
 - **`sk delete <thing>`**: Deletes a thing. Only bad people do this.
 
+**Admin Commands**
+- Syntax: \<prefix\> \<command\> \<thing\>(optional)
+- **`sk adminset <thing> <value>`**: Sets a \<thing\>'s karma to the value
+
 *Note: Prefix and commands are case insensitive.*
 
 ## Current Scope
@@ -25,9 +29,9 @@ Commands are formated and limited in scope such that users interact with the poi
 - Show a thing's karma
 - Search the database for things
 - Delete things. Don't do this...
+- Admin commands for users with the 'Administrator' permission
 
 ## Future Scope
-- Admin commands for discord ranks to set points to specific values, add or subtract values, clear values or keys, delete things, etc.
 - Lists for top 5, worst 5, etc.
 - Add a user as a thing to the database when they join the server.
 

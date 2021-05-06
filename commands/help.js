@@ -16,5 +16,14 @@ module.exports = {
             '**`sk delete <thing>`**: Deletes a thing. Only bad people do this.',
             '*Note: Prefix and commands are case insensitive.*'
         ]);
+        if (message.member.hasPermission('ADMINISTRATOR')) {
+            message.author.send([
+                '.',
+                '__**ADMIN Commands:**__',
+                'Syntax: **<prefix> <command> <thing> <value>**',
+                '**`sk adminset <thing> <value>`**: Sets a thing\'s karma to the value',
+                '*Note: Prefix and commands are case insensitive.*'
+            ]);
+        }
     }
 }

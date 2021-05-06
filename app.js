@@ -121,6 +121,7 @@ client.on('message', message => {
                 client.commands.get('searchThings').execute(message, thingName);
             } else if (command == 'delete'){
                 client.commands.get('trollDelete').execute(message, thingName);
+            // admin commands
             } else if (command == 'adminset'){
                 client.commands.get('adminSet').execute(message, thingName, value);
             }
@@ -146,9 +147,9 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     // SET STATUS
-    // client.user.setActivity(`"sk help"`, {type: "WATCHING"});
+    client.user.setActivity(`"sk help"`, {type: "WATCHING"});
     // Status for testing
-    client.user.setActivity(`"TESTING"`, {});
+    // client.user.setActivity(`"TESTING"`, {});
 });
 
 // LOGIN
