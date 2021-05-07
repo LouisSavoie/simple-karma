@@ -103,6 +103,16 @@ replyObj.karmaYourselfError = function(message, thingName) {
     }).catch(console.error);
 };
 
+// ERROR: CAN'T TROLL DELETE YOURSELF
+replyObj.trollDeleteYourselfError = function(message) {
+    message.reply({
+        embed: {
+        color: "RED",
+        description: `You can't delete yourself!`
+        }
+    }).catch(console.error);
+};
+
 // ERROR: NOT ENOUGH KARMA
 replyObj.notEnoughKarma = function(message) {
     message.reply({
