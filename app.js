@@ -144,6 +144,14 @@ client.on('message', message => {
     }
 });
 
+// JOIN HANDLER
+client.on('guildMemberAdd', member => {
+    // DEBUG
+    console.log(`--- DEBUG: @${member.displayName} joined ---`);
+    
+    client.commands.get('addOnJoin').execute(member);
+});
+
 // CONFIRM LOGIN
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);

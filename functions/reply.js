@@ -39,6 +39,17 @@ replyObj.thingAlreadyExists = function(message, foundThing) {
     }).catch(console.error);
 };
 
+// STATUS: THING ALREADY EXISTS ON JOIN
+replyObj.thingAlreadyExistsOnJoin = function(member, foundThing) {
+    member.guild.channels.cache.find(i => i.name === 'general').send({
+        embed: {
+          color: "GREEN",
+          description: `**${foundThing.name}** joined the server\n
+          and already has **${foundThing.karma}** karma.`
+        }
+    }).catch(console.error);
+};
+
 // SUCCESS: THING CREATED
 replyObj.thingCreated = function(message, newThing) {
     message.reply({
@@ -49,9 +60,32 @@ replyObj.thingCreated = function(message, newThing) {
     }).catch(console.error);
 };
 
+// SUCCESS: THING CREATED ON JOIN
+replyObj.thingCreatedOnJoin = function(member, newThing) {
+    member.guild.channels.cache.find(i => i.name === 'general').send({
+        embed: {
+          color: "BLUE",
+          description: `**${newThing.name}** joined the server\n
+          and has been added to the database!\n
+          If **${newThing.name}** is not their desired name,\n
+          create a new thing with \`sk new <@name>\`.`
+        }
+    }).catch(console.error);
+};
+
 // ERROR: THING COULD NOT BE CREATED
 replyObj.thingNotCreated = function(message, thingName) {
     message.reply({
+        embed: {
+          color: "RED",
+          description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not created :('
+        }
+    }).catch(console.error);
+};
+
+// ERROR: THING COULD NOT BE CREATED ON JOIN
+replyObj.thingNotCreatedOnJoin = function(member, thingName) {
+    member.guild.channels.cache.find(i => i.name === 'general').send({
         embed: {
           color: "RED",
           description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not created :('
