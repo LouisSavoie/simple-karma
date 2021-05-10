@@ -41,13 +41,13 @@ databaseObj.find = async function(char) {
     }
 };
 
-// FIND TOP FIVE
-databaseObj.findTopFive = async function() {
-    // Search the database for top five karma
+// FIND BEST
+databaseObj.findBest = async function() {
+    // Search the database for best five karma
     let foundThings = await Thing.find().sort({"karma": -1}).limit(5);
 
     // debug
-    console.log("=== find top five in Database ===");
+    console.log("=== find best five in Database ===");
     console.log("DEBUG: 1. database.js, foundThings: " + foundThings);
 
     // if success, return the things

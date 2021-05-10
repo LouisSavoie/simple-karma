@@ -10,7 +10,7 @@ module.exports = {
             '**`sk help`**: DMs this list to you',
             '**`sk new <thing>`**: Creates a new thing',
             '**`sk search <string>`**: DMs you a list of things with names that contain the string',
-            '**`sk best`**: Shows a list of the top five things by karma',
+            '**`sk best`**: Shows a list of the best five things by karma',
             '**`sk worst`**: Shows a list of the worst five things by karma',
             '**`sk <thing>`**: Shows a thing\'s karma',
             '**`sk + <thing>`**: Increments a thing\'s karma',

@@ -29,13 +29,13 @@ replyObj.thingsFound = function(message, char, foundThings) {
     ]).catch(console.error);
 };
 
-// SUCCESS: TOP FIVE FOUND
-replyObj.topFiveFound = function(message, foundThings) {
+// SUCCESS: BEST FOUND
+replyObj.bestFound = function(message, foundThings) {
     // debug
     // console.log("foundThings:\n" + foundThings);
     
     let num = 1;
-    let text = `__**TOP FIVE KARMA**__:`;
+    let text = `__**BEST FIVE KARMA**__:`;
     foundThings.forEach(thing => {
         text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`;
         num++;
@@ -162,12 +162,12 @@ replyObj.noThingsFound = function(message, char) {
     }).catch(console.error);
 };
 
-// ERROR: TOP FIVE NOT FOUND
-replyObj.topFiveNotFound = function(message) {
+// ERROR: BEST NOT FOUND
+replyObj.bestNotFound = function(message) {
     message.reply({
         embed: {
           color: "RED",
-          description: `Top five things could not be found.`
+          description: `Best things could not be found.`
         }
     }).catch(console.error);
 };

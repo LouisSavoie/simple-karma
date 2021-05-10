@@ -9,7 +9,7 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk help`**: DMs this list to you
 - **`sk new <thing>`**: Creates a new \<thing\>
 - **`sk search <strng>`**: DMs a list of \<thing\>s with names that include the given string.
-- **`sk best`**: Shows a list of the top five \<thing\>s by karma.
+- **`sk best`**: Shows a list of the best five \<thing\>s by karma.
 - **`sk worst`**: Shows a list of the worst five \<thing\>s by karma.
 - **`sk <thing>`**: Shows a \<thing\>'s karma
 - **`sk + <thing>`**: Increments a \<thing\>'s karma
@@ -28,14 +28,17 @@ Commands are formated and limited in scope such that users interact with the poi
 - Persistant cloud database
 - Add new things to the database
 - Increment / decrement a thing's karma
-- You cant give yourself karma.
+- You cant give yourself karma
 - Show a thing's karma
 - Search the database for things
+- List the best things
+- list the worst things
 - Delete things. Don't do this...
 - Admin commands for users with the 'Administrator' permission
+- Users are added to the database when they join the server automatically
 
 ## Future Scope
-- Lists for top 5, worst 5, etc.
-- Add a user as a thing to the database when they join the server.
+
+*All caught up, hurrah!*
 
 If you have any suggestions for Future Scope features or Current Scope feature improvements, please fill out an issue and start the title with `Suggestion: `. Thanks :D

@@ -132,7 +132,7 @@ client.on('message', message => {
             if (command == 'help'){
                 client.commands.get('help').execute(message);
             } else if (command == 'best'){
-                client.commands.get('topFive').execute(message);
+                client.commands.get('best').execute(message);
             } else if (command == 'worst'){
                 client.commands.get('worst').execute(message);
             } else {
@@ -161,9 +161,9 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     // SET STATUS
-    // client.user.setActivity(`"sk help"`, {type: "WATCHING"});
+    client.user.setActivity(`"sk help"`, {type: "WATCHING"});
     // Status for testing
-    client.user.setActivity(`"TESTING"`, {});
+    // client.user.setActivity(`"TESTING"`, {});
 });
 
 // LOGIN
