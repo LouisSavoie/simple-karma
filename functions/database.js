@@ -41,6 +41,24 @@ databaseObj.find = async function(char) {
     }
 };
 
+// FIND TOP FIVE
+databaseObj.findTopFive = async function() {
+    // Search the database for top five karma
+    let foundThings = await Thing.find().sort({"karma": -1}).limit(5);
+
+    // debug
+    console.log("=== find top five in Database ===");
+    console.log("DEBUG: 1. database.js, foundThings: " + foundThings);
+
+    // if success, return the things
+    if (foundThings) {
+        return foundThings;
+    // if not, return null
+    } else {
+        return null;
+    }
+};
+
 // CREATE THING
 databaseObj.create = async function(thingName) {
     let newThing = await Thing.create({name: thingName, karma: 0});

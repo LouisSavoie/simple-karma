@@ -131,6 +131,8 @@ client.on('message', message => {
         } else {
             if (command == 'help'){
                 client.commands.get('help').execute(message);
+            } else if (command == 'best'){
+                client.commands.get('topFive').execute(message);
             } else {
                 //if getThingName is omitted and was a valid command, send error reply
                 if (commandNamesArray.includes(getThingName)) {

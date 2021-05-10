@@ -16,7 +16,7 @@ replyObj.thingsFound = function(message, char, foundThings) {
     // debug
     // console.log("foundThings:\n" + foundThings);
 
-    text = `.\nThings containing **${char}**:`;
+    let text = `.\nThings containing **${char}**:`;
     foundThings.forEach(thing => {
         text += `\n--------------------\n**${thing.name}**: Karma - **${thing.karma}**`
     });
@@ -27,6 +27,29 @@ replyObj.thingsFound = function(message, char, foundThings) {
     message.author.send([
         `${text}`
     ]).catch(console.error);
+};
+
+// SUCCESS: TOP FIVE FOUND
+replyObj.topFiveFound = function(message, foundThings) {
+    // debug
+    // console.log("foundThings:\n" + foundThings);
+    
+    let num = 1;
+    let text = `__**TOP FIVE KARMA**__:`;
+    foundThings.forEach(thing => {
+        text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`;
+        num++;
+    });
+
+    // debug
+    // console.log("text:\n" + text);
+    
+    message.reply({
+        embed: {
+            color: "BLUE",
+            description: `${text}`
+        }
+    }).catch(console.error);
 };
 
 // ERROR: THING ALREADY EXISTS
@@ -112,6 +135,16 @@ replyObj.noThingsFound = function(message, char) {
         embed: {
           color: "RED",
           description: `No things containing **${char}** exist!`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: TOP FIVE NOT FOUND
+replyObj.topFiveNotFound = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `Top five things could not be found.`
         }
     }).catch(console.error);
 };
