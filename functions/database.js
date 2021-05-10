@@ -59,6 +59,24 @@ databaseObj.findTopFive = async function() {
     }
 };
 
+// FIND WORST
+databaseObj.findWorst = async function() {
+    // Search the database for worst five karma
+    let foundThings = await Thing.find().sort({"karma": 1}).limit(5);
+
+    // debug
+    console.log("=== find worst five in Database ===");
+    console.log("DEBUG: 1. database.js, foundThings: " + foundThings);
+
+    // if success, return the things
+    if (foundThings) {
+        return foundThings;
+    // if not, return null
+    } else {
+        return null;
+    }
+};
+
 // CREATE THING
 databaseObj.create = async function(thingName) {
     let newThing = await Thing.create({name: thingName, karma: 0});

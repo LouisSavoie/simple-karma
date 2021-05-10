@@ -52,6 +52,29 @@ replyObj.topFiveFound = function(message, foundThings) {
     }).catch(console.error);
 };
 
+// SUCCESS: WORST FOUND
+replyObj.worstFound = function(message, foundThings) {
+    // debug
+    // console.log("foundThings:\n" + foundThings);
+    
+    let num = 1;
+    let text = `__**WORST FIVE KARMA**__:`;
+    foundThings.forEach(thing => {
+        text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`;
+        num++;
+    });
+
+    // debug
+    // console.log("text:\n" + text);
+    
+    message.reply({
+        embed: {
+            color: "BLUE",
+            description: `${text}`
+        }
+    }).catch(console.error);
+};
+
 // ERROR: THING ALREADY EXISTS
 replyObj.thingAlreadyExists = function(message, foundThing) {
     message.reply({
@@ -145,6 +168,16 @@ replyObj.topFiveNotFound = function(message) {
         embed: {
           color: "RED",
           description: `Top five things could not be found.`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: WORST NOT FOUND
+replyObj.worstNotFound = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `Worst things could not be found.`
         }
     }).catch(console.error);
 };

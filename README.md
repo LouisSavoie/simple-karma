@@ -10,6 +10,7 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk new <thing>`**: Creates a new \<thing\>
 - **`sk search <strng>`**: DMs a list of \<thing\>s with names that include the given string.
 - **`sk best`**: Shows a list of the top five \<thing\>s by karma.
+- **`sk worst`**: Shows a list of the worst five \<thing\>s by karma.
 - **`sk <thing>`**: Shows a \<thing\>'s karma
 - **`sk + <thing>`**: Increments a \<thing\>'s karma
 - **`sk - <thing>`**: Decrements a \<thing\>'s karma
