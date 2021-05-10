@@ -131,6 +131,10 @@ client.on('message', message => {
         } else {
             if (command == 'help'){
                 client.commands.get('help').execute(message);
+            } else if (command == 'best'){
+                client.commands.get('best').execute(message);
+            } else if (command == 'worst'){
+                client.commands.get('worst').execute(message);
             } else {
                 //if getThingName is omitted and was a valid command, send error reply
                 if (commandNamesArray.includes(getThingName)) {
@@ -142,6 +146,14 @@ client.on('message', message => {
             }
         }
     }
+});
+
+// JOIN HANDLER
+client.on('guildMemberAdd', member => {
+    // DEBUG
+    console.log(`--- DEBUG: @${member.displayName} joined ---`);
+    
+    client.commands.get('addOnJoin').execute(member);
 });
 
 // CONFIRM LOGIN

@@ -16,7 +16,7 @@ replyObj.thingsFound = function(message, char, foundThings) {
     // debug
     // console.log("foundThings:\n" + foundThings);
 
-    text = `.\nThings containing **${char}**:`;
+    let text = `.\nThings containing **${char}**:`;
     foundThings.forEach(thing => {
         text += `\n--------------------\n**${thing.name}**: Karma - **${thing.karma}**`
     });
@@ -29,12 +29,69 @@ replyObj.thingsFound = function(message, char, foundThings) {
     ]).catch(console.error);
 };
 
+// SUCCESS: BEST FOUND
+replyObj.bestFound = function(message, foundThings) {
+    // debug
+    // console.log("foundThings:\n" + foundThings);
+    
+    let num = 1;
+    let text = `__**BEST FIVE KARMA**__:`;
+    foundThings.forEach(thing => {
+        text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`;
+        num++;
+    });
+
+    // debug
+    // console.log("text:\n" + text);
+    
+    message.reply({
+        embed: {
+            color: "BLUE",
+            description: `${text}`
+        }
+    }).catch(console.error);
+};
+
+// SUCCESS: WORST FOUND
+replyObj.worstFound = function(message, foundThings) {
+    // debug
+    // console.log("foundThings:\n" + foundThings);
+    
+    let num = 1;
+    let text = `__**WORST FIVE KARMA**__:`;
+    foundThings.forEach(thing => {
+        text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`;
+        num++;
+    });
+
+    // debug
+    // console.log("text:\n" + text);
+    
+    message.reply({
+        embed: {
+            color: "BLUE",
+            description: `${text}`
+        }
+    }).catch(console.error);
+};
+
 // ERROR: THING ALREADY EXISTS
 replyObj.thingAlreadyExists = function(message, foundThing) {
     message.reply({
         embed: {
           color: "RED",
           description: 'Thing, **' + foundThing.name + '**, already exists!'
+        }
+    }).catch(console.error);
+};
+
+// STATUS: THING ALREADY EXISTS ON JOIN
+replyObj.thingAlreadyExistsOnJoin = function(member, foundThing) {
+    member.guild.channels.cache.find(i => i.name === 'general').send({
+        embed: {
+          color: "GREEN",
+          description: `**${foundThing.name}** joined the server\n
+          and already has **${foundThing.karma}** karma.`
         }
     }).catch(console.error);
 };
@@ -49,9 +106,32 @@ replyObj.thingCreated = function(message, newThing) {
     }).catch(console.error);
 };
 
+// SUCCESS: THING CREATED ON JOIN
+replyObj.thingCreatedOnJoin = function(member, newThing) {
+    member.guild.channels.cache.find(i => i.name === 'general').send({
+        embed: {
+          color: "BLUE",
+          description: `**${newThing.name}** joined the server\n
+          and has been added to the database!\n
+          If **${newThing.name}** is not their desired name,\n
+          create a new thing with \`sk new <@name>\`.`
+        }
+    }).catch(console.error);
+};
+
 // ERROR: THING COULD NOT BE CREATED
 replyObj.thingNotCreated = function(message, thingName) {
     message.reply({
+        embed: {
+          color: "RED",
+          description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not created :('
+        }
+    }).catch(console.error);
+};
+
+// ERROR: THING COULD NOT BE CREATED ON JOIN
+replyObj.thingNotCreatedOnJoin = function(member, thingName) {
+    member.guild.channels.cache.find(i => i.name === 'general').send({
         embed: {
           color: "RED",
           description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not created :('
@@ -82,6 +162,26 @@ replyObj.noThingsFound = function(message, char) {
     }).catch(console.error);
 };
 
+// ERROR: BEST NOT FOUND
+replyObj.bestNotFound = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `Best things could not be found.`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: WORST NOT FOUND
+replyObj.worstNotFound = function(message) {
+    message.reply({
+        embed: {
+          color: "RED",
+          description: `Worst things could not be found.`
+        }
+    }).catch(console.error);
+};
+
 // ERROR: KARMA CAPPED
 replyObj.capped = function(message, thingName) {
     message.reply({
@@ -99,6 +199,16 @@ replyObj.karmaYourselfError = function(message, thingName) {
         embed: {
         color: "RED",
         description: `You can't give yourself karma!`
+        }
+    }).catch(console.error);
+};
+
+// ERROR: CAN'T TROLL DELETE YOURSELF
+replyObj.trollDeleteYourselfError = function(message) {
+    message.reply({
+        embed: {
+        color: "RED",
+        description: `You can't delete yourself!`
         }
     }).catch(console.error);
 };
