@@ -22,5 +22,9 @@
     "dotenv": "^8.2.0",
     "jsoning": "^0.10.21",
     "mongoose": "^5.12.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-standard": "^16.0.2"
   }
 }

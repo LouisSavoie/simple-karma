@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 // THING MONGOOSE MODEL
 const ThingSchema = new mongoose.Schema({
-    name: String,
-    karma: Number
-});
+  name: String,
+  karma: Number
+})
 
-module.exports = mongoose.model("Thing", ThingSchema);
+module.exports = mongoose.model('Thing', ThingSchema)
