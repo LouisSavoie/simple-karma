@@ -24,7 +24,7 @@ module.exports = {
         // debug
         console.log('DEBUG: 2. adminDelete.js, res: ' + res)
 
-        if (res == 1) {
+        if (res === 1) {
           reply.thingDeleted(message, foundThing.name)
         } else {
           reply.thingNotDeleted(message, foundThing.name)

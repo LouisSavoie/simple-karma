@@ -13,7 +13,7 @@ module.exports = {
     console.log('DEBUG: 2. searchThings.js, foundThings: ' + foundThings)
 
     // if no things are found, send reply with error
-    if (foundThings.length == 0) {
+    if (foundThings.length === 0) {
       reply.noThingsFound(message, char)
       // if things found, send DM to the message's author with things' karma
     } else {

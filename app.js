@@ -55,11 +55,11 @@ client.on('message', message => {
     command = command.toLowerCase()
   }
 
-  if (thingName && thingName.startsWith('@') && thingName.charCodeAt(1) == 8203) {
+  if (thingName && thingName.startsWith('@') && thingName.charCodeAt(1) === 8203) {
     thingName = thingName.slice(0, 1) + thingName.slice(2)
   }
 
-  if (getThingName && getThingName.startsWith('@') && getThingName.charCodeAt(1) == 8203) {
+  if (getThingName && getThingName.startsWith('@') && getThingName.charCodeAt(1) === 8203) {
     getThingName = getThingName.slice(0, 1) + getThingName.slice(2)
   }
 
