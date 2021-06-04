@@ -142,9 +142,9 @@ replyObj.thingNotCreatedOnJoin = function (member, thingName) {
 // ERROR: THING NOT FOUND
 replyObj.notFound = function (message, thingName) {
   // if thingName includes spaces, add parens that are needed to create it
-  let thingNameParens = ""
+  let thingNameParens = ''
   if (thingName.includes(' ')) {
-    thingNameParens = "(" + thingName + ")"
+    thingNameParens = '(' + thingName + ')'
   }
   message.reply({
     embed: {
