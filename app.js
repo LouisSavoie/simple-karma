@@ -41,8 +41,9 @@ client.on('message', message => {
   }
 
   // COMMAND ARGS PROCESSING
-  // remove the prefix from the message, convert mentions to plain strings, split the arguments into an array by spaces
-  const argsArray = message.cleanContent.slice(prefix.length).split(' ')
+  // remove the prefix from the message, convert mentions to plain strings,
+  // split the arguments into an array by spaces, allow things with spaces bewteen parens
+  const argsArray = message.cleanContent.slice(prefix.length).split(/(?!\(.*)\s(?![^(]*?\))/g)
 
   // split args array into args
   let command = argsArray[0]
@@ -61,6 +62,14 @@ client.on('message', message => {
 
   if (getThingName && getThingName.startsWith('@') && getThingName.charCodeAt(1) === 8203) {
     getThingName = getThingName.slice(0, 1) + getThingName.slice(2)
+  }
+  // remove parens from thingName if present for things that include spaces
+  if (thingName && thingName.startsWith('(') && thingName.endsWith(')')) {
+    thingName = thingName.slice(1, -1)
+  }
+  // remove parens from getThingName if present for things that include spaces
+  if (getThingName && getThingName.startsWith('(') && getThingName.endsWith(')')) {
+    getThingName = getThingName.slice(1, -1)
   }
 
   if (value) {
@@ -162,7 +171,7 @@ client.on('ready', () => {
   // SET STATUS
   client.user.setActivity('"sk help"', { type: 'WATCHING' })
   // Status for testing
-  // client.user.setActivity(`"TESTING"`, {});
+  // client.user.setActivity('"TESTING"', {})
 })
 
 // LOGIN

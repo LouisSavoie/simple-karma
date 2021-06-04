@@ -141,11 +141,16 @@ replyObj.thingNotCreatedOnJoin = function (member, thingName) {
 
 // ERROR: THING NOT FOUND
 replyObj.notFound = function (message, thingName) {
+  // if thingName includes spaces, add parens that are needed to create it
+  let thingNameParens = ''
+  if (thingName.includes(' ')) {
+    thingNameParens = '(' + thingName + ')'
+  }
   message.reply({
     embed: {
       color: 'RED',
       description: `Thing, **${thingName}**, doesn't exist!\n
-          You can create it with: \`sk new ${thingName}\`\n
+          You can create it with: \`sk new ${thingNameParens}\`\n
           It could also exist under a different name.\n
           Use \`sk search <part of name>\` to see if it does.`
     }
