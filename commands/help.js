@@ -16,7 +16,8 @@ module.exports = {
       '**`sk + <thing>`**: Increments a thing\'s karma',
       '**`sk - <thing>`**: Decrements a thing\'s karma',
       '**`sk delete <thing>`**: Deletes a thing. Only bad people do this.',
-      '*Note: Prefix and commands are case insensitive.*'
+      '*Note: Prefix and commands are case insensitive.*',
+      '*Note: Thing names in parentheses can have spaces.*'
     ])
     if (message.member.hasPermission('ADMINISTRATOR')) {
       message.author.send([
@@ -24,8 +25,7 @@ module.exports = {
         '__**ADMIN Commands:**__',
         'Syntax: **<prefix> <command> <thing> <value>**',
         '**`sk adminset <thing> <value>`**: Sets a thing\'s karma to the value',
-        '**`sk admindelete <thing>`**: Deletes a thing',
-        '*Note: Prefix and commands are case insensitive.*'
+        '**`sk admindelete <thing>`**: Deletes a thing'
       ])
     }
   }

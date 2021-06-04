@@ -25,6 +25,7 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk admindelete <thing>`**: Deletes a \<thing\>
 
 *Note: Prefix and commands are case insensitive.*
+*Note: Thing names in parentheses can have spaces.*
 
 ## Current Scope
 - Help documentation
@@ -39,6 +40,7 @@ Commands are formated and limited in scope such that users interact with the poi
 - Delete things. Don't do this...
 - Admin commands for users with the 'Administrator' permission
 - Users are added to the database when they join the server automatically
+- Thing names in parentheses can have spaces. Example: `(SimpleKarma Discord Bot)`
 
 ## Future Scope
 
