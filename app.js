@@ -63,13 +63,22 @@ client.on('message', message => {
   if (getThingName && getThingName.startsWith('@') && getThingName.charCodeAt(1) === 8203) {
     getThingName = getThingName.slice(0, 1) + getThingName.slice(2)
   }
+
   // remove parens from thingName if present for things that include spaces
   if (thingName && thingName.startsWith('(') && thingName.endsWith(')')) {
     thingName = thingName.slice(1, -1)
   }
+  // remove space from thingName after @ for user names with spaces
+  if (thingName && thingName.startsWith('@') && thingName.charCodeAt(1) === 32) {
+    thingName = thingName.slice(0, 1) + thingName.slice(2)
+  }
   // remove parens from getThingName if present for things that include spaces
   if (getThingName && getThingName.startsWith('(') && getThingName.endsWith(')')) {
     getThingName = getThingName.slice(1, -1)
+  }
+  // remove space from getThingName after @ for user names with spaces
+  if (getThingName && getThingName.startsWith('@') && getThingName.charCodeAt(1) === 32) {
+    getThingName = getThingName.slice(0, 1) + getThingName.slice(2)
   }
 
   if (value) {

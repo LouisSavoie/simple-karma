@@ -16,8 +16,11 @@ module.exports = {
       '**`sk + <thing>`**: Increments a thing\'s karma',
       '**`sk - <thing>`**: Decrements a thing\'s karma',
       '**`sk delete <thing>`**: Deletes a thing. Only bad people do this.',
-      '*Note: Prefix and commands are case insensitive.*',
-      '*Note: Thing names in parentheses can have spaces.*'
+      'Notes:',
+      '*- Prefix and commands are case insensitive.*',
+      '*- Thing names in parentheses can have spaces.*',
+      '*- User Thing names with spaces must have a space between the @ and the rest of the name.*',
+      '*  - Example: `(@ Joe User)` for `@Joe User`*'
     ])
     if (message.member.hasPermission('ADMINISTRATOR')) {
       message.author.send([
