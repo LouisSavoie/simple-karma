@@ -26,7 +26,9 @@ for (const file of commandFiles) {
 };
 
 // COMMAND SYNTAX
-// <prefix> <command> <thingName>(optional)
+// <prefix> <command> <thingName> <value>
+// <prefix> <command> <thingName>
+// <prefix> <getThingName>
 
 // COMMAND PREFIX
 const prefix = 'sk '
@@ -55,15 +57,14 @@ client.on('message', message => {
   if (command) {
     command = command.toLowerCase()
   }
-
+  // remove Discord's zero width space char form User thingName
   if (thingName && thingName.startsWith('@') && thingName.charCodeAt(1) === 8203) {
     thingName = thingName.slice(0, 1) + thingName.slice(2)
   }
-
+  // remove Discord's zero width space char form User GetThingName
   if (getThingName && getThingName.startsWith('@') && getThingName.charCodeAt(1) === 8203) {
     getThingName = getThingName.slice(0, 1) + getThingName.slice(2)
   }
-
   // remove parens from thingName if present for things that include spaces
   if (thingName && thingName.startsWith('(') && thingName.endsWith(')')) {
     thingName = thingName.slice(1, -1)
