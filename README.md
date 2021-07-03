@@ -24,8 +24,11 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk adminset <thing> <value>`**: Sets a \<thing\>'s karma to the value
 - **`sk admindelete <thing>`**: Deletes a \<thing\>
 
-*Note: Prefix and commands are case insensitive.*
-*Note: Thing names in parentheses can have spaces.*
+**Notes:**
+- *Prefix and commands are case insensitive.*
+- *Thing names in parentheses can have spaces.*
+- *User Thing names with spaces must have a space between the @ and the rest of the name.*
+  - *Example: `(@ Joe User)` for `@Joe User`*
 
 ## Current Scope
 - Help documentation
