@@ -25,7 +25,7 @@ Commands are formated and limited in scope such that users interact with the poi
 - **`sk admindelete <thing>`**: Deletes a \<thing\>
 
 **Notes:**
-- *Prefix and commands are case insensitive.*
+- *Prefix, commands, and thing names are case insensitive.*
 - *Thing names in parentheses can have spaces.*
 - *User Thing names with spaces must have a space between the @ and the rest of the name.*
   - *Example: `(@ Joe User)` for `@Joe User`*
