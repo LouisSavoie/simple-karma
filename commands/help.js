@@ -17,7 +17,7 @@ module.exports = {
       '**`sk - <thing>`**: Decrements a thing\'s karma',
       '**`sk delete <thing>`**: Deletes a thing. Only bad people do this.',
       'Notes:',
-      '*- Prefix and commands are case insensitive.*',
+      '*- Prefix, commands, and thing names are case insensitive.*',
       '*- Thing names in parentheses can have spaces.*',
       '*- User Thing names with spaces must have a space between the @ and the rest of the name.*',
       '*  - Example: `(@ Joe User)` for `@Joe User`*'

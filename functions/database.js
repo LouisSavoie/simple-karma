@@ -7,7 +7,7 @@ const databaseObj = {}
 // FIND ONE
 databaseObj.findOne = async function (thingName) {
   // check if the database has the thing
-  const foundThing = await Thing.findOne({ name: thingName }).exec()
+  const foundThing = await Thing.findOne({ nameLower: thingName.toLowerCase() }).exec()
 
   // debug
   console.log('=== findOne in Database ===')
@@ -79,7 +79,7 @@ databaseObj.findWorst = async function () {
 
 // CREATE THING
 databaseObj.create = async function (thingName) {
-  const newThing = await Thing.create({ name: thingName, karma: 0 })
+  const newThing = await Thing.create({ name: thingName, nameLower: thingName.toLowerCase(), karma: 0 })
 
   // if it creation is successful, return the thing
   if (newThing) {

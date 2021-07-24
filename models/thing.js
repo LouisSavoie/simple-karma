@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 // THING MONGOOSE MODEL
 const ThingSchema = new mongoose.Schema({
   name: String,
+  nameLower: String,
   karma: Number
 })
 
