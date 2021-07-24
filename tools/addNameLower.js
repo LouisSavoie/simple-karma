@@ -18,10 +18,10 @@ Thing.find({}, function (err, res) {
     console.log(err)
   }
   res.forEach(thing => {
-    const nameLower = thing.name.toLowerCase();
-    thing.nameLower = nameLower;
-    thing.save();
-    console.log(thing);
-  });
-  console.log("Successed!");
-});
+    const nameLower = thing.name.toLowerCase()
+    thing.nameLower = nameLower
+    thing.save()
+    console.log(thing)
+  })
+  console.log('Successed!')
+})
