@@ -7,7 +7,7 @@ module.exports = {
   description: 'Decrements karma for a thing',
   async execute (message, thingName) {
     // check if the database has the thing
-    const foundThing = await db.findOne(thingName)
+    const foundThing = await db.findOne(message.guild.id, thingName)
 
     // debug
     console.log('DEBUG: 2. decrementKarma.js, foundThing: ' + foundThing)

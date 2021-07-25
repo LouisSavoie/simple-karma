@@ -42,6 +42,10 @@ client.on('message', message => {
     return
   }
 
+  // DEBUG
+  console.log('>>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<')
+  console.log('DEBUG: Guild id: ' + message.guild.id)
+
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
   // split the arguments into an array by spaces, allow things with spaces bewteen parens
@@ -169,7 +173,8 @@ client.on('message', message => {
 // JOIN HANDLER
 client.on('guildMemberAdd', member => {
   // DEBUG
-  console.log(`--- DEBUG: @${member.displayName} joined ---`)
+  console.log('>>>>>>>>>>>>>>>>> JOIN HANDLER <<<<<<<<<<<<<<<<<')
+  console.log(`DEBUG: @${member.displayName} joined`)
 
   client.commands.get('addOnJoin').execute(member)
 })
@@ -179,9 +184,9 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
 
   // SET STATUS
-  client.user.setActivity('"sk help"', { type: 'WATCHING' })
+  // client.user.setActivity('"sk help"', { type: 'WATCHING' })
   // Status for testing
-  // client.user.setActivity('"TESTING"', {})
+  client.user.setActivity('"TESTING"', {})
 })
 
 // LOGIN

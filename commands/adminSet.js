@@ -11,7 +11,7 @@ module.exports = {
       // check if value is a number
       if (!isNaN(value)) {
         // check if the database has the thing
-        const foundThing = await db.findOne(thingName)
+        const foundThing = await db.findOne(message.guild.id, thingName)
 
         // debug
         console.log('DEBUG: 2. adminSet.js, foundThing: ' + foundThing)

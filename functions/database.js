@@ -5,9 +5,9 @@ const Thing = require('../models/thing')
 const databaseObj = {}
 
 // FIND ONE
-databaseObj.findOne = async function (thingName) {
+databaseObj.findOne = async function (server, thingName) {
   // check if the database has the thing
-  const foundThing = await Thing.findOne({ nameLower: thingName.toLowerCase() }).exec()
+  const foundThing = await Thing.findOne({ server: server, nameLower: thingName.toLowerCase() }).exec()
 
   // debug
   console.log('=== findOne in Database ===')
@@ -23,10 +23,10 @@ databaseObj.findOne = async function (thingName) {
 }
 
 // FIND
-databaseObj.find = async function (char) {
+databaseObj.find = async function (server, char) {
   const regex = new RegExp(char, 'i')
   // Search the database for things with names containing with the character
-  const foundThings = await Thing.find({ name: regex })
+  const foundThings = await Thing.find({ server: server, name: regex })
 
   // debug
   console.log('=== find in Database ===')
@@ -42,9 +42,9 @@ databaseObj.find = async function (char) {
 }
 
 // FIND BEST
-databaseObj.findBest = async function () {
+databaseObj.findBest = async function (server) {
   // Search the database for best five karma
-  const foundThings = await Thing.find().sort({ karma: -1 }).limit(5)
+  const foundThings = await Thing.find({ server: server }).sort({ karma: -1 }).limit(5)
 
   // debug
   console.log('=== find best five in Database ===')
@@ -60,9 +60,9 @@ databaseObj.findBest = async function () {
 }
 
 // FIND WORST
-databaseObj.findWorst = async function () {
+databaseObj.findWorst = async function (server) {
   // Search the database for worst five karma
-  const foundThings = await Thing.find().sort({ karma: 1 }).limit(5)
+  const foundThings = await Thing.find({ server: server }).sort({ karma: 1 }).limit(5)
 
   // debug
   console.log('=== find worst five in Database ===')
@@ -78,8 +78,8 @@ databaseObj.findWorst = async function () {
 }
 
 // CREATE THING
-databaseObj.create = async function (thingName) {
-  const newThing = await Thing.create({ name: thingName, nameLower: thingName.toLowerCase(), karma: 0 })
+databaseObj.create = async function (server, thingName) {
+  const newThing = await Thing.create({ server: server, name: thingName, nameLower: thingName.toLowerCase(), karma: 0 })
 
   // if it creation is successful, return the thing
   if (newThing) {
@@ -91,8 +91,8 @@ databaseObj.create = async function (thingName) {
 }
 
 // DELETE THING
-databaseObj.deleteOne = async function (thingName) {
-  const res = await Thing.deleteOne({ name: thingName })
+databaseObj.deleteOne = async function (server, thingName) {
+  const res = await Thing.deleteOne({ server: server, name: thingName })
 
   // debug
   console.log('=== deleteOne from Database ===')

@@ -7,10 +7,10 @@ module.exports = {
   description: 'Creates a new thing when user joins server',
   async execute (member) {
     const thingName = '@' + member.displayName
-    const regex = new RegExp(member.displayName, 'i')
+    // const regex = new RegExp(member.displayName, 'i')
 
     // check if the database already has the thing
-    const foundThing = await db.findOne(regex)
+    const foundThing = await db.findOne(member.guild.id, thingName)
 
     // debug
     console.log('DEBUG: 2. addOnJoin.js, foundThing: ' + foundThing)
@@ -20,7 +20,7 @@ module.exports = {
       reply.thingAlreadyExistsOnJoin(member, foundThing)
       // if it doesn't, create the thing then send reply to the message's channel confirming it's creation
     } else {
-      const newThing = await db.create(thingName)
+      const newThing = await db.create(member.guild.id, thingName)
       if (newThing) {
         reply.thingCreatedOnJoin(member, newThing)
         // if the creation fails, send reply to the message's channel explaining so
