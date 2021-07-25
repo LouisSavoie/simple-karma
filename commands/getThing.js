@@ -7,7 +7,7 @@ module.exports = {
   description: 'Displays a thing',
   async execute (message, thingName) {
     // check if the database has the thing
-    const foundThing = await db.findOne(thingName)
+    const foundThing = await db.findOne(message.guild.id, thingName)
 
     // debug
     console.log('DEBUG: 2. getThing.js, thing: ' + foundThing)

@@ -9,7 +9,7 @@ module.exports = {
     // if the message author has permission, proceed
     if (message.member.hasPermission('ADMINISTRATOR')) {
       // check if the database has the thing
-      const foundThing = await db.findOne(thingName)
+      const foundThing = await db.findOne(message.guild.id, thingName)
 
       // debug
       console.log('DEBUG: 2. adminDelete.js, foundThing: ' + foundThing)
@@ -19,7 +19,7 @@ module.exports = {
         reply.notFound(message, thingName)
         // if it does, delete it and send seccess reply
       } else {
-        const res = await db.deleteOne(foundThing.name)
+        const res = await db.deleteOne(message.guild.id, foundThing.name)
 
         // debug
         console.log('DEBUG: 2. adminDelete.js, res: ' + res)

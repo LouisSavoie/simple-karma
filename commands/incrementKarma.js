@@ -9,7 +9,7 @@ module.exports = {
     // check if the command issuer is the thing being incremented
     if (!thingName.includes(message.member.displayName)) {
       // check if the database has the thing
-      const foundThing = await db.findOne(thingName)
+      const foundThing = await db.findOne(message.guild.id, thingName)
 
       // debug
       console.log('DEBUG: 2. incrementKarma.js, foundThing: ' + foundThing)

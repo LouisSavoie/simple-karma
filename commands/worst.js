@@ -7,7 +7,7 @@ module.exports = {
   description: 'Displays the worst 5 things with the lowest karma',
   async execute (message) {
     // get the things from the database
-    const foundThings = await db.findWorst()
+    const foundThings = await db.findWorst(message.guild.id)
 
     // debug
     console.log('DEBUG: 2. worst.js, things: ' + foundThings)

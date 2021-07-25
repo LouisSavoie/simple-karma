@@ -7,7 +7,7 @@ module.exports = {
   description: 'Displays the best 5 things with the highest karma',
   async execute (message) {
     // get the things from the database
-    const foundThings = await db.findBest()
+    const foundThings = await db.findBest(message.guild.id)
 
     // debug
     console.log('DEBUG: 2. topFIve.js, things: ' + foundThings)

@@ -11,7 +11,7 @@ module.exports = {
       // create regex for finding the command issuer
       const regex = new RegExp(message.member.displayName, 'i')
       // check if the database has the the user that issued the command as a thing
-      const foundUser = await db.findOne(regex)
+      const foundUser = await db.findOne(message.guild.id, regex)
 
       // debug
       console.log('DEBUG: 2. trollDelete.js, foundUser: ' + foundUser)
@@ -23,7 +23,7 @@ module.exports = {
           reply.notEnoughKarma(message)
         } else {
           // check if the database has the thing
-          const foundThing = await db.findOne(thingName)
+          const foundThing = await db.findOne(message.guild.id, thingName)
 
           // debug
           console.log('DEBUG: 3. trollDelete.js, foundThing: ' + foundThing)
