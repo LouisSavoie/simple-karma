@@ -5,14 +5,17 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'incrementKarma',
   description: 'Increments karma for a thing',
-  async execute (message, thingName) {
+  async execute (message, thingName, debugLog, debugFlag) {
     // check if the command issuer is the thing being incremented
-    if (!thingName.includes(message.member.displayName)) {
+    if (thingName.includes(message.member.displayName)) {
+      reply.karmaYourselfError(message, thingName)
+    } else {
       // check if the database has the thing
-      const foundThing = await db.findOne(message.guild.id, thingName)
+      const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
       // debug
-      console.log('DEBUG: 2. incrementKarma.js, foundThing: ' + foundThing)
+      const debug =`DEBUG: 2. incrementKarma.js, foundThing: ${foundThing}`
+      console.log(debug)
 
       // if it does, check if the thing's karma is over 9000
       if (foundThing) {
@@ -29,8 +32,15 @@ module.exports = {
       } else {
         reply.notFound(message, thingName)
       }
-    } else {
-      reply.karmaYourselfError(message, thingName)
+
+      // if debugFlag, DM debug
+      if (debugFlag) {
+        message.author.send([
+          debugLog,
+          debugDB,
+          debug
+        ])
+      }
     }
   }
 }

@@ -156,7 +156,7 @@ client.on('message', message => {
       if (command === 'new') {
         client.commands.get('newThing').execute(message, thingName)
       } else if (command === '+') {
-        client.commands.get('incrementKarma').execute(message, thingName)
+        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '-') {
         client.commands.get('decrementKarma').execute(message, thingName)
       } else if (command === 'search') {

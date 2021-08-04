@@ -11,7 +11,6 @@ module.exports = {
 
     // debug
     const debug = `DEBUG: 2. getThing.js, thing: ${foundThing}`
-
     console.log(debug)
 
     // if it does, reply with the thing
