@@ -25,6 +25,10 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command)
 };
 
+// CREATE DEBUG LOG
+let debugLog = ''
+let debugFlag = false
+
 // COMMAND SYNTAX
 // <prefix> <command> <thingName> <value>
 // <prefix> <command> <thingName>
@@ -43,13 +47,18 @@ client.on('message', message => {
   }
 
   // DEBUG
-  console.log('>>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<')
-  console.log('DEBUG: Guild id: ' + message.guild.id)
+  debugLog = ''
+  debugFlag = false
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
   // split the arguments into an array by spaces, allow things with spaces bewteen parens
   const argsArray = message.cleanContent.slice(prefix.length).split(/(?!\(.*)\s(?![^(]*?\))/g)
+
+  if (argsArray.includes('debug')) {
+    argsArray.splice(argsArray.indexOf('debug'), 1)
+    if (message.member.hasPermission('ADMINISTRATOR')) debugFlag = true
+  }
 
   // split args array into args
   let command = argsArray[0]
@@ -107,14 +116,25 @@ client.on('message', message => {
     };
   }
 
-  // console messages
-  console.log('================= Command Args ==================')
-  console.log('DEBUG: command: ' + command)
-  console.log('DEBUG: thingName: ' + thingName)
-  console.log('DEBUG: thingNameCharCodes: ' + thingNameCharCodes)
-  console.log('DEBUG: getThingName: ' + getThingName)
-  console.log('DEBUG: getThingNameCharCodes: ' + getThingNameCharCodes)
-  console.log('DEBUG: value: ' + value)
+  const debugMsgHandler = `
+  .
+  >>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<
+  DEBUG: Guild id: ${message.guild.id}`
+
+  console.log(debugMsgHandler)
+  if (debugFlag) debugLog += debugMsgHandler
+
+  const debugArgs = `
+  ================= Command Args ==================
+  DEBUG: command: ${command}
+  DEBUG: thingName: ${thingName}
+  DEBUG: thingNameCharCodes: ${thingNameCharCodes}
+  DEBUG: getThingName: ${getThingName}
+  DEBUG: getThingNameCharCodes: ${getThingNameCharCodes}
+  DEBUG: value: ${value}`
+
+  console.log(debugArgs)
+  if (debugFlag) debugLog += debugArgs
 
   // BANNED CHARACTERS REGEX
   const bannedCharsRegex = /[`\\]/g
@@ -163,7 +183,7 @@ client.on('message', message => {
           client.commands.get('noThing').execute(message)
           // else, it was a getThing request
         } else {
-          client.commands.get('getThing').execute(message, getThingName)
+          client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag)
         }
       }
     }

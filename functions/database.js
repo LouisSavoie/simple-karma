@@ -10,15 +10,17 @@ databaseObj.findOne = async function (server, thingName) {
   const foundThing = await Thing.findOne({ server: server, nameLower: thingName.toLowerCase() }).exec()
 
   // debug
-  console.log('=== findOne in Database ===')
-  console.log('DEBUG: 1. database.js, foundThing: ' + foundThing)
+  const debugDB = `
+  === findOne in Database ===
+  DEBUG: 1. database.js, foundThing: ${foundThing}`
+  console.log(debugDB)
 
   // if it does, return the thing
   if (foundThing) {
-    return foundThing
+    return [foundThing, debugDB]
     // if it doesn't, return null
   } else {
-    return null
+    return [null, debugDB]
   }
 }
 
