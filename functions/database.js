@@ -31,15 +31,17 @@ databaseObj.find = async function (server, char) {
   const foundThings = await Thing.find({ server: server, name: regex })
 
   // debug
-  console.log('=== find in Database ===')
-  console.log('DEBUG: 1. database.js, foundThings: ' + foundThings)
+  const debugDB = `
+  === find in Database ===
+  DEBUG: 1. database.js, foundThings: ${foundThings}`
+  console.log(debugDB)
 
   // if success, return the things
   if (foundThings) {
-    return foundThings
+    return [foundThings, debugDB]
     // if not, return null
   } else {
-    return null
+    return [null, debugDB]
   }
 }
 
