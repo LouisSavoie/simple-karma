@@ -154,7 +154,7 @@ client.on('message', message => {
     // if the args include a thingName, check these commands
     if (thingName) {
       if (command === 'new') {
-        client.commands.get('newThing').execute(message, thingName)
+        client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '+') {
         client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '-') {
