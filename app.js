@@ -158,7 +158,7 @@ client.on('message', message => {
       } else if (command === '+') {
         client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '-') {
-        client.commands.get('decrementKarma').execute(message, thingName)
+        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === 'search') {
         client.commands.get('searchThings').execute(message, thingName)
       } else if (command === 'delete') {

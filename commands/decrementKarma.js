@@ -5,12 +5,13 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'decrementKarma',
   description: 'Decrements karma for a thing',
-  async execute (message, thingName) {
+  async execute (message, thingName, debugLog, debugFlag) {
     // check if the database has the thing
-    const foundThing = await db.findOne(message.guild.id, thingName)
+    const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
     // debug
-    console.log('DEBUG: 2. decrementKarma.js, foundThing: ' + foundThing)
+    const debug =`DEBUG: 2. decrementKarma.js, foundThing: ${foundThing}`
+    console.log(debug)
 
     // if it does, decrement thing's karma then send reply to the message's channel with thing's karma
     if (foundThing) {
@@ -20,6 +21,15 @@ module.exports = {
       // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
     } else {
       reply.notFound(message, thingName)
+    }
+
+    // if debugFlag, DM debug
+    if (debugFlag) {
+      message.author.send([
+        debugLog,
+        debugDB,
+        debug
+      ])
     }
   }
 }
