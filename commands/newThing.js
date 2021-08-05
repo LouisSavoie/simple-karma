@@ -10,7 +10,7 @@ module.exports = {
     const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
     // debug
-    const debug =`DEBUG: 2. newThing.js, foundThing: ${foundThing}`
+    const debug = `DEBUG: 2. newThing.js, foundThing: ${foundThing}`
     console.log(debug)
 
     // if it does, send reply to the massage's channel explaining so

@@ -10,7 +10,7 @@ module.exports = {
     const [foundThings, debugDB] = await db.find(message.guild.id, char)
 
     // debug
-    const debug =`DEBUG: 2. searchThings.js, foundThing: ${foundThings}`
+    const debug = `DEBUG: 2. searchThings.js, foundThing: ${foundThings}`
     console.log(debug)
 
     // if no things are found, send reply with error

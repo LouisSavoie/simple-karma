@@ -14,7 +14,7 @@ module.exports = {
       const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
       // debug
-      const debug =`DEBUG: 2. incrementKarma.js, foundThing: ${foundThing}`
+      const debug = `DEBUG: 2. incrementKarma.js, foundThing: ${foundThing}`
       console.log(debug)
 
       // if it does, check if the thing's karma is over 9000
