@@ -176,7 +176,7 @@ client.on('message', message => {
       } else if (command === 'best') {
         client.commands.get('best').execute(message, debugLog, debugFlag)
       } else if (command === 'worst') {
-        client.commands.get('worst').execute(message)
+        client.commands.get('worst').execute(message, debugLog, debugFlag)
       } else {
         // if getThingName is omitted and was a valid command, send error reply
         if (commandNamesArray.includes(getThingName)) {

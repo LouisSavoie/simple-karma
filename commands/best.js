@@ -10,7 +10,7 @@ module.exports = {
     const [foundThings, debugDB] = await db.findBest(message.guild.id)
 
     // debug
-    const debug = `DEBUG: 2. topFive.js, foundThings: ${foundThings}`
+    const debug = `DEBUG: 2. best.js, foundThings: ${foundThings}`
     console.log(debug)
 
     // if things are found, reply with the things
