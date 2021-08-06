@@ -174,7 +174,7 @@ client.on('message', message => {
       if (command === 'help') {
         client.commands.get('help').execute(message)
       } else if (command === 'best') {
-        client.commands.get('best').execute(message)
+        client.commands.get('best').execute(message, debugLog, debugFlag)
       } else if (command === 'worst') {
         client.commands.get('worst').execute(message)
       } else {

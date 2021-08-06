@@ -51,15 +51,17 @@ databaseObj.findBest = async function (server) {
   const foundThings = await Thing.find({ server: server }).sort({ karma: -1 }).limit(5)
 
   // debug
-  console.log('=== find best five in Database ===')
-  console.log('DEBUG: 1. database.js, foundThings: ' + foundThings)
+  const debugDB = `
+  === find best five in Database ===
+  DEBUG: 1. database.js, foundThings: ${foundThings}`
+  console.log(debugDB)
 
   // if success, return the things
   if (foundThings) {
-    return foundThings
+    return [foundThings, debugDB]
     // if not, return null
   } else {
-    return null
+    return [null, debugDB]
   }
 }
 
