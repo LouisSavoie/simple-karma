@@ -6,10 +6,9 @@ module.exports = {
   name: 'adminSet',
   description: 'Increments karma for a thing',
   async execute (message, thingName, value, debugLog, debugFlag) {
-
     // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
-    let debugDB = ``
-    let debug = ``
+    let debugDB = ''
+    let debug = ''
 
     // if the message author has permission, proceed
     if (message.member.hasPermission('ADMINISTRATOR')) {

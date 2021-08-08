@@ -18,7 +18,7 @@ module.exports = {
       }
     } else {
       // create debugDB variable to handle DM'ing in different cases
-      let debugDB = ``
+      let debugDB = ''
 
       // check if the database has the the user that issued the command as a thing
       const [foundUser, debugDBUser] = await db.findOne(message.guild.id, '@' + message.member.displayName)
@@ -59,7 +59,6 @@ module.exports = {
       } else {
         reply.userNotInDatabase(message, message.member.displayName)
       }
-
 
       // if debugFlag, DM debug
       if (debugFlag) {
