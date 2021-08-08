@@ -5,12 +5,13 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'newThing',
   description: 'Creates a new thing',
-  async execute (message, thingName) {
+  async execute (message, thingName, debugLog, debugFlag) {
     // check if the database already has the thing
-    const foundThing = await db.findOne(message.guild.id, thingName)
+    const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
     // debug
-    console.log('DEBUG: 2. newTing.js, foundThing: ' + foundThing)
+    const debug = `  DEBUG: 2. newThing.js, foundThing: ${foundThing}`
+    console.log(debug)
 
     // if it does, send reply to the massage's channel explaining so
     if (foundThing) {
@@ -23,6 +24,15 @@ module.exports = {
       } else {
         reply.thingNotCreated(message, thingName)
       }
+    }
+
+    // if debugFlag, DM debug
+    if (debugFlag) {
+      message.author.send([
+        debugLog,
+        debugDB,
+        debug
+      ])
     }
   }
 }

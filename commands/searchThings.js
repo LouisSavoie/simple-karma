@@ -5,12 +5,13 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'searchThings',
   description: 'DMs list of things with names containing a string',
-  async execute (message, char) {
+  async execute (message, char, debugLog, debugFlag) {
     // Search the database for things with names containing with the character
-    const foundThings = await db.find(message.guild.id, char)
+    const [foundThings, debugDB] = await db.find(message.guild.id, char)
 
     // debug
-    console.log('DEBUG: 2. searchThings.js, foundThings: ' + foundThings)
+    const debug = `DEBUG: 2. searchThings.js, foundThing: ${foundThings}`
+    console.log(debug)
 
     // if no things are found, send reply with error
     if (foundThings.length === 0) {
@@ -18,6 +19,15 @@ module.exports = {
       // if things found, send DM to the message's author with things' karma
     } else {
       reply.thingsFound(message, char, foundThings)
+    }
+
+    // if debugFlag, DM debug
+    if (debugFlag) {
+      message.author.send([
+        debugLog,
+        debugDB,
+        debug
+      ])
     }
   }
 }

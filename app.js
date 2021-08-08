@@ -25,6 +25,10 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command)
 };
 
+// CREATE DEBUG LOG
+let debugLog = ''
+let debugFlag = false
+
 // COMMAND SYNTAX
 // <prefix> <command> <thingName> <value>
 // <prefix> <command> <thingName>
@@ -43,13 +47,18 @@ client.on('message', message => {
   }
 
   // DEBUG
-  console.log('>>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<')
-  console.log('DEBUG: Guild id: ' + message.guild.id)
+  debugLog = ''
+  debugFlag = false
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
   // split the arguments into an array by spaces, allow things with spaces bewteen parens
   const argsArray = message.cleanContent.slice(prefix.length).split(/(?!\(.*)\s(?![^(]*?\))/g)
+
+  if (argsArray.includes('debug')) {
+    argsArray.splice(argsArray.indexOf('debug'), 1)
+    if (message.member.hasPermission('ADMINISTRATOR')) debugFlag = true
+  }
 
   // split args array into args
   let command = argsArray[0]
@@ -107,14 +116,26 @@ client.on('message', message => {
     };
   }
 
-  // console messages
-  console.log('================= Command Args ==================')
-  console.log('DEBUG: command: ' + command)
-  console.log('DEBUG: thingName: ' + thingName)
-  console.log('DEBUG: thingNameCharCodes: ' + thingNameCharCodes)
-  console.log('DEBUG: getThingName: ' + getThingName)
-  console.log('DEBUG: getThingNameCharCodes: ' + getThingNameCharCodes)
-  console.log('DEBUG: value: ' + value)
+  const debugMsgHandler = `
+  .
+  >>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<
+  DEBUG: Guild id: ${message.guild.id}`
+
+  console.log(debugMsgHandler)
+  if (debugFlag) debugLog += debugMsgHandler
+
+  const debugArgs = `
+  ================= Command Args ==================
+  DEBUG: command: ${command}
+  DEBUG: thingName: ${thingName}
+  DEBUG: thingNameCharCodes: ${thingNameCharCodes}
+  DEBUG: getThingName: ${getThingName}
+  DEBUG: getThingNameCharCodes: ${getThingNameCharCodes}
+  DEBUG: value: ${value}
+  DEBUG: debugFlag: ${debugFlag}`
+
+  console.log(debugArgs)
+  if (debugFlag) debugLog += debugArgs
 
   // BANNED CHARACTERS REGEX
   const bannedCharsRegex = /[`\\]/g
@@ -128,42 +149,42 @@ client.on('message', message => {
   // COMMAND TREE
   // if thingName or getThingName contains banned chars, send error reply
   if (bannedCharsRegex.test(getThingName) || bannedCharsRegex.test(thingName)) {
-    client.commands.get('unknownCommand').execute(message)
+    client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
     // else, proceed
   } else {
     // if the args include a thingName, check these commands
     if (thingName) {
       if (command === 'new') {
-        client.commands.get('newThing').execute(message, thingName)
+        client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '+') {
-        client.commands.get('incrementKarma').execute(message, thingName)
+        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '-') {
-        client.commands.get('decrementKarma').execute(message, thingName)
+        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === 'search') {
-        client.commands.get('searchThings').execute(message, thingName)
+        client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag)
       } else if (command === 'delete') {
-        client.commands.get('trollDelete').execute(message, thingName)
+        client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
         // admin commands
       } else if (command === 'adminset') {
-        client.commands.get('adminSet').execute(message, thingName, value)
+        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag)
       } else if (command === 'admindelete') {
-        client.commands.get('adminDelete').execute(message, thingName)
+        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag)
       }
       // if args does not include a thingName, check these commands
     } else {
       if (command === 'help') {
-        client.commands.get('help').execute(message)
+        client.commands.get('help').execute(message, debugLog, debugFlag)
       } else if (command === 'best') {
-        client.commands.get('best').execute(message)
+        client.commands.get('best').execute(message, debugLog, debugFlag)
       } else if (command === 'worst') {
-        client.commands.get('worst').execute(message)
+        client.commands.get('worst').execute(message, debugLog, debugFlag)
       } else {
         // if getThingName is omitted and was a valid command, send error reply
         if (commandNamesArray.includes(getThingName)) {
-          client.commands.get('noThing').execute(message)
+          client.commands.get('noThing').execute(message, debugLog, debugFlag)
           // else, it was a getThing request
         } else {
-          client.commands.get('getThing').execute(message, getThingName)
+          client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag)
         }
       }
     }

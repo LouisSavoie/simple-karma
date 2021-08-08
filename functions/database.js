@@ -10,15 +10,18 @@ databaseObj.findOne = async function (server, thingName) {
   const foundThing = await Thing.findOne({ server: server, nameLower: thingName.toLowerCase() }).exec()
 
   // debug
-  console.log('=== findOne in Database ===')
-  console.log('DEBUG: 1. database.js, foundThing: ' + foundThing)
+  const debugDB = `
+  === findOne in Database ===
+  DEBUG: 1a. database.js, thingName: ${thingName.toLowerCase()}
+  DEBUG: 1b. database.js, foundThing: ${foundThing}`
+  console.log(debugDB)
 
   // if it does, return the thing
   if (foundThing) {
-    return foundThing
+    return [foundThing, debugDB]
     // if it doesn't, return null
   } else {
-    return null
+    return [null, debugDB]
   }
 }
 
@@ -29,15 +32,17 @@ databaseObj.find = async function (server, char) {
   const foundThings = await Thing.find({ server: server, name: regex })
 
   // debug
-  console.log('=== find in Database ===')
-  console.log('DEBUG: 1. database.js, foundThings: ' + foundThings)
+  const debugDB = `
+  === find in Database ===
+  DEBUG: 1. database.js, foundThings: ${foundThings}`
+  console.log(debugDB)
 
   // if success, return the things
   if (foundThings) {
-    return foundThings
+    return [foundThings, debugDB]
     // if not, return null
   } else {
-    return null
+    return [null, debugDB]
   }
 }
 
@@ -47,15 +52,17 @@ databaseObj.findBest = async function (server) {
   const foundThings = await Thing.find({ server: server }).sort({ karma: -1 }).limit(5)
 
   // debug
-  console.log('=== find best five in Database ===')
-  console.log('DEBUG: 1. database.js, foundThings: ' + foundThings)
+  const debugDB = `
+  === find best five in Database ===
+  DEBUG: 1. database.js, foundThings: ${foundThings}`
+  console.log(debugDB)
 
   // if success, return the things
   if (foundThings) {
-    return foundThings
+    return [foundThings, debugDB]
     // if not, return null
   } else {
-    return null
+    return [null, debugDB]
   }
 }
 
@@ -65,15 +72,17 @@ databaseObj.findWorst = async function (server) {
   const foundThings = await Thing.find({ server: server }).sort({ karma: 1 }).limit(5)
 
   // debug
-  console.log('=== find worst five in Database ===')
-  console.log('DEBUG: 1. database.js, foundThings: ' + foundThings)
+  const debugDB = `
+  === find worst five in Database ===
+  DEBUG: 1. database.js, foundThings: ${foundThings}`
+  console.log(debugDB)
 
   // if success, return the things
   if (foundThings) {
-    return foundThings
+    return [foundThings, debugDB]
     // if not, return null
   } else {
-    return null
+    return [null, debugDB]
   }
 }
 
@@ -95,10 +104,12 @@ databaseObj.deleteOne = async function (server, thingName) {
   const res = await Thing.deleteOne({ server: server, name: thingName })
 
   // debug
-  console.log('=== deleteOne from Database ===')
-  console.log('DEBUG: 1. database.js, res: ' + res.ok)
+  const debugDB = `
+  === deleteOne from Database ===
+  DEBUG: 1. database.js, res: ${res.ok}`
+  console.log(debugDB)
 
-  return res.ok
+  return [res.ok, debugDB]
 }
 
 //  Export find object
