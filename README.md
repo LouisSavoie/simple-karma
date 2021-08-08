@@ -29,11 +29,13 @@ Commands are formated and limited in scope such that users interact with the poi
 - *Thing names in parentheses can have spaces.*
 - *User Thing names with spaces must have a space between the @ and the rest of the name.*
   - *Example: `(@ Joe User)` for `@Joe User`*
+- *Admins can add `debug` anywhere in the command to have debug info DM'd to them.*
 
 ## Current Scope
 - Help documentation
 - Persistant cloud database
 - Add new things to the database
+- Things are specific to a Discord server
 - Increment / decrement a thing's karma
 - You cant give yourself karma
 - Show a thing's karma
@@ -43,10 +45,14 @@ Commands are formated and limited in scope such that users interact with the poi
 - Delete things. Don't do this...
 - Admin commands for users with the 'Administrator' permission
 - Users are added to the database when they join the server automatically
-- Thing names in parentheses can have spaces. Example: `(SimpleKarma Discord Bot)`
+- Thing names in parentheses can have spaces. Example: `(SimpleKarma Discord Bot)` and `(@ SimpleKarma Bot)`
+- Get debug info DM'd to you
 
 ## Future Scope
 
-*All caught up, hurrah!*
+- search * finds all things
+- rename thing admin command
+
+~~*All caught up, hurrah!*~~
 
 If you have any suggestions for Future Scope features or Current Scope feature improvements, please fill out an issue and start the title with `Suggestion: `. Thanks :D
