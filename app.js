@@ -148,7 +148,7 @@ client.on('message', message => {
   // COMMAND TREE
   // if thingName or getThingName contains banned chars, send error reply
   if (bannedCharsRegex.test(getThingName) || bannedCharsRegex.test(thingName)) {
-    client.commands.get('unknownCommand').execute(message)
+    client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
     // else, proceed
   } else {
     // if the args include a thingName, check these commands
