@@ -168,7 +168,7 @@ client.on('message', message => {
       } else if (command === 'adminset') {
         client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag)
       } else if (command === 'admindelete') {
-        client.commands.get('adminDelete').execute(message, thingName)
+        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag)
       }
       // if args does not include a thingName, check these commands
     } else {

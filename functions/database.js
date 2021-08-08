@@ -104,10 +104,12 @@ databaseObj.deleteOne = async function (server, thingName) {
   const res = await Thing.deleteOne({ server: server, name: thingName })
 
   // debug
-  console.log('=== deleteOne from Database ===')
-  console.log('DEBUG: 1. database.js, res: ' + res.ok)
+  const debugDB = `
+  === deleteOne from Database ===
+  DEBUG: 1. database.js, res: ${res.ok}`
+  console.log(debugDB)
 
-  return res.ok
+  return [res.ok, debugDB]
 }
 
 //  Export find object
