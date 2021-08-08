@@ -181,7 +181,7 @@ client.on('message', message => {
       } else {
         // if getThingName is omitted and was a valid command, send error reply
         if (commandNamesArray.includes(getThingName)) {
-          client.commands.get('noThing').execute(message)
+          client.commands.get('noThing').execute(message, debugLog, debugFlag)
           // else, it was a getThing request
         } else {
           client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag)
