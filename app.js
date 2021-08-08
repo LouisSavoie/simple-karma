@@ -172,7 +172,7 @@ client.on('message', message => {
       // if args does not include a thingName, check these commands
     } else {
       if (command === 'help') {
-        client.commands.get('help').execute(message)
+        client.commands.get('help').execute(message, debugLog, debugFlag)
       } else if (command === 'best') {
         client.commands.get('best').execute(message, debugLog, debugFlag)
       } else if (command === 'worst') {

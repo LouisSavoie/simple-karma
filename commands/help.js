@@ -1,7 +1,7 @@
 module.exports = {
   name: 'help',
   description: 'DMs a list of all commands.',
-  execute (message) {
+  execute (message, debugLog, debugFlag) {
     message.author.send([
       '.',
       '**Help**:',
@@ -22,6 +22,7 @@ module.exports = {
       '*- User Thing names with spaces must have a space between the @ and the rest of the name.*',
       '*  - Example: `(@ Joe User)` for `@Joe User`*'
     ])
+    
     if (message.member.hasPermission('ADMINISTRATOR')) {
       message.author.send([
         '.',
@@ -29,6 +30,13 @@ module.exports = {
         'Syntax: **<prefix> <command> <thing> <value>**',
         '**`sk adminset <thing> <value>`**: Sets a thing\'s karma to the value',
         '**`sk admindelete <thing>`**: Deletes a thing'
+      ])
+    }
+
+    // if debugFlag, DM debug
+    if (debugFlag) {
+      message.author.send([
+        debugLog
       ])
     }
   }
