@@ -131,7 +131,8 @@ client.on('message', message => {
   DEBUG: thingNameCharCodes: ${thingNameCharCodes}
   DEBUG: getThingName: ${getThingName}
   DEBUG: getThingNameCharCodes: ${getThingNameCharCodes}
-  DEBUG: value: ${value}`
+  DEBUG: value: ${value}
+  DEBUG: debugFlag: ${debugFlag}`
 
   console.log(debugArgs)
   if (debugFlag) debugLog += debugArgs
