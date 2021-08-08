@@ -163,7 +163,7 @@ client.on('message', message => {
       } else if (command === 'search') {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag)
       } else if (command === 'delete') {
-        client.commands.get('trollDelete').execute(message, thingName)
+        client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
         // admin commands
       } else if (command === 'adminset') {
         client.commands.get('adminSet').execute(message, thingName, value)

@@ -12,7 +12,8 @@ databaseObj.findOne = async function (server, thingName) {
   // debug
   const debugDB = `
   === findOne in Database ===
-  DEBUG: 1. database.js, foundThing: ${foundThing}`
+  DEBUG: 1a. database.js, thingName: ${thingName.toLowerCase()}
+  DEBUG: 1b. database.js, foundThing: ${foundThing}`
   console.log(debugDB)
 
   // if it does, return the thing

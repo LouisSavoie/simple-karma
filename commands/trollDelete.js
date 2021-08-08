@@ -5,16 +5,28 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'trollDelete',
   description: 'Transfers karma from user issuing the command to the thing they tried to delete.',
-  async execute (message, thingName) {
+  async execute (message, thingName, debugLog, debugFlag) {
     // check if the command issuer is the thing being deleted
-    if (!thingName.includes(message.member.displayName)) {
-      // create regex for finding the command issuer
-      const regex = new RegExp(message.member.displayName, 'i')
+    if (thingName.includes(message.member.displayName)) {
+      reply.trollDeleteYourselfError(message)
+
+      // if debugFlag, DM debug
+      if (debugFlag) {
+        message.author.send([
+          debugLog
+        ])
+      }
+    } else {
+      // create debugDB variable to handle DM'ing in different cases
+      let debugDB = ``
+
       // check if the database has the the user that issued the command as a thing
-      const foundUser = await db.findOne(message.guild.id, regex)
+      const [foundUser, debugDBUser] = await db.findOne(message.guild.id, '@' + message.member.displayName)
+      debugDB += debugDBUser
 
       // debug
-      console.log('DEBUG: 2. trollDelete.js, foundUser: ' + foundUser)
+      let debug = `  DEBUG: trollDelete.js, foundUser: ${foundUser}`
+      console.log(debug)
 
       // if it does, continue
       if (foundUser) {
@@ -23,10 +35,12 @@ module.exports = {
           reply.notEnoughKarma(message)
         } else {
           // check if the database has the thing
-          const foundThing = await db.findOne(message.guild.id, thingName)
+          const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
+          debugDB += debugDBThing
 
           // debug
-          console.log('DEBUG: 3. trollDelete.js, foundThing: ' + foundThing)
+          debug += `DEBUG: trollDelete.js, foundThing: ${foundThing}`
+          console.log('DEBUG: trollDelete.js, foundThing: ' + foundThing)
 
           // if it does, take the user's karma and give it to the thing
           if (foundThing) {
@@ -45,8 +59,16 @@ module.exports = {
       } else {
         reply.userNotInDatabase(message, message.member.displayName)
       }
-    } else {
-      reply.trollDeleteYourselfError(message)
+
+
+      // if debugFlag, DM debug
+      if (debugFlag) {
+        message.author.send([
+          debugLog,
+          debugDB,
+          debug
+        ])
+      }
     }
   }
 }
