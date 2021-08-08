@@ -5,16 +5,23 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'adminSet',
   description: 'Increments karma for a thing',
-  async execute (message, thingName, value) {
+  async execute (message, thingName, value, debugLog, debugFlag) {
+
+    // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
+    let debugDB = ``
+    let debug = ``
+
     // if the message author has permission, proceed
     if (message.member.hasPermission('ADMINISTRATOR')) {
       // check if value is a number
       if (!isNaN(value)) {
         // check if the database has the thing
-        const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
+        const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
+        debugDB += debugDBThing
 
         // debug
-        console.log('DEBUG: 2. adminSet.js, foundThing: ' + foundThing)
+        debug += `  DEBUG: 2. adminSet.js, foundThing: ${foundThing}`
+        console.log(debug)
 
         // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
         if (!foundThing) {
@@ -31,6 +38,15 @@ module.exports = {
       // if message author does not have permission, send error reply
     } else {
       reply.noPermission(message)
+    }
+
+    // if debugFlag, DM debug
+    if (debugFlag) {
+      message.author.send([
+        debugLog,
+        debugDB,
+        debug
+      ])
     }
   }
 }

@@ -166,7 +166,7 @@ client.on('message', message => {
         client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
         // admin commands
       } else if (command === 'adminset') {
-        client.commands.get('adminSet').execute(message, thingName, value)
+        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag)
       } else if (command === 'admindelete') {
         client.commands.get('adminDelete').execute(message, thingName)
       }
