@@ -175,7 +175,6 @@ client.on('message', message => {
       }
       // if args does not include a thingName, check these commands
     } else {
-      console.log("ping")
       if (command === 'help') {
         client.commands.get('help').execute(message, debugLog, debugFlag)
       } else if (command === 'best') {
@@ -183,7 +182,6 @@ client.on('message', message => {
       } else if (command === 'worst') {
         client.commands.get('worst').execute(message, debugLog, debugFlag)
       } else {
-        // console.log("ping")
         // if getThingName is omitted and was a valid command, send error reply
         if (commandNamesArray.includes(getThingName)) {
           client.commands.get('noThing').execute(message, debugLog, debugFlag)
