@@ -16,6 +16,10 @@ replyObj.thingsFound = function (message, char, foundThings) {
   // debug
   // console.log("foundThings:\n" + foundThings);
 
+  if (char === '') {
+    char = '*'
+  }
+
   let text = `.\nThings containing **${char}**:`
   foundThings.forEach(thing => {
     text += `\n--------------------\n**${thing.name}**: Karma - **${thing.karma}**`
