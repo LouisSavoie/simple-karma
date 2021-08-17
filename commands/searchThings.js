@@ -6,11 +6,16 @@ module.exports = {
   name: 'searchThings',
   description: 'DMs list of things with names containing a string',
   async execute (message, char, debugLog, debugFlag) {
+    // if char is '*', return all
+    if (char === '*') {
+      char = ''
+    }
+
     // Search the database for things with names containing with the character
     const [foundThings, debugDB] = await db.find(message.guild.id, char)
 
     // debug
-    const debug = `DEBUG: 2. searchThings.js, foundThing: ${foundThings}`
+    const debug = `  DEBUG: 2. searchThings.js, foundThing: ${foundThings}`
     console.log(debug)
 
     // if no things are found, send reply with error
