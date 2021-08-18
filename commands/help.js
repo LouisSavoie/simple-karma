@@ -29,6 +29,7 @@ module.exports = {
         '__**ADMIN Commands:**__',
         'Syntax: **<prefix> <command> <thing> <value>**',
         '**`sk adminset <thing> <value>`**: Sets a thing\'s karma to the value',
+        '**`sk adminrename <thing> <value>`**: Renames a thing to the value',
         '**`sk admindelete <thing>`**: Deletes a thing',
         'Notes:',
         '*- Add `debug` anywhere in the command to have debug info DM\'d to you.*'

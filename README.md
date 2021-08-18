@@ -22,6 +22,7 @@ Commands are formated and limited in scope such that users interact with the poi
 **Admin Commands**
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
 - **`sk adminset <thing> <value>`**: Sets a \<thing\>'s karma to the value
+- **`sk adminrename <thing> <value>`**: Renames a \<thing\> to the value
 - **`sk admindelete <thing>`**: Deletes a \<thing\>
 
 **Notes:**
@@ -43,8 +44,11 @@ Commands are formated and limited in scope such that users interact with the poi
 - Searching `*` returns all
 - List the best things
 - list the worst things
-- Delete things. Don't do this...
+- Get trolled trying to delete a thing
 - Admin commands for users with the 'Administrator' permission
+- Set karma values
+- Rename things
+- Actually delete things
 - Users are added to the database when they join the server automatically
 - Thing names in parentheses can have spaces. Example: `(SimpleKarma Discord Bot)` and `(@ SimpleKarma Bot)`
 - Get debug info DM'd to you

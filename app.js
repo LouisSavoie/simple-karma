@@ -64,7 +64,7 @@ client.on('message', message => {
   let command = argsArray[0]
   let thingName = argsArray[1]
   let getThingName = argsArray[0]
-  let value = argsArray[2]
+  const value = argsArray[2]
 
   // args transformations
   if (command) {
