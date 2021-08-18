@@ -12,6 +12,7 @@ module.exports = {
 
     // if the message author has permission, proceed
     if (message.member.hasPermission('ADMINISTRATOR')) {
+      value = parseInt(value, 10)
       // check if value is a number
       if (!isNaN(value)) {
         // check if the database has the thing

@@ -52,7 +52,7 @@ client.on('message', message => {
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
-  // split the arguments into an array by spaces, allow things with spaces bewteen parens
+  // split the arguments into an array by spaces, allow things with spaces between parens
   const argsArray = message.cleanContent.slice(prefix.length).split(/(?!\(.*)\s(?![^(]*?\))/g)
 
   if (argsArray.includes('debug')) {
@@ -93,10 +93,6 @@ client.on('message', message => {
   // remove space from getThingName after @ for user names with spaces
   if (getThingName && getThingName.startsWith('@') && getThingName.charCodeAt(1) === 32) {
     getThingName = getThingName.slice(0, 1) + getThingName.slice(2)
-  }
-
-  if (value) {
-    value = parseInt(value, 10)
   }
 
   // DEBUG
@@ -168,6 +164,8 @@ client.on('message', message => {
         // admin commands
       } else if (command === 'adminset') {
         client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag)
+      } else if (command === 'adminrename') {
+        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag)
       } else if (command === 'admindelete') {
         client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag)
       } else {
