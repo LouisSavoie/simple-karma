@@ -57,7 +57,7 @@ client.on('message', message => {
 
   if (argsArray.includes('debug')) {
     argsArray.splice(argsArray.indexOf('debug'), 1)
-    if (message.member.hasPermission('ADMINISTRATOR')) debugFlag = true
+    debugFlag = true
   }
 
   // split args array into args
