@@ -139,7 +139,7 @@ client.on('message', message => {
   // COMMAND NAMES ARRAY
   // an array containing the syntax of commands that include a thingName,
   // incase the thingName is omitted from the command,
-  // the getThingName can be checked against this array to verify if it was ment for the getThing command.
+  // the getThingName can be checked against this array to verify if it was meant for the getThing command.
   const commandNamesArray = ['new', '+', '-', 'search', 'delete']
 
   // COMMAND TREE

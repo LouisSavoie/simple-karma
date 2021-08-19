@@ -5,13 +5,13 @@
 
 SimpleKarma is a Discord bot used to award "things" points such as Karma. Things can be users, concepts, physical or digital objects, brands, or whatever you want!
 
-Commands are formated and limited in scope such that users interact with the points databases very deliberately.
+Commands are formatted and limited in scope such that users interact with the points databases very deliberately.
 
 ## Commands
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
 - **`sk help`**: DMs this list to you
 - **`sk new <thing>`**: Creates a new \<thing\>
-- **`sk search <strng>`**: DMs a list of \<thing\>s with names that include the given string. Searching `*` returns all.
+- **`sk search <string>`**: DMs a list of \<thing\>s with names that include the given string. Searching `*` returns all.
 - **`sk best`**: Shows a list of the best five \<thing\>s by karma.
 - **`sk worst`**: Shows a list of the worst five \<thing\>s by karma.
 - **`sk <thing>`**: Shows a \<thing\>'s karma
@@ -30,11 +30,11 @@ Commands are formated and limited in scope such that users interact with the poi
 - *Thing names in parentheses can have spaces.*
 - *User Thing names with spaces must have a space between the @ and the rest of the name.*
   - *Example: `(@ Joe User)` for `@Joe User`*
-- *Admins can add `debug` anywhere in the command to have debug info DM'd to them.*
+- *Add `debug` anywhere in the command to have debug info DM'd to them.*
 
 ## Current Scope
 - Help documentation
-- Persistant cloud database
+- Persistent cloud database
 - Add new things to the database
 - Things are specific to a Discord server
 - Increment / decrement a thing's karma
@@ -55,11 +55,9 @@ Commands are formated and limited in scope such that users interact with the poi
 
 ## Future Scope
 
-- `+ / - karma` on a non-existant thing will create that thing
+- `+ / - karma` on a non-existent thing will create that thing
 - undo admin command
-- rename thing admin command
 - allow command arguments in any order
-- make debug for everyone
 
 ~~*All caught up, hurrah!*~~
 

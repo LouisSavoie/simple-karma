@@ -260,7 +260,7 @@ replyObj.unknownCommand = function (message) {
   message.reply({
     embed: {
       color: 'RED',
-      description: 'Command is unknown or conatins banned characters.'
+      description: 'Command is unknown or contains banned characters.'
     }
   }).catch(console.error)
 }
