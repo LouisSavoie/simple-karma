@@ -46,7 +46,7 @@ client.on('message', message => {
     return
   }
 
-  // DEBUG
+  // Reset debug vars to default values
   debugLog = ''
   debugFlag = false
 
@@ -193,6 +193,10 @@ client.on('message', message => {
 
 // JOIN HANDLER
 client.on('guildMemberAdd', member => {
+  // Reset debug vars to default values
+  debugLog = ''
+  debugFlag = false
+  
   // DEBUG
   console.log('>>>>>>>>>>>>>>>>> JOIN HANDLER <<<<<<<<<<<<<<<<<')
   console.log(`DEBUG: @${member.displayName} joined`)
