@@ -10,7 +10,7 @@ module.exports = {
     const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
     // debug
-    const debug = `DEBUG: 2. getThing.js, thing: ${foundThing}`
+    const debug = `  DEBUG: 2. getThing.js, thing: ${foundThing}`
     console.log(debug)
 
     // if it does, reply with the thing

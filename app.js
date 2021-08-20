@@ -29,6 +29,9 @@ for (const file of commandFiles) {
 let debugLog = ''
 let debugFlag = false
 
+// CREATE UNDO ARRAY
+let undo = {}
+
 // COMMAND SYNTAX
 // <prefix> <command> <thingName> <value>
 // <prefix> <command> <thingName>
@@ -49,6 +52,13 @@ client.on('message', message => {
   // Reset debug vars to default values
   debugLog = ''
   debugFlag = false
+
+  // UNDO SETUP
+  const serverID = message.guild.id
+  if (!(serverID in undo)) {
+    undo[serverID] = []
+    console.log(`  DEBUG: app.js, added ${serverID} to undo: ${JSON.stringify(undo)}`)
+  }
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
@@ -146,13 +156,17 @@ client.on('message', message => {
   // if thingName or getThingName contains banned chars, send error reply
   if (bannedCharsRegex.test(getThingName) || bannedCharsRegex.test(thingName)) {
     client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
-    // else, proceed
   } else {
-    // console.log("ping")
+    if (command === 'undo') {
+      client.commands.get('undo').execute(undo[serverID].pop(), debugLog, debugFlag)
+      console.log(`  DEBUG: app.js, removed from undo.${serverID}: ${JSON.stringify(undo[serverID])}`)
+    }
     // if the args include a thingName, check these commands
-    if (thingName) {
+    else if (thingName) {
       if (command === 'new') {
         client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag)
+        undo[serverID].push({ thing: thingName, command: 'delete' })
+        console.log(`  DEBUG: app.js, added to undo.${serverID}: ${JSON.stringify(undo[serverID])}`)
       } else if (command === '+') {
         client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '-') {
@@ -196,7 +210,7 @@ client.on('guildMemberAdd', member => {
   // Reset debug vars to default values
   debugLog = ''
   debugFlag = false
-  
+
   // DEBUG
   console.log('>>>>>>>>>>>>>>>>> JOIN HANDLER <<<<<<<<<<<<<<<<<')
   console.log(`DEBUG: @${member.displayName} joined`)
@@ -209,9 +223,9 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
 
   // SET STATUS
-  client.user.setActivity('"sk help"', { type: 'WATCHING' })
+  // client.user.setActivity('"sk help"', { type: 'WATCHING' })
   // Status for testing
-  // client.user.setActivity('"TESTING"', {})
+  client.user.setActivity('"TESTING"', {})
 })
 
 // LOGIN
