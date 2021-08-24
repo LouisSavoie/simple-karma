@@ -4,14 +4,14 @@ const reply = require('../functions/reply')
 
 module.exports = {
   name: 'adminDelete',
-  description: 'Increments karma for a thing',
-  async execute (message, thingName, debugLog, debugFlag) {
+  description: 'Deletes a thing',
+  async execute (message, thingName, debugLog, debugFlag, undoFlag) {
     // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
     let debugDB = ''
     let debug = ''
 
     // if the message author has permission, proceed
-    if (message.member.hasPermission('ADMINISTRATOR')) {
+    if (message.member.hasPermission('ADMINISTRATOR') || undoFlag) {
       // check if the database has the thing
       const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
       debugDB += debugDBThing
@@ -23,7 +23,7 @@ module.exports = {
       // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
       if (!foundThing) {
         reply.notFound(message, thingName)
-        // if it does, delete it and send seccess reply
+        // if it does, delete it and send success reply
       } else {
         const [res, debugDBDelete] = await db.deleteOne(message.guild.id, foundThing.name)
         debugDB += debugDBDelete

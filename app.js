@@ -53,11 +53,11 @@ client.on('message', message => {
   debugLog = ''
   debugFlag = false
 
-  // UNDO SETUP
+  // ADD SERVER TO UNDO OBJECT
   const serverID = message.guild.id
   if (!(serverID in undo)) {
     undo[serverID] = []
-    console.log(`  DEBUG: app.js, added ${serverID} to undo: ${JSON.stringify(undo)}`)
+    // console.log(`  DEBUG: app.js, added ${serverID} to undo: ${JSON.stringify(undo)}`)
   }
 
   // COMMAND ARGS PROCESSING
@@ -158,15 +158,15 @@ client.on('message', message => {
     client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
   } else {
     if (command === 'undo') {
-      client.commands.get('undo').execute(undo[serverID].pop(), debugLog, debugFlag)
-      console.log(`  DEBUG: app.js, removed from undo.${serverID}: ${JSON.stringify(undo[serverID])}`)
+      client.commands.get('undo').execute(undo[serverID].pop(), client.commands, debugLog, debugFlag)
+      // console.log(`  DEBUG: app.js, removed from undo.${serverID}: ${JSON.stringify(undo[serverID])}`)
     }
     // if the args include a thingName, check these commands
     else if (thingName) {
       if (command === 'new') {
         client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag)
-        undo[serverID].push({ thing: thingName, command: 'delete' })
-        console.log(`  DEBUG: app.js, added to undo.${serverID}: ${JSON.stringify(undo[serverID])}`)
+        undo[serverID].push({message: message, thingName: thingName, command: 'delete' })
+        // console.log(`  DEBUG: app.js, added to undo.${serverID}: ${JSON.stringify(undo[serverID])}`)
       } else if (command === '+') {
         client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '-') {
@@ -181,7 +181,7 @@ client.on('message', message => {
       } else if (command === 'adminrename') {
         client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag)
       } else if (command === 'admindelete') {
-        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }
@@ -223,9 +223,10 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
 
   // SET STATUS
-  // client.user.setActivity('"sk help"', { type: 'WATCHING' })
+  client.user.setActivity('"sk help"', { type: 'WATCHING' })
+
   // Status for testing
-  client.user.setActivity('"TESTING"', {})
+  // client.user.setActivity('"TESTING"', {})
 })
 
 // LOGIN

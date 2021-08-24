@@ -4,13 +4,14 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'undo',
   description: 'Undoes previous command that changed a thing',
-  async execute (undo, debugLog, debugFlag) {
+  async execute (undo, commands, debugLog, debugFlag) {
     if (undo === undefined) {
       console.log(`  DEBUG: undo.js: undo is undefined`)
     } else {
       switch(undo.command) {
         case 'delete':
-          console.log(`  DEBUG: undo.js: reached delete case for ${undo.thing}`)
+          console.log(`  DEBUG: undo.js: reached delete case for ${undo.thingName}`)
+          commands.get('adminDelete').execute(undo.message, undo.thingName, debugLog, debugFlag, true)
           break;
         default:
           console.log(`  DEBUG: undo.js: reached default case`)
