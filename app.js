@@ -29,9 +29,6 @@ for (const file of commandFiles) {
 let debugLog = ''
 let debugFlag = false
 
-// CREATE UNDO ARRAY
-let undo = {}
-
 // COMMAND SYNTAX
 // <prefix> <command> <thingName> <value>
 // <prefix> <command> <thingName>
@@ -52,13 +49,6 @@ client.on('message', message => {
   // Reset debug vars to default values
   debugLog = ''
   debugFlag = false
-
-  // ADD SERVER TO UNDO OBJECT
-  const serverID = message.guild.id
-  if (!(serverID in undo)) {
-    undo[serverID] = []
-    // console.log(`  DEBUG: app.js, added ${serverID} to undo: ${JSON.stringify(undo)}`)
-  }
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
@@ -158,15 +148,12 @@ client.on('message', message => {
     client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
   } else {
     if (command === 'undo') {
-      client.commands.get('undo').execute(undo[serverID].pop(), client.commands, debugLog, debugFlag)
-      // console.log(`  DEBUG: app.js, removed from undo.${serverID}: ${JSON.stringify(undo[serverID])}`)
+      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag)
     }
     // if the args include a thingName, check these commands
     else if (thingName) {
       if (command === 'new') {
         client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag)
-        undo[serverID].push({message: message, thingName: thingName, command: 'delete' })
-        // console.log(`  DEBUG: app.js, added to undo.${serverID}: ${JSON.stringify(undo[serverID])}`)
       } else if (command === '+') {
         client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
       } else if (command === '-') {

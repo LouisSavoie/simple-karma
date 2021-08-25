@@ -1,6 +1,7 @@
 // Require functions
 const db = require('../functions/database')
 const reply = require('../functions/reply')
+const undo = require('./undo')
 
 module.exports = {
   name: 'newThing',
@@ -21,6 +22,7 @@ module.exports = {
       const newThing = await db.create(message.guild.id, thingName)
       if (newThing) {
         reply.thingCreated(message, newThing)
+        undo.execute(null, message, newThing, 'delete', null, null)
       } else {
         reply.thingNotCreated(message, thingName)
       }
