@@ -1,6 +1,7 @@
 // Require functions
 const db = require('../functions/database')
 const reply = require('../functions/reply')
+const undo = require('./undo')
 
 module.exports = {
   name: 'adminDelete',
@@ -34,6 +35,7 @@ module.exports = {
 
         if (res === 1) {
           reply.thingDeleted(message, foundThing.name)
+          undo.execute(null, message, foundThing, 'create', null, null)
         } else {
           reply.thingNotDeleted(message, foundThing.name)
         }

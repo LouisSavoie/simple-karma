@@ -23,6 +23,10 @@ module.exports = {
           // console.log(`  DEBUG: undo.js: reached delete case for ${undo.thing.name}`)
           commands.get('adminDelete').execute(message, undo.thing.name, debugLog, debugFlag, true)
           break;
+        case 'create':
+          // console.log(`  DEBUG: undo.js: reached create case for ${undo.thing.name}`)
+          commands.get('newThing').execute(message, undo.thing.name, debugLog, debugFlag, undo.thing) //newthing needs to reinstate karma
+          break;
         default:
           console.log(`  DEBUG: undo.js: reached default case`)
       }

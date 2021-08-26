@@ -87,8 +87,8 @@ databaseObj.findWorst = async function (server) {
 }
 
 // CREATE THING
-databaseObj.create = async function (server, thingName) {
-  const newThing = await Thing.create({ server: server, name: thingName, nameLower: thingName.toLowerCase(), karma: 0 })
+databaseObj.create = async function (server, thingName, karma) {
+  const newThing = await Thing.create({ server: server, name: thingName, nameLower: thingName.toLowerCase(), karma: karma })
 
   // if it creation is successful, return the thing
   if (newThing) {
