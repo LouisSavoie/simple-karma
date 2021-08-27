@@ -165,7 +165,7 @@ client.on('message', message => {
       } else if (command === 'adminset') {
         client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag)
       } else if (command === 'adminrename') {
-        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag)
+        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false)
       } else if (command === 'admindelete') {
         client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false)
       } else {

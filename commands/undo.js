@@ -34,6 +34,10 @@ module.exports = {
           // console.log(`  DEBUG: undo.js: reached decrement case for ${undo.thing.name}`)
           commands.get('incrementKarma').execute(message, undo.thing.name, debugLog, debugFlag)
           break
+        case 'rename':
+          // console.log(`  DEBUG: undo.js: reached decrement case for ${undo.thing.name}`)
+          commands.get('adminRename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true)
+          break
         default:
           console.log('  DEBUG: undo.js: reached default case')
       }
