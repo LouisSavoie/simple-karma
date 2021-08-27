@@ -149,9 +149,8 @@ client.on('message', message => {
   } else {
     if (command === 'undo') {
       client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag)
-    }
-    // if the args include a thingName, check these commands
-    else if (thingName) {
+    } else if (thingName) {
+      // if the args include a thingName, check these commands
       if (command === 'new') {
         client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null)
       } else if (command === '+') {
