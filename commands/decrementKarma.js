@@ -1,6 +1,7 @@
 // Require functions
 const db = require('../functions/database')
 const reply = require('../functions/reply')
+const undo = require('./undo')
 
 module.exports = {
   name: 'decrementKarma',
@@ -18,6 +19,7 @@ module.exports = {
       foundThing.karma -= 1
       foundThing.save()
       reply.found(message, foundThing)
+      undo.execute(null, message, foundThing, 'increment', null, null)
       // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
     } else {
       reply.notFound(message, thingName)
