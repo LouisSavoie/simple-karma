@@ -5,7 +5,7 @@ const undo = require('./undo')
 
 module.exports = {
   name: 'adminSet',
-  description: 'Increments karma for a thing',
+  description: 'Sets karma for a thing to a given value',
   async execute (message, thingName, value, debugLog, debugFlag, undoFlag) {
     // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
     let debugDB = ''
@@ -27,7 +27,7 @@ module.exports = {
         // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
         if (!foundThing) {
           reply.notFound(message, thingName)
-          // if it does, set the karma to the value and send seccess reply
+          // if it does, set the karma to the value and send success reply
         } else {
           const oldKarma = foundThing.karma
           foundThing.karma = value

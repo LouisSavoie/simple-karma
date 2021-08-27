@@ -1,3 +1,4 @@
+const reply = require('../functions/reply')
 // Undo Object, keys are guild.id, values are arrays of undo objects for the keys server
 const undos = {}
 
@@ -44,6 +45,7 @@ module.exports = {
           break
         default:
           console.log('  DEBUG: undo.js: reached default case')
+          reply.noUndoCase()
       }
     }
   }

@@ -315,5 +315,15 @@ replyObj.thingNotDeleted = function (message, thingName) {
   }).catch(console.error)
 }
 
+// ERROR: NO UNDO CASE
+replyObj.noUndoCase = function () {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'Undo operation does not match any defined case.'
+    }
+  }).catch(console.error)
+}
+
 //  Export reply object
 module.exports = replyObj
