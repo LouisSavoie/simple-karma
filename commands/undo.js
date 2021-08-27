@@ -31,12 +31,16 @@ module.exports = {
           commands.get('decrementKarma').execute(message, undo.thing.name, debugLog, debugFlag)
           break
         case 'increment':
-          // console.log(`  DEBUG: undo.js: reached decrement case for ${undo.thing.name}`)
+          // console.log(`  DEBUG: undo.js: reached increment case for ${undo.thing.name}`)
           commands.get('incrementKarma').execute(message, undo.thing.name, debugLog, debugFlag)
           break
         case 'rename':
-          // console.log(`  DEBUG: undo.js: reached decrement case for ${undo.thing.name}`)
+          // console.log(`  DEBUG: undo.js: reached rename case for ${undo.thing.name}`)
           commands.get('adminRename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true)
+          break
+        case 'set':
+          // console.log(`  DEBUG: undo.js: reached set case for ${undo.thing.name}`)
+          commands.get('adminSet').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true)
           break
         default:
           console.log('  DEBUG: undo.js: reached default case')

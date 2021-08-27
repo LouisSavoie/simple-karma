@@ -1,17 +1,18 @@
 // Require functions
 const db = require('../functions/database')
 const reply = require('../functions/reply')
+const undo = require('./undo')
 
 module.exports = {
   name: 'adminSet',
   description: 'Increments karma for a thing',
-  async execute (message, thingName, value, debugLog, debugFlag) {
+  async execute (message, thingName, value, debugLog, debugFlag, undoFlag) {
     // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
     let debugDB = ''
     let debug = ''
 
     // if the message author has permission, proceed
-    if (message.member.hasPermission('ADMINISTRATOR')) {
+    if (message.member.hasPermission('ADMINISTRATOR') || undoFlag) {
       value = parseInt(value, 10)
       // check if value is a number
       if (!isNaN(value)) {
@@ -28,9 +29,12 @@ module.exports = {
           reply.notFound(message, thingName)
           // if it does, set the karma to the value and send seccess reply
         } else {
+          const oldKarma = foundThing.karma
           foundThing.karma = value
           foundThing.save()
           reply.found(message, foundThing)
+          foundThing.value = oldKarma
+          undo.execute(null, message, foundThing, 'set', null, null)
         }
       } else {
         reply.notANumber(message, value)
