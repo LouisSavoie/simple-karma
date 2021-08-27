@@ -26,6 +26,9 @@ module.exports = {
           // console.log(`  DEBUG: undo.js: reached create case for ${undo.thing.name}`)
           commands.get('newThing').execute(message, undo.thing.name, debugLog, debugFlag, undo.thing)
           break
+        case 'decrement':
+          // console.log(`  DEBUG: undo.js: reached decrement case for ${undo.thing.name}`)
+          commands.get('decrementKarma').execute(message, undo.thing.name, debugLog, debugFlag)
         default:
           console.log('  DEBUG: undo.js: reached default case')
       }
