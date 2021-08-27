@@ -12,18 +12,19 @@ Commands are formatted and limited in scope such that users interact with the po
 - **`sk help`**: DMs this list to you
 - **`sk new <thing>`**: Creates a new \<thing\>
 - **`sk search <string>`**: DMs a list of \<thing\>s with names that include the given string. Searching `*` returns all.
-- **`sk best`**: Shows a list of the best five \<thing\>s by karma.
-- **`sk worst`**: Shows a list of the worst five \<thing\>s by karma.
+- **`sk best`**: Shows a list of the best five things by karma.
+- **`sk worst`**: Shows a list of the worst five things by karma.
 - **`sk <thing>`**: Shows a \<thing\>'s karma
 - **`sk + <thing>`**: Increments a \<thing\>'s karma
 - **`sk - <thing>`**: Decrements a \<thing\>'s karma
-- **`sk delete <thing>`**: Deletes a thing. Only bad people do this.
+- **`sk delete <thing>`**: Deletes a \<thing\>. Only bad people do this.
 
 **Admin Commands**
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
-- **`sk adminset <thing> <value>`**: Sets a \<thing\>'s karma to the value
-- **`sk adminrename <thing> <value>`**: Renames a \<thing\> to the value
+- **`sk adminset <thing> <value>`**: Sets a \<thing\>'s karma to the \<value\>
+- **`sk adminrename <thing> <value>`**: Renames a \<thing\> to the \<value\>
 - **`sk admindelete <thing>`**: Deletes a \<thing\>
+- **`sk undo`**: Undoes the last command that changed a thing
 
 **Notes:**
 - *Prefix, commands, and thing names are case insensitive.*
@@ -52,11 +53,11 @@ Commands are formatted and limited in scope such that users interact with the po
 - Users are added to the database when they join the server automatically
 - Thing names in parentheses can have spaces. Example: `(SimpleKarma Discord Bot)` and `(@ SimpleKarma Bot)`
 - Get debug info DM'd to you
+- Undo changes
 
 ## Future Scope
 
 - `+ / - karma` on a non-existent thing will create that thing
-- undo admin command
 - allow command arguments in any order
 
 ~~*All caught up, hurrah!*~~
