@@ -316,7 +316,7 @@ replyObj.thingNotDeleted = function (message, thingName) {
 }
 
 // ERROR: NO UNDO CASE
-replyObj.noUndoCase = function () {
+replyObj.noUndoCase = function (message) {
   message.reply({
     embed: {
       color: 'RED',
