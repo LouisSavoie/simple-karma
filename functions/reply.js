@@ -325,5 +325,15 @@ replyObj.noUndoCase = function (message) {
   }).catch(console.error)
 }
 
+// ERROR: NO UNDO
+replyObj.noUndoCase = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'There is nothing to undo.'
+    }
+  }).catch(console.error)
+}
+
 //  Export reply object
 module.exports = replyObj
