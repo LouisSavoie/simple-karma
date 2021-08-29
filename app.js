@@ -64,7 +64,7 @@ client.on('message', message => {
   let command = argsArray[0]
   let thingName = argsArray[1]
   let getThingName = argsArray[0]
-  const value = argsArray[2]
+  let value = argsArray[2]
 
   // args transformations
   if (command) {
@@ -93,6 +93,15 @@ client.on('message', message => {
   // remove space from getThingName after @ for user names with spaces
   if (getThingName && getThingName.startsWith('@') && getThingName.charCodeAt(1) === 32) {
     getThingName = getThingName.slice(0, 1) + getThingName.slice(2)
+  }
+
+  // remove parens from value if present for things that include spaces
+  if (value && value.startsWith('(') && value.endsWith(')')) {
+    value = value.slice(1, -1)
+  }
+  // remove space from value after @ for user names with spaces
+  if (value && value.startsWith('@') && value.charCodeAt(1) === 32) {
+    value = value.slice(0, 1) + value.slice(2)
   }
 
   // DEBUG
