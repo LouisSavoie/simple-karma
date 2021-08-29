@@ -1,11 +1,12 @@
 // Require functions
 const db = require('../functions/database')
 const reply = require('../functions/reply')
+const undo = require('./undo')
 
 module.exports = {
   name: 'incrementKarma',
   description: 'Increments karma for a thing',
-  async execute (message, thingName, debugLog, debugFlag) {
+  async execute (message, thingName, debugLog, debugFlag, addUndoFlag) {
     // check if the command issuer is the thing being incremented
     if (thingName.includes(message.member.displayName)) {
       reply.karmaYourselfError(message, thingName)
@@ -27,6 +28,7 @@ module.exports = {
           foundThing.karma += 1
           foundThing.save()
           reply.found(message, foundThing)
+          if (addUndoFlag) undo.execute(null, message, foundThing, 'decrement', null, null)
         }
         // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
       } else {

@@ -46,7 +46,7 @@ client.on('message', message => {
     return
   }
 
-  // DEBUG
+  // Reset debug vars to default values
   debugLog = ''
   debugFlag = false
 
@@ -57,7 +57,7 @@ client.on('message', message => {
 
   if (argsArray.includes('debug')) {
     argsArray.splice(argsArray.indexOf('debug'), 1)
-    if (message.member.hasPermission('ADMINISTRATOR')) debugFlag = true
+    debugFlag = true
   }
 
   // split args array into args
@@ -139,35 +139,35 @@ client.on('message', message => {
   // COMMAND NAMES ARRAY
   // an array containing the syntax of commands that include a thingName,
   // incase the thingName is omitted from the command,
-  // the getThingName can be checked against this array to verify if it was ment for the getThing command.
+  // the getThingName can be checked against this array to verify if it was meant for the getThing command.
   const commandNamesArray = ['new', '+', '-', 'search', 'delete']
 
   // COMMAND TREE
   // if thingName or getThingName contains banned chars, send error reply
   if (bannedCharsRegex.test(getThingName) || bannedCharsRegex.test(thingName)) {
     client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
-    // else, proceed
   } else {
-    // console.log("ping")
-    // if the args include a thingName, check these commands
-    if (thingName) {
+    if (command === 'undo') {
+      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag)
+    } else if (thingName) {
+      // if the args include a thingName, check these commands
       if (command === 'new') {
-        client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
       } else if (command === '+') {
-        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true)
       } else if (command === '-') {
-        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true)
       } else if (command === 'search') {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag)
       } else if (command === 'delete') {
         client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
         // admin commands
       } else if (command === 'adminset') {
-        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag)
+        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false, true)
       } else if (command === 'adminrename') {
-        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag)
+        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false, true)
       } else if (command === 'admindelete') {
-        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false, true)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }
@@ -193,6 +193,10 @@ client.on('message', message => {
 
 // JOIN HANDLER
 client.on('guildMemberAdd', member => {
+  // Reset debug vars to default values
+  debugLog = ''
+  debugFlag = false
+
   // DEBUG
   console.log('>>>>>>>>>>>>>>>>> JOIN HANDLER <<<<<<<<<<<<<<<<<')
   console.log(`DEBUG: @${member.displayName} joined`)
@@ -206,6 +210,7 @@ client.on('ready', () => {
 
   // SET STATUS
   client.user.setActivity('"sk help"', { type: 'WATCHING' })
+
   // Status for testing
   // client.user.setActivity('"TESTING"', {})
 })

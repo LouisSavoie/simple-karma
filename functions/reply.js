@@ -260,7 +260,7 @@ replyObj.unknownCommand = function (message) {
   message.reply({
     embed: {
       color: 'RED',
-      description: 'Command is unknown or conatins banned characters.'
+      description: 'Command is unknown or contains banned characters.'
     }
   }).catch(console.error)
 }
@@ -311,6 +311,26 @@ replyObj.thingNotDeleted = function (message, thingName) {
     embed: {
       color: 'RED',
       description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not deleted :('
+    }
+  }).catch(console.error)
+}
+
+// ERROR: NO UNDO CASE
+replyObj.noUndoCase = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'Undo operation does not match any defined case.'
+    }
+  }).catch(console.error)
+}
+
+// ERROR: NO UNDO
+replyObj.noUndoCase = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'There is nothing to undo.'
     }
   }).catch(console.error)
 }
