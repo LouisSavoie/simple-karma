@@ -6,7 +6,7 @@ const undo = require('./undo')
 module.exports = {
   name: 'newThing',
   description: 'Creates a new thing',
-  async execute (message, thingName, debugLog, debugFlag, undoThing) {
+  async execute (message, thingName, debugLog, debugFlag, undoThing, addUndoFlag) {
     // check if the database already has the thing
     const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
@@ -26,7 +26,7 @@ module.exports = {
       const newThing = await db.create(message.guild.id, thingName, karma)
       if (newThing) {
         reply.thingCreated(message, newThing)
-        undo.execute(null, message, newThing, 'delete', null, null)
+        if (addUndoFlag) undo.execute(null, message, newThing, 'delete', null, null)
       } else {
         reply.thingNotCreated(message, thingName)
       }

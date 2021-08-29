@@ -1,6 +1,7 @@
 // Require functions
 const db = require('../functions/database')
 const reply = require('../functions/reply')
+const undo = require('./undo')
 
 module.exports = {
   name: 'trollDelete',
@@ -44,6 +45,8 @@ module.exports = {
 
           // if it does, take the user's karma and give it to the thing
           if (foundThing) {
+            const undoStuff = { thingName: foundThing.name, thingKarma: foundThing.karma, userName: foundUser.name, userKarma: foundUser.karma }
+            undo.execute(null, message, undoStuff, 'untroll', null, null)
             foundThing.karma += foundUser.karma
             foundThing.save()
             foundUser.karma = 0

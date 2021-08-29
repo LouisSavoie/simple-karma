@@ -6,7 +6,7 @@ const undo = require('./undo')
 module.exports = {
   name: 'adminDelete',
   description: 'Deletes a thing',
-  async execute (message, thingName, debugLog, debugFlag, undoFlag) {
+  async execute (message, thingName, debugLog, debugFlag, undoFlag, addUndoFlag) {
     // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
     let debugDB = ''
     let debug = ''
@@ -35,7 +35,7 @@ module.exports = {
 
         if (res === 1) {
           reply.thingDeleted(message, foundThing.name)
-          undo.execute(null, message, foundThing, 'create', null, null)
+          if (addUndoFlag) undo.execute(null, message, foundThing, 'create', null, null)
         } else {
           reply.thingNotDeleted(message, foundThing.name)
         }

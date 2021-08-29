@@ -152,22 +152,22 @@ client.on('message', message => {
     } else if (thingName) {
       // if the args include a thingName, check these commands
       if (command === 'new') {
-        client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null)
+        client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
       } else if (command === '+') {
-        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true)
       } else if (command === '-') {
-        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true)
       } else if (command === 'search') {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag)
       } else if (command === 'delete') {
         client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
         // admin commands
       } else if (command === 'adminset') {
-        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false)
+        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false, true)
       } else if (command === 'adminrename') {
-        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false)
+        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false, true)
       } else if (command === 'admindelete') {
-        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false)
+        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false, true)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }

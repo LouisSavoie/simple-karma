@@ -6,7 +6,7 @@ const undo = require('./undo')
 module.exports = {
   name: 'adminSet',
   description: 'Sets karma for a thing to a given value',
-  async execute (message, thingName, value, debugLog, debugFlag, undoFlag) {
+  async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag) {
     // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
     let debugDB = ''
     let debug = ''
@@ -34,7 +34,7 @@ module.exports = {
           foundThing.save()
           reply.found(message, foundThing)
           foundThing.value = oldKarma
-          undo.execute(null, message, foundThing, 'set', null, null)
+          if (addUndoFlag) undo.execute(null, message, foundThing, 'set', null, null)
         }
       } else {
         reply.notANumber(message, value)
