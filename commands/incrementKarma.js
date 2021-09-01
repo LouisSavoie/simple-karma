@@ -16,7 +16,7 @@ module.exports = {
       const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
       // debug
-      const debug = `DEBUG: 2. incrementKarma.js, foundThing: ${foundThing}`
+      const debug = `  DEBUG: 2. incrementKarma.js, foundThing: ${foundThing}`
       console.log(debug)
 
       // if it does, check if the thing's karma is over 9000
@@ -41,6 +41,7 @@ module.exports = {
         }
         // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
       } else {
+        debugLog += '\n' + debugDB + '\n' + debug
         reply.notFoundCreated(message, thingName)
         newThing.execute(message, thingName, debugLog, debugFlag, {karma: +1}, true)
       }
