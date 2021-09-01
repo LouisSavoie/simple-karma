@@ -2,6 +2,7 @@
 const db = require('../functions/database')
 const reply = require('../functions/reply')
 const undo = require('./undo')
+const newThing = require('./newThing')
 
 module.exports = {
   name: 'incrementKarma',
@@ -29,19 +30,19 @@ module.exports = {
           foundThing.save()
           reply.found(message, foundThing)
           if (addUndoFlag) undo.execute(null, message, foundThing, 'decrement', null, null)
+          // if debugFlag, DM debug
+          if (debugFlag) {
+            message.author.send([
+              debugLog,
+              debugDB,
+              debug
+            ])
+          }
         }
         // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
       } else {
-        reply.notFound(message, thingName)
-      }
-
-      // if debugFlag, DM debug
-      if (debugFlag) {
-        message.author.send([
-          debugLog,
-          debugDB,
-          debug
-        ])
+        reply.notFoundCreated(message, thingName)
+        newThing.execute(message, thingName, debugLog, debugFlag, {karma: +1}, true)
       }
     }
   }
