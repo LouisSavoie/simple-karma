@@ -160,6 +160,21 @@ replyObj.notFound = function (message, thingName) {
   }).catch(console.error)
 }
 
+// SUCCESS: THING NOT FOUND CREATED
+replyObj.notFoundCreated = function (message, thingName) {
+  // if thingName includes spaces, add parens that are needed to create it
+  if (thingName.includes(' ')) {
+    thingName = '(' + thingName + ')'
+  }
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: `Thing, **${thingName}**, doesn't exist, but has been created for you.\n
+          If this was a mistake, an admin can undo it.`
+    }
+  }).catch(console.error)
+}
+
 // ERROR: NO THINGS FOUND
 replyObj.noThingsFound = function (message, char) {
   message.reply({

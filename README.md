@@ -15,8 +15,8 @@ Commands are formatted and limited in scope such that users interact with the po
 - **`sk best`**: Shows a list of the best five things by karma.
 - **`sk worst`**: Shows a list of the worst five things by karma.
 - **`sk <thing>`**: Shows a \<thing\>'s karma
-- **`sk + <thing>`**: Increments a \<thing\>'s karma
-- **`sk - <thing>`**: Decrements a \<thing\>'s karma
+- **`sk + <thing>`**: Increments a \<thing\>'s karma, if it doesn't exist it is created
+- **`sk - <thing>`**: Decrements a \<thing\>'s karma, if it doesn't exist it is created
 - **`sk delete <thing>`**: Deletes a \<thing\>. Only bad people do this.
 
 **Admin Commands**
@@ -57,7 +57,6 @@ Commands are formatted and limited in scope such that users interact with the po
 
 ## Future Scope
 
-- `+ / - karma` on a non-existent thing will create that thing
 - allow command arguments in any order
 
 ~~*All caught up, hurrah!*~~
