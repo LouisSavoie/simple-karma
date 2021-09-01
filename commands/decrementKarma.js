@@ -33,7 +33,7 @@ module.exports = {
     } else {
       debugLog += '\n' + debugDB + '\n' + debug
       reply.notFoundCreated(message, thingName)
-      newThing.execute(message, thingName, debugLog, debugFlag, {karma: -1}, true)
+      newThing.execute(message, thingName, debugLog, debugFlag, { karma: -1 }, true)
     }
   }
 }
