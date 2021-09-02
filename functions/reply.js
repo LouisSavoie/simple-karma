@@ -350,5 +350,24 @@ replyObj.noUndoCase = function (message) {
   }).catch(console.error)
 }
 
+// INFO: NEXT UNDO
+replyObj.nextUndo = function (message, undo) {
+  if (undo.command === 'untroll') {
+    message.reply({
+      embed: {
+        color: 'GREY',
+        description: 'Next undo will **' + undo.command + ' ' + undo.thing.thingName + '** and **' + undo.command + ' ' + undo.thing.userName + '**.'
+      }
+    }).catch(console.error)
+  } else {
+    message.reply({
+      embed: {
+        color: 'GREY',
+        description: 'Next undo will **' + undo.command + ' ' + undo.thing.name + '**.'
+      }
+    }).catch(console.error)
+  }
+}
+
 //  Export reply object
 module.exports = replyObj
