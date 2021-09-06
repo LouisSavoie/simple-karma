@@ -177,6 +177,8 @@ client.on('message', message => {
         client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false, true)
       } else if (command === 'admindelete') {
         client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false, true)
+      } else if (command === 'namepoints') {
+        client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }

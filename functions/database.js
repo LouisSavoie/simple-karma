@@ -4,7 +4,7 @@ const Thing = require('../models/thing')
 // Create find object
 const databaseObj = {}
 
-// FIND ONE
+// FIND ONE THING
 databaseObj.findOne = async function (server, thingName) {
   // check if the database has the thing
   const foundThing = await Thing.findOne({ server: server, nameLower: thingName.toLowerCase() }).exec()
@@ -25,7 +25,7 @@ databaseObj.findOne = async function (server, thingName) {
   }
 }
 
-// FIND
+// FIND THINGS
 databaseObj.find = async function (server, char) {
   const regex = new RegExp(char, 'i')
   // Search the database for things with names containing with the character
