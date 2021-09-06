@@ -5,7 +5,7 @@ const ThingSchema = new mongoose.Schema({
   server: String,
   name: String,
   nameLower: String,
-  points: Number
+  karma: Number
 })
 
 module.exports = mongoose.model('Thing', ThingSchema)
