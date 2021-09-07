@@ -112,5 +112,25 @@ databaseObj.deleteOne = async function (server, thingName) {
   return [res.ok, debugDB]
 }
 
+// FIND SERVER
+databaseObj.findServer = async function (id) {
+  // check if the database has the thing
+  const foundServer = await Server.findOne({ ID: id }).exec()
+
+  // debug
+  const debugDB = `
+  === findServer in Database ===
+  DEBUG: 1. database.js, foundServer: ${foundServer}`
+  console.log(debugDB)
+
+  // if it does, return the thing
+  if (foundServer) {
+    return [foundServer, debugDB]
+    // if it doesn't, return null
+  } else {
+    return [null, debugDB]
+  }
+}
+
 //  Export find object
 module.exports = databaseObj
