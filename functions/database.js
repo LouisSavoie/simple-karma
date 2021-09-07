@@ -132,5 +132,18 @@ databaseObj.findServer = async function (id) {
   }
 }
 
+// CREATE SERVER
+databaseObj.createServer = async function (id, pointsName) {
+  const newServer = await Server.create({ ID: id, pointsName: pointsName })
+
+  // if it creation is successful, return the thing
+  if (newServer) {
+    return newServer
+    // if the creation fails, return null
+  } else {
+    return null
+  }
+}
+
 //  Export find object
 module.exports = databaseObj
