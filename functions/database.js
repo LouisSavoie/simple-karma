@@ -1,5 +1,6 @@
 // Require Mongoose Model for Things
 const Thing = require('../models/thing')
+const Server = require('../models/server')
 
 // Create find object
 const databaseObj = {}
