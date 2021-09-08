@@ -379,5 +379,15 @@ replyObj.pointsNameSet = function (message, pointsName) {
   }).catch(console.error)
 }
 
+// ERROR: THING COULD NOT BE CREATED
+replyObj.serverNotCreated = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and your points name was not set :('
+    }
+  }).catch(console.error)
+}
+
 //  Export reply object
 module.exports = replyObj
