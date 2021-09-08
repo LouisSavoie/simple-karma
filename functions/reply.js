@@ -369,5 +369,15 @@ replyObj.nextUndo = function (message, undo) {
   }
 }
 
+// SUCCESS: POINTSNAME SET
+replyObj.pointsNameSet = function (message, pointsName) {
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: `Points name set to: **${pointsName}**!`
+    }
+  }).catch(console.error)
+}
+
 //  Export reply object
 module.exports = replyObj
