@@ -1,10 +1,8 @@
-// REQUIRES
 const Discord = require('discord.js')
 const client = new Discord.Client()
-// For reading command files
 const fs = require('fs')
-// For database models
 const mongoose = require('mongoose')
+const db = require('./functions/database')
 
 require('dotenv').config()
 
@@ -38,7 +36,7 @@ let debugFlag = false
 const prefix = 'sk '
 
 // MESSAGE HANDLER
-client.on('message', message => {
+client.on('message', async message => {
   // FILTER OUT MESSAGES
   // if message is a DM, it won't have the correct object methods for some commands and could cause a crash
   // if message doesn't start with the prefix and is form a bot, return
@@ -46,9 +44,22 @@ client.on('message', message => {
     return
   }
 
+  // DEBUG
   // Reset debug vars to default values
   debugLog = ''
   debugFlag = false
+
+  const debugMsgHandler = `
+  .
+  >>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<
+  DEBUG: Guild id: ${message.guild.id}`
+
+  console.log(debugMsgHandler)
+  debugLog += debugMsgHandler
+
+  // CHECK SERVER POINTSNAME
+  const [pointsName, debugDB] = await db.findPointsName(message.guild.id)
+  debugLog += debugDB
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
@@ -121,14 +132,6 @@ client.on('message', message => {
     };
   }
 
-  const debugMsgHandler = `
-  .
-  >>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<
-  DEBUG: Guild id: ${message.guild.id}`
-
-  console.log(debugMsgHandler)
-  if (debugFlag) debugLog += debugMsgHandler
-
   const debugArgs = `
   ================= Command Args ==================
   DEBUG: command: ${command}
@@ -140,7 +143,7 @@ client.on('message', message => {
   DEBUG: debugFlag: ${debugFlag}`
 
   console.log(debugArgs)
-  if (debugFlag) debugLog += debugArgs
+  debugLog += debugArgs
 
   // BANNED CHARACTERS REGEX
   const bannedCharsRegex = /[`\\]/g

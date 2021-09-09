@@ -87,6 +87,25 @@ databaseObj.findWorst = async function (server) {
   }
 }
 
+// FIND POINTSNAME
+databaseObj.findPointsName = async function(messageID) {
+  const server = await Server.findOne({ ID: messageID }).exec()
+
+  // debug
+  const debugDB = `
+  === findPointsName in Database ===
+  DEBUG: 1. database.js, server: ${server}`
+  console.log(debugDB)
+
+  // if it does, return the thing
+  if (server) {
+    return [server.pointsName, debugDB]
+    // if it doesn't, return null
+  } else {
+    return [null, debugDB]
+  }
+}
+
 // CREATE THING
 databaseObj.create = async function (server, thingName, karma) {
   const newThing = await Thing.create({ server: server, name: thingName, nameLower: thingName.toLowerCase(), karma: karma })
