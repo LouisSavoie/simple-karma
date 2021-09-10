@@ -2,11 +2,11 @@
 const replyObj = {}
 
 // SUCCESS: THING FOUND
-replyObj.found = function (message, foundThing) {
+replyObj.found = function (message, foundThing, pointsName) {
   message.reply({
     embed: {
       color: 'BLUE',
-      description: '**' + foundThing.name + '** has **' + foundThing.karma + '** karma.'
+      description: '**' + foundThing.name + '** has **' + foundThing.karma + '** ' + pointsName + '.'
     }
   }).catch(console.error)
 }

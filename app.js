@@ -202,7 +202,7 @@ client.on('message', async message => {
         if (commandNamesArray.includes(getThingName)) {
           client.commands.get('noThing').execute(message, debugLog, debugFlag)
         } else {
-          client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag)
+          client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag, pointsName)
         }
       }
     }
