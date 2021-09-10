@@ -58,8 +58,12 @@ client.on('message', async message => {
   debugLog += debugMsgHandler
 
   // CHECK SERVER POINTSNAME
-  const [pointsName, debugDB] = await db.findPointsName(message.guild.id)
+  let [pointsName, debugDB] = await db.findPointsName(message.guild.id)
+  if (!pointsName) pointsName = 'Points'
+  const debugPoints = `  DEBUG: 2. app.js, pointsName: ${pointsName}`
+  console.log(debugPoints)
   debugLog += debugDB
+  debugLog += debugPoints
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
