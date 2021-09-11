@@ -12,21 +12,15 @@ replyObj.found = function (message, foundThing, pointsName) {
 }
 
 // SUCCESS: THINGS FOUND
-replyObj.thingsFound = function (message, char, foundThings) {
-  // debug
-  // console.log("foundThings:\n" + foundThings);
-
+replyObj.thingsFound = function (message, char, foundThings, pointsName) {
   if (char === '') {
     char = '*'
   }
 
   let text = `.\nThings containing **${char}**:`
   foundThings.forEach(thing => {
-    text += `\n--------------------\n**${thing.name}**: Karma - **${thing.karma}**`
+    text += `\n--------------------\n**${thing.name}**: ${pointsName} - **${thing.karma}**`
   })
-
-  // debug
-  // console.log("text:\n" + text);
 
   message.author.send([
         `${text}`

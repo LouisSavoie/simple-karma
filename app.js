@@ -174,7 +174,7 @@ client.on('message', async message => {
       } else if (command === '-') {
         client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true)
       } else if (command === 'search') {
-        client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag, pointsName)
       } else if (command === 'delete') {
         client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
         // admin commands
