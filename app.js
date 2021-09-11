@@ -164,13 +164,13 @@ client.on('message', async message => {
     client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
   } else {
     if (command === 'undo') {
-      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag)
+      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag, pointsName)
     } else if (thingName) {
       // if the args include a thingName, check these commands
       if (command === 'new') {
         client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
       } else if (command === '+') {
-        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true)
+        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === '-') {
         client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true)
       } else if (command === 'search') {

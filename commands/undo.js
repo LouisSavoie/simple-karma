@@ -5,7 +5,7 @@ const undos = {}
 module.exports = {
   name: 'undo',
   description: 'Tracks changes to things and can revert them',
-  async execute (commands, message, thing, undoCommand, debugLog, debugFlag) {
+  async execute (commands, message, thing, undoCommand, debugLog, debugFlag, pointsName) {
     // ADD SERVER TO UNDO OBJECT
     if (!(message.guild.id in undos)) {
       undos[message.guild.id] = []
@@ -34,7 +34,7 @@ module.exports = {
               break
             case 'increment':
               // console.log(`  DEBUG: undo.js: reached increment case for ${undo.thing.name}`)
-              commands.get('incrementKarma').execute(message, undo.thing.name, debugLog, debugFlag, false)
+              commands.get('incrementKarma').execute(message, undo.thing.name, debugLog, debugFlag, false, pointsName)
               break
             case 'rename':
               // console.log(`  DEBUG: undo.js: reached rename case for ${undo.thing.name}`)

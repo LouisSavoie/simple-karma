@@ -7,7 +7,7 @@ const newThing = require('./newThing')
 module.exports = {
   name: 'incrementKarma',
   description: 'Increments karma for a thing',
-  async execute (message, thingName, debugLog, debugFlag, addUndoFlag) {
+  async execute (message, thingName, debugLog, debugFlag, addUndoFlag, pointsName) {
     // check if the command issuer is the thing being incremented
     if (thingName.includes(message.member.displayName)) {
       reply.karmaYourselfError(message, thingName)
@@ -28,8 +28,8 @@ module.exports = {
         } else {
           foundThing.karma += 1
           foundThing.save()
-          reply.found(message, foundThing)
-          if (addUndoFlag) undo.execute(null, message, foundThing, 'decrement', null, null)
+          reply.found(message, foundThing, pointsName)
+          if (addUndoFlag) undo.execute(null, message, foundThing, 'decrement', null, null, pointsName)
           // if debugFlag, DM debug
           if (debugFlag) {
             message.author.send([
