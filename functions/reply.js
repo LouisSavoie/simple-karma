@@ -32,7 +32,7 @@ replyObj.bestFound = function (message, foundThings, pointsName) {
   let num = 1
   let text = `__**BEST FIVE ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
-    text += `\n${num}. **${thing.name}**: **${thing.karma}**`
+    text += `\n${num}. **${thing.name}**: ${thing.karma}`
     num++
   })
 
@@ -45,19 +45,13 @@ replyObj.bestFound = function (message, foundThings, pointsName) {
 }
 
 // SUCCESS: WORST FOUND
-replyObj.worstFound = function (message, foundThings) {
-  // debug
-  // console.log("foundThings:\n" + foundThings);
-
+replyObj.worstFound = function (message, foundThings, pointsName) {
   let num = 1
-  let text = '__**WORST FIVE KARMA**__:'
+  let text = `__**WORST FIVE ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
-    text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`
+    text += `\n${num}. **${thing.name}**: ${thing.karma}`
     num++
   })
-
-  // debug
-  // console.log("text:\n" + text);
 
   message.reply({
     embed: {

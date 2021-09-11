@@ -196,7 +196,7 @@ client.on('message', async message => {
       } else if (command === 'best') {
         client.commands.get('best').execute(message, debugLog, debugFlag, pointsName)
       } else if (command === 'worst') {
-        client.commands.get('worst').execute(message, debugLog, debugFlag)
+        client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName)
       } else {
         // if getThingName is omitted and was a valid command, send error reply
         if (commandNamesArray.includes(getThingName)) {
