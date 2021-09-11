@@ -28,19 +28,13 @@ replyObj.thingsFound = function (message, char, foundThings, pointsName) {
 }
 
 // SUCCESS: BEST FOUND
-replyObj.bestFound = function (message, foundThings) {
-  // debug
-  // console.log("foundThings:\n" + foundThings);
-
+replyObj.bestFound = function (message, foundThings, pointsName) {
   let num = 1
-  let text = '__**BEST FIVE KARMA**__:'
+  let text = `__**BEST FIVE ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
-    text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`
+    text += `\n${num}. **${thing.name}**: **${thing.karma}**`
     num++
   })
-
-  // debug
-  // console.log("text:\n" + text);
 
   message.reply({
     embed: {

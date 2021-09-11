@@ -194,7 +194,7 @@ client.on('message', async message => {
       if (command === 'help') {
         client.commands.get('help').execute(message, debugLog, debugFlag)
       } else if (command === 'best') {
-        client.commands.get('best').execute(message, debugLog, debugFlag)
+        client.commands.get('best').execute(message, debugLog, debugFlag, pointsName)
       } else if (command === 'worst') {
         client.commands.get('worst').execute(message, debugLog, debugFlag)
       } else {
