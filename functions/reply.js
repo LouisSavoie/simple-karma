@@ -17,9 +17,9 @@ replyObj.thingsFound = function (message, char, foundThings, pointsName) {
     char = '*'
   }
 
-  let text = `.\nThings containing **${char}**:`
+  let text = `.\nThings containing **${char}**:\n\n**Name**: ${pointsName}\n--------------------`
   foundThings.forEach(thing => {
-    text += `\n--------------------\n**${thing.name}**: ${pointsName} - **${thing.karma}**`
+    text += `\n**${thing.name}**: ${thing.karma}`
   })
 
   message.author.send([
