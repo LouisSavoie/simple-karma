@@ -42,11 +42,11 @@ module.exports = {
               break
             case 'set':
               // console.log(`  DEBUG: undo.js: reached set case for ${undo.thing.name}`)
-              commands.get('adminSet').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false)
+              commands.get('adminSet').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
               break
             case 'untroll':
-              commands.get('adminSet').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false)
-              commands.get('adminSet').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false)
+              commands.get('adminSet').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName)
+              commands.get('adminSet').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName)
               break
             default:
               console.log('  DEBUG: undo.js: reached default case')

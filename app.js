@@ -179,7 +179,7 @@ client.on('message', async message => {
         client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
         // admin commands
       } else if (command === 'adminset') {
-        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false, true)
+        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
       } else if (command === 'adminrename') {
         client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false, true)
       } else if (command === 'admindelete') {
