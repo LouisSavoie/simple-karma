@@ -7,7 +7,7 @@ const newThing = require('./newThing')
 module.exports = {
   name: 'decrementKarma',
   description: 'Decrements karma for a thing',
-  async execute (message, thingName, debugLog, debugFlag, addUndoFlag) {
+  async execute (message, thingName, debugLog, debugFlag, addUndoFlag, pointsName) {
     // check if the database has the thing
     const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
@@ -19,8 +19,8 @@ module.exports = {
     if (foundThing) {
       foundThing.karma -= 1
       foundThing.save()
-      reply.found(message, foundThing)
-      if (addUndoFlag) undo.execute(null, message, foundThing, 'increment', null, null)
+      reply.found(message, foundThing, pointsName)
+      if (addUndoFlag) undo.execute(null, message, foundThing, 'increment', null, null, pointsName)
       // if debugFlag, DM debug
       if (debugFlag) {
         message.author.send([

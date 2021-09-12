@@ -172,7 +172,7 @@ client.on('message', async message => {
       } else if (command === '+') {
         client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === '-') {
-        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true)
+        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === 'search') {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag, pointsName)
       } else if (command === 'delete') {
