@@ -3,7 +3,7 @@
 
 # Simple Karma
 
-SimpleKarma is a Discord bot used to award "things" points such as Karma. Things can be users, concepts, physical or digital objects, brands, or whatever you want!
+SimpleKarma is a Discord bot used to award "things" points. Things can be users, concepts, physical or digital objects, brands, or whatever you want!
 
 Commands are formatted and limited in scope such that users interact with the points databases very deliberately.
 
@@ -12,16 +12,16 @@ Commands are formatted and limited in scope such that users interact with the po
 - **`sk help`**: DMs this list to you
 - **`sk new <thing>`**: Creates a new \<thing\>
 - **`sk search <string>`**: DMs a list of \<thing\>s with names that include the given string. Searching `*` returns all.
-- **`sk best`**: Shows a list of the best five things by karma.
-- **`sk worst`**: Shows a list of the worst five things by karma.
-- **`sk <thing>`**: Shows a \<thing\>'s karma
-- **`sk + <thing>`**: Increments a \<thing\>'s karma, if it doesn't exist it is created
-- **`sk - <thing>`**: Decrements a \<thing\>'s karma, if it doesn't exist it is created
+- **`sk best`**: Shows a list of the best five things by points.
+- **`sk worst`**: Shows a list of the worst five things by points.
+- **`sk <thing>`**: Shows a \<thing\>'s points
+- **`sk + <thing>`**: Increments a \<thing\>'s points, if it doesn't exist it is created
+- **`sk - <thing>`**: Decrements a \<thing\>'s points, if it doesn't exist it is created
 - **`sk delete <thing>`**: Deletes a \<thing\>. Only bad people do this.
 
 **Admin Commands**
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
-- **`sk adminset <thing> <value>`**: Sets a \<thing\>'s karma to the \<value\>
+- **`sk adminset <thing> <value>`**: Sets a \<thing\>'s points to the \<value\>
 - **`sk adminrename <thing> <value>`**: Renames a \<thing\> to the \<value\>
 - **`sk admindelete <thing>`**: Deletes a \<thing\>
 - **`sk undo`**: Undoes the last command that changed a thing
@@ -38,16 +38,16 @@ Commands are formatted and limited in scope such that users interact with the po
 - Persistent cloud database
 - Add new things to the database
 - Things are specific to a Discord server
-- Increment / decrement a thing's karma
-- You cant give yourself karma
-- Show a thing's karma
+- Increment / decrement a thing's points
+- You cant give yourself points
+- Show a thing's points
 - Search the database for things
 - Searching `*` returns all
 - List the best things
 - list the worst things
 - Get trolled trying to delete a thing
 - Admin commands for users with the 'Administrator' permission
-- Set karma values
+- Set points values
 - Rename things
 - Actually delete things
 - Users are added to the database when they join the server automatically
