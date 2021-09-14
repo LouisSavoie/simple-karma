@@ -26,7 +26,7 @@ module.exports = {
       const newThing = await db.create(message.guild.id, thingName, karma)
       if (newThing) {
         reply.thingCreated(message, newThing)
-        if (addUndoFlag) undo.execute(null, message, newThing, 'delete', null, null)
+        if (addUndoFlag) undo.execute(null, message, newThing, 'delete', null, null, null)
       } else {
         reply.thingNotCreated(message, thingName)
       }
