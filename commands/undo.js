@@ -38,7 +38,7 @@ module.exports = {
               break
             case 'rename':
               // console.log(`  DEBUG: undo.js: reached rename case for ${undo.thing.name}`)
-              commands.get('adminRename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false)
+              commands.get('adminRename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
               break
             case 'set':
               // console.log(`  DEBUG: undo.js: reached set case for ${undo.thing.name}`)
