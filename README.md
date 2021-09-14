@@ -57,7 +57,15 @@ Commands are formatted and limited in scope such that users interact with the po
 
 ## Future Scope
 
+- adminPlus and adminMinus commands
+- add users as botAdmin so they can use admin commands without being a discord admin
+- delete all for server admin command
+- add all users of server command
+- multi-newThing command
+- singular and plural points
+- support server
 - allow command arguments in any order
+- toggle allowing negative points
 
 ~~*All caught up, hurrah!*~~
 
