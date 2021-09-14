@@ -72,12 +72,12 @@ replyObj.thingAlreadyExists = function (message, foundThing) {
 }
 
 // STATUS: THING ALREADY EXISTS ON JOIN
-replyObj.thingAlreadyExistsOnJoin = function (member, foundThing) {
+replyObj.thingAlreadyExistsOnJoin = function (member, foundThing, pointsName) {
   member.guild.channels.cache.find(i => i.name === 'general').send({
     embed: {
       color: 'GREEN',
       description: `**${foundThing.name}** joined the server\n
-          and already has **${foundThing.karma}** karma.`
+          and already has **${foundThing.karma}** ${pointsName}.`
     }
   }).catch(console.error)
 }
@@ -100,7 +100,7 @@ replyObj.thingCreatedOnJoin = function (member, newThing) {
       description: `**${newThing.name}** joined the server\n
           and has been added to the database!\n
           If **${newThing.name}** is not their desired name,\n
-          create a new thing with \`sk new <@name>\`.`
+          rename them with \`sk adminRename ${newThing.name} <@name>\`.`
     }
   }).catch(console.error)
 }
@@ -361,7 +361,7 @@ replyObj.pointsNameSet = function (message, pointsName) {
   }).catch(console.error)
 }
 
-// ERROR: THING COULD NOT BE CREATED
+// ERROR: SERVER COULD NOT BE CREATED
 replyObj.serverNotCreated = function (message) {
   message.reply({
     embed: {

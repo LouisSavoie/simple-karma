@@ -210,16 +210,18 @@ client.on('message', async message => {
 })
 
 // JOIN HANDLER
-client.on('guildMemberAdd', member => {
-  // Reset debug vars to default values
-  debugLog = ''
-  debugFlag = false
-
+client.on('guildMemberAdd', async member => {
   // DEBUG
   console.log('>>>>>>>>>>>>>>>>> JOIN HANDLER <<<<<<<<<<<<<<<<<')
   console.log(`DEBUG: @${member.displayName} joined`)
 
-  client.commands.get('addOnJoin').execute(member)
+  // CHECK SERVER POINTSNAME
+  let [pointsName, debugDB] = await db.findPointsName(member.guild.id)
+  if (!pointsName) pointsName = 'Points'
+  const debugPoints = `  DEBUG: 2. app.js, pointsName: ${pointsName}`
+  console.log(debugPoints)
+
+  client.commands.get('addOnJoin').execute(member, pointsName)
 })
 
 // CONFIRM LOGIN
