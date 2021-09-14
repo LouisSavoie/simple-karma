@@ -199,11 +199,11 @@ replyObj.capped = function (message, thingName) {
 }
 
 // ERROR: CAN'T GIVE KARMA TO YOURSELF
-replyObj.karmaYourselfError = function (message, thingName) {
+replyObj.karmaYourselfError = function (message, pointsName) {
   message.reply({
     embed: {
       color: 'RED',
-      description: 'You can\'t give yourself karma!'
+      description: `You can\'t give yourself ${pointsName}!`
     }
   }).catch(console.error)
 }

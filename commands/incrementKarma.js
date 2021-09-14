@@ -10,7 +10,7 @@ module.exports = {
   async execute (message, thingName, debugLog, debugFlag, addUndoFlag, pointsName) {
     // check if the command issuer is the thing being incremented
     if (thingName.includes(message.member.displayName)) {
-      reply.karmaYourselfError(message, thingName)
+      reply.karmaYourselfError(message, pointsName)
     } else {
       // check if the database has the thing
       const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
