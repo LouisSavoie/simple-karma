@@ -188,15 +188,15 @@ replyObj.worstNotFound = function (message) {
 }
 
 // ERROR: KARMA CAPPED
-replyObj.capped = function (message, thingName) {
-  message.reply({
-    embed: {
-      color: 'RED',
-      description: `Thing, **${thingName}'s** karma is already **OVER 9000**!\n
-        **${thingName}** doesn't need anymore.`
-    }
-  }).catch(console.error)
-}
+// replyObj.capped = function (message, thingName, pointsName) {
+//   message.reply({
+//     embed: {
+//       color: 'RED',
+//       description: `Thing, **${thingName}'s** ${pointsName} is already **OVER 9000**!\n
+//         **${thingName}** doesn't need anymore.`
+//     }
+//   }).catch(console.error)
+// }
 
 // ERROR: CAN'T GIVE KARMA TO YOURSELF
 replyObj.karmaYourselfError = function (message, pointsName) {
