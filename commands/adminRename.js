@@ -5,7 +5,7 @@ const undo = require('./undo')
 module.exports = {
   name: 'adminRename',
   description: 'Renames a thing',
-  async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag) {
+  async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName) {
     // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
     let debugDB = ''
     let debug = ''
@@ -28,9 +28,9 @@ module.exports = {
         foundThing.name = value
         foundThing.nameLower = value.toLowerCase()
         foundThing.save()
-        reply.found(message, foundThing)
+        reply.found(message, foundThing, pointsName)
         foundThing.value = thingName
-        if (addUndoFlag) undo.execute(null, message, foundThing, 'rename', null, null)
+        if (addUndoFlag) undo.execute(null, message, foundThing, 'rename', null, null, pointsName)
       }
       // if message author does not have permission, send error reply
     } else {

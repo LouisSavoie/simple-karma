@@ -2,31 +2,25 @@
 const replyObj = {}
 
 // SUCCESS: THING FOUND
-replyObj.found = function (message, foundThing) {
+replyObj.found = function (message, foundThing, pointsName) {
   message.reply({
     embed: {
       color: 'BLUE',
-      description: '**' + foundThing.name + '** has **' + foundThing.karma + '** karma.'
+      description: '**' + foundThing.name + '** has **' + foundThing.karma + '** ' + pointsName + '.'
     }
   }).catch(console.error)
 }
 
 // SUCCESS: THINGS FOUND
-replyObj.thingsFound = function (message, char, foundThings) {
-  // debug
-  // console.log("foundThings:\n" + foundThings);
-
+replyObj.thingsFound = function (message, char, foundThings, pointsName) {
   if (char === '') {
     char = '*'
   }
 
-  let text = `.\nThings containing **${char}**:`
+  let text = `.\nThings containing **${char}**:\n\n**Name**: ${pointsName}\n--------------------`
   foundThings.forEach(thing => {
-    text += `\n--------------------\n**${thing.name}**: Karma - **${thing.karma}**`
+    text += `\n**${thing.name}**: ${thing.karma}`
   })
-
-  // debug
-  // console.log("text:\n" + text);
 
   message.author.send([
         `${text}`
@@ -34,19 +28,13 @@ replyObj.thingsFound = function (message, char, foundThings) {
 }
 
 // SUCCESS: BEST FOUND
-replyObj.bestFound = function (message, foundThings) {
-  // debug
-  // console.log("foundThings:\n" + foundThings);
-
+replyObj.bestFound = function (message, foundThings, pointsName) {
   let num = 1
-  let text = '__**BEST FIVE KARMA**__:'
+  let text = `__**BEST FIVE ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
-    text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`
+    text += `\n${num}. **${thing.name}**: ${thing.karma}`
     num++
   })
-
-  // debug
-  // console.log("text:\n" + text);
 
   message.reply({
     embed: {
@@ -57,19 +45,13 @@ replyObj.bestFound = function (message, foundThings) {
 }
 
 // SUCCESS: WORST FOUND
-replyObj.worstFound = function (message, foundThings) {
-  // debug
-  // console.log("foundThings:\n" + foundThings);
-
+replyObj.worstFound = function (message, foundThings, pointsName) {
   let num = 1
-  let text = '__**WORST FIVE KARMA**__:'
+  let text = `__**WORST FIVE ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
-    text += `\n${num}. **${thing.name}**: Karma = **${thing.karma}**`
+    text += `\n${num}. **${thing.name}**: ${thing.karma}`
     num++
   })
-
-  // debug
-  // console.log("text:\n" + text);
 
   message.reply({
     embed: {
@@ -90,12 +72,12 @@ replyObj.thingAlreadyExists = function (message, foundThing) {
 }
 
 // STATUS: THING ALREADY EXISTS ON JOIN
-replyObj.thingAlreadyExistsOnJoin = function (member, foundThing) {
+replyObj.thingAlreadyExistsOnJoin = function (member, foundThing, pointsName) {
   member.guild.channels.cache.find(i => i.name === 'general').send({
     embed: {
       color: 'GREEN',
       description: `**${foundThing.name}** joined the server\n
-          and already has **${foundThing.karma}** karma.`
+          and already has **${foundThing.karma}** ${pointsName}.`
     }
   }).catch(console.error)
 }
@@ -118,7 +100,7 @@ replyObj.thingCreatedOnJoin = function (member, newThing) {
       description: `**${newThing.name}** joined the server\n
           and has been added to the database!\n
           If **${newThing.name}** is not their desired name,\n
-          create a new thing with \`sk new <@name>\`.`
+          rename them with \`sk adminRename ${newThing.name} <@name>\`.`
     }
   }).catch(console.error)
 }
@@ -206,22 +188,22 @@ replyObj.worstNotFound = function (message) {
 }
 
 // ERROR: KARMA CAPPED
-replyObj.capped = function (message, thingName) {
-  message.reply({
-    embed: {
-      color: 'RED',
-      description: `Thing, **${thingName}'s** karma is already **OVER 9000**!\n
-        **${thingName}** doesn't need anymore.`
-    }
-  }).catch(console.error)
-}
+// replyObj.capped = function (message, thingName, pointsName) {
+//   message.reply({
+//     embed: {
+//       color: 'RED',
+//       description: `Thing, **${thingName}'s** ${pointsName} is already **OVER 9000**!\n
+//         **${thingName}** doesn't need anymore.`
+//     }
+//   }).catch(console.error)
+// }
 
 // ERROR: CAN'T GIVE KARMA TO YOURSELF
-replyObj.karmaYourselfError = function (message, thingName) {
+replyObj.karmaYourselfError = function (message, pointsName) {
   message.reply({
     embed: {
       color: 'RED',
-      description: 'You can\'t give yourself karma!'
+      description: `You can't give yourself ${pointsName}!`
     }
   }).catch(console.error)
 }
@@ -237,11 +219,11 @@ replyObj.trollDeleteYourselfError = function (message) {
 }
 
 // ERROR: NOT ENOUGH KARMA
-replyObj.notEnoughKarma = function (message) {
+replyObj.notEnoughKarma = function (message, pointsName) {
   message.reply({
     embed: {
       color: 'RED',
-      description: 'You have insufficient karma to use this command.'
+      description: `You have insufficient ${pointsName} to use this command.`
     }
   }).catch(console.error)
 }
@@ -258,13 +240,13 @@ replyObj.userNotInDatabase = function (message, displayName) {
 }
 
 // SUCCESS: DELETE TROLLED
-replyObj.deleteTrolled = function (message, foundUser, foundThing) {
+replyObj.deleteTrolled = function (message, foundUser, foundThing, pointsName) {
   message.reply({
     embed: {
       color: 'BLUE',
       description: `**AN *"ERROR"* OCCURRED!**\n
-        **${foundUser.name}'s** karma has been transferred to **${foundThing.name}**.\n
-        **${foundThing.name}** has **${foundThing.karma}** karma.\n
+        **${foundUser.name}'s** ${pointsName} has been transferred to **${foundThing.name}**.\n
+        **${foundThing.name}** has **${foundThing.karma}** ${pointsName}.\n
         and **${foundUser.name.toUpperCase()}** has **NONE**.`
     }
   }).catch(console.error)
@@ -346,6 +328,45 @@ replyObj.noUndoCase = function (message) {
     embed: {
       color: 'RED',
       description: 'There is nothing to undo.'
+    }
+  }).catch(console.error)
+}
+
+// INFO: NEXT UNDO
+replyObj.nextUndo = function (message, undo) {
+  if (undo.command === 'untroll') {
+    message.reply({
+      embed: {
+        color: 'GREY',
+        description: 'Next undo will **' + undo.command + ' ' + undo.thing.thingName + '** and **' + undo.command + ' ' + undo.thing.userName + '**.'
+      }
+    }).catch(console.error)
+  } else {
+    message.reply({
+      embed: {
+        color: 'GREY',
+        description: 'Next undo will **' + undo.command + ' ' + undo.thing.name + '**.'
+      }
+    }).catch(console.error)
+  }
+}
+
+// SUCCESS: POINTSNAME SET
+replyObj.pointsNameSet = function (message, pointsName) {
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: `Points name set to: **${pointsName}**!`
+    }
+  }).catch(console.error)
+}
+
+// ERROR: SERVER COULD NOT BE CREATED
+replyObj.serverNotCreated = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and your points name was not set :('
     }
   }).catch(console.error)
 }

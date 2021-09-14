@@ -5,7 +5,7 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'getThing',
   description: 'Displays a thing',
-  async execute (message, thingName, debugLog, debugFlag) {
+  async execute (message, thingName, debugLog, debugFlag, pointsName) {
     // check if the database has the thing
     const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
@@ -15,7 +15,7 @@ module.exports = {
 
     // if it does, reply with the thing
     if (foundThing) {
-      reply.found(message, foundThing)
+      reply.found(message, foundThing, pointsName)
       // if not, reply with error
     } else {
       reply.notFound(message, thingName)

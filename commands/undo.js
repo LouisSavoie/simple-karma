@@ -5,7 +5,7 @@ const undos = {}
 module.exports = {
   name: 'undo',
   description: 'Tracks changes to things and can revert them',
-  async execute (commands, message, thing, undoCommand, debugLog, debugFlag) {
+  async execute (commands, message, thing, undoCommand, debugLog, debugFlag, pointsName) {
     // ADD SERVER TO UNDO OBJECT
     if (!(message.guild.id in undos)) {
       undos[message.guild.id] = []
@@ -30,28 +30,29 @@ module.exports = {
               break
             case 'decrement':
               // console.log(`  DEBUG: undo.js: reached decrement case for ${undo.thing.name}`)
-              commands.get('decrementKarma').execute(message, undo.thing.name, debugLog, debugFlag, false)
+              commands.get('decrementKarma').execute(message, undo.thing.name, debugLog, debugFlag, false, pointsName)
               break
             case 'increment':
               // console.log(`  DEBUG: undo.js: reached increment case for ${undo.thing.name}`)
-              commands.get('incrementKarma').execute(message, undo.thing.name, debugLog, debugFlag, false)
+              commands.get('incrementKarma').execute(message, undo.thing.name, debugLog, debugFlag, false, pointsName)
               break
             case 'rename':
               // console.log(`  DEBUG: undo.js: reached rename case for ${undo.thing.name}`)
-              commands.get('adminRename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false)
+              commands.get('adminRename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
               break
             case 'set':
               // console.log(`  DEBUG: undo.js: reached set case for ${undo.thing.name}`)
-              commands.get('adminSet').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false)
+              commands.get('adminSet').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
               break
             case 'untroll':
-              commands.get('adminSet').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false)
-              commands.get('adminSet').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false)
+              commands.get('adminSet').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName)
+              commands.get('adminSet').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName)
               break
             default:
               console.log('  DEBUG: undo.js: reached default case')
               reply.noUndoCase(message)
           }
+          if (undos[message.guild.id].length) reply.nextUndo(message, undos[message.guild.id][undos[message.guild.id].length - 1])
         } else {
           reply.noUndoCase(message)
         }

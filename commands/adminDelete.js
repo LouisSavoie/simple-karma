@@ -35,7 +35,7 @@ module.exports = {
 
         if (res === 1) {
           reply.thingDeleted(message, foundThing.name)
-          if (addUndoFlag) undo.execute(null, message, foundThing, 'create', null, null)
+          if (addUndoFlag) undo.execute(null, message, foundThing, 'create', null, null, null)
         } else {
           reply.thingNotDeleted(message, foundThing.name)
         }

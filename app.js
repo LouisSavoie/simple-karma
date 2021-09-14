@@ -1,10 +1,8 @@
-// REQUIRES
 const Discord = require('discord.js')
 const client = new Discord.Client()
-// For reading command files
 const fs = require('fs')
-// For database models
 const mongoose = require('mongoose')
+const db = require('./functions/database')
 
 require('dotenv').config()
 
@@ -38,7 +36,7 @@ let debugFlag = false
 const prefix = 'sk '
 
 // MESSAGE HANDLER
-client.on('message', message => {
+client.on('message', async message => {
   // FILTER OUT MESSAGES
   // if message is a DM, it won't have the correct object methods for some commands and could cause a crash
   // if message doesn't start with the prefix and is form a bot, return
@@ -46,9 +44,26 @@ client.on('message', message => {
     return
   }
 
+  // DEBUG
   // Reset debug vars to default values
   debugLog = ''
   debugFlag = false
+
+  const debugMsgHandler = `
+  .
+  >>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<
+  DEBUG: Guild id: ${message.guild.id}`
+
+  console.log(debugMsgHandler)
+  debugLog += debugMsgHandler
+
+  // CHECK SERVER POINTSNAME
+  let [pointsName, debugDB] = await db.findPointsName(message.guild.id)
+  if (!pointsName) pointsName = 'Points'
+  const debugPoints = `  DEBUG: 2. app.js, pointsName: ${pointsName}`
+  console.log(debugPoints)
+  debugLog += debugDB
+  debugLog += debugPoints
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
@@ -121,14 +136,6 @@ client.on('message', message => {
     };
   }
 
-  const debugMsgHandler = `
-  .
-  >>>>>>>>>>>>>>>>> MESSAGE HANDLER <<<<<<<<<<<<<<<<<
-  DEBUG: Guild id: ${message.guild.id}`
-
-  console.log(debugMsgHandler)
-  if (debugFlag) debugLog += debugMsgHandler
-
   const debugArgs = `
   ================= Command Args ==================
   DEBUG: command: ${command}
@@ -140,7 +147,7 @@ client.on('message', message => {
   DEBUG: debugFlag: ${debugFlag}`
 
   console.log(debugArgs)
-  if (debugFlag) debugLog += debugArgs
+  debugLog += debugArgs
 
   // BANNED CHARACTERS REGEX
   const bannedCharsRegex = /[`\\]/g
@@ -157,26 +164,28 @@ client.on('message', message => {
     client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
   } else {
     if (command === 'undo') {
-      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag)
+      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag, pointsName)
     } else if (thingName) {
       // if the args include a thingName, check these commands
       if (command === 'new') {
         client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
       } else if (command === '+') {
-        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true)
+        client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === '-') {
-        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true)
+        client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === 'search') {
-        client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag, pointsName)
       } else if (command === 'delete') {
-        client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag, pointsName)
         // admin commands
       } else if (command === 'adminset') {
-        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false, true)
+        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
       } else if (command === 'adminrename') {
-        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false, true)
+        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
       } else if (command === 'admindelete') {
         client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false, true)
+      } else if (command === 'namepoints') {
+        client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }
@@ -185,15 +194,15 @@ client.on('message', message => {
       if (command === 'help') {
         client.commands.get('help').execute(message, debugLog, debugFlag)
       } else if (command === 'best') {
-        client.commands.get('best').execute(message, debugLog, debugFlag)
+        client.commands.get('best').execute(message, debugLog, debugFlag, pointsName)
       } else if (command === 'worst') {
-        client.commands.get('worst').execute(message, debugLog, debugFlag)
+        client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName)
       } else {
         // if getThingName is omitted and was a valid command, send error reply
         if (commandNamesArray.includes(getThingName)) {
           client.commands.get('noThing').execute(message, debugLog, debugFlag)
         } else {
-          client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag)
+          client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag, pointsName)
         }
       }
     }
@@ -201,16 +210,19 @@ client.on('message', message => {
 })
 
 // JOIN HANDLER
-client.on('guildMemberAdd', member => {
-  // Reset debug vars to default values
-  debugLog = ''
-  debugFlag = false
-
+client.on('guildMemberAdd', async member => {
   // DEBUG
   console.log('>>>>>>>>>>>>>>>>> JOIN HANDLER <<<<<<<<<<<<<<<<<')
   console.log(`DEBUG: @${member.displayName} joined`)
 
-  client.commands.get('addOnJoin').execute(member)
+  // CHECK SERVER POINTSNAME
+  const res = await db.findPointsName(member.guild.id)
+  let pointsName = res[0]
+  if (!pointsName) pointsName = 'Points'
+  const debugPoints = `  DEBUG: 2. app.js, pointsName: ${pointsName}`
+  console.log(debugPoints)
+
+  client.commands.get('addOnJoin').execute(member, pointsName)
 })
 
 // CONFIRM LOGIN

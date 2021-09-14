@@ -1,10 +1,11 @@
 // Require Mongoose Model for Things
 const Thing = require('../models/thing')
+const Server = require('../models/server')
 
 // Create find object
 const databaseObj = {}
 
-// FIND ONE
+// FIND ONE THING
 databaseObj.findOne = async function (server, thingName) {
   // check if the database has the thing
   const foundThing = await Thing.findOne({ server: server, nameLower: thingName.toLowerCase() }).exec()
@@ -25,7 +26,7 @@ databaseObj.findOne = async function (server, thingName) {
   }
 }
 
-// FIND
+// FIND THINGS
 databaseObj.find = async function (server, char) {
   const regex = new RegExp(char, 'i')
   // Search the database for things with names containing with the character
@@ -86,6 +87,25 @@ databaseObj.findWorst = async function (server) {
   }
 }
 
+// FIND POINTSNAME
+databaseObj.findPointsName = async function (messageID) {
+  const server = await Server.findOne({ ID: messageID }).exec()
+
+  // debug
+  const debugDB = `
+  === findPointsName in Database ===
+  DEBUG: 1. database.js, server: ${server}`
+  console.log(debugDB)
+
+  // if it does, return the thing
+  if (server) {
+    return [server.pointsName, debugDB]
+    // if it doesn't, return null
+  } else {
+    return [null, debugDB]
+  }
+}
+
 // CREATE THING
 databaseObj.create = async function (server, thingName, karma) {
   const newThing = await Thing.create({ server: server, name: thingName, nameLower: thingName.toLowerCase(), karma: karma })
@@ -110,6 +130,39 @@ databaseObj.deleteOne = async function (server, thingName) {
   console.log(debugDB)
 
   return [res.ok, debugDB]
+}
+
+// FIND SERVER
+databaseObj.findServer = async function (id) {
+  // check if the database has the thing
+  const foundServer = await Server.findOne({ ID: id }).exec()
+
+  // debug
+  const debugDB = `
+  === findServer in Database ===
+  DEBUG: 1. database.js, foundServer: ${foundServer}`
+  console.log(debugDB)
+
+  // if it does, return the thing
+  if (foundServer) {
+    return [foundServer, debugDB]
+    // if it doesn't, return null
+  } else {
+    return [null, debugDB]
+  }
+}
+
+// CREATE SERVER
+databaseObj.createServer = async function (id, pointsName) {
+  const newServer = await Server.create({ ID: id, pointsName: pointsName })
+
+  // if it creation is successful, return the thing
+  if (newServer) {
+    return newServer
+    // if the creation fails, return null
+  } else {
+    return null
+  }
 }
 
 //  Export find object

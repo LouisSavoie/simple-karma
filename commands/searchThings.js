@@ -5,7 +5,7 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'searchThings',
   description: 'DMs list of things with names containing a string',
-  async execute (message, char, debugLog, debugFlag) {
+  async execute (message, char, debugLog, debugFlag, pointsName) {
     // if char is '*', return all
     if (char === '*') {
       char = ''
@@ -23,7 +23,7 @@ module.exports = {
       reply.noThingsFound(message, char)
       // if things found, send DM to the message's author with things' karma
     } else {
-      reply.thingsFound(message, char, foundThings)
+      reply.thingsFound(message, char, foundThings, pointsName)
     }
 
     // if debugFlag, DM debug
