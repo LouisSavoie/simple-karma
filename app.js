@@ -216,7 +216,8 @@ client.on('guildMemberAdd', async member => {
   console.log(`DEBUG: @${member.displayName} joined`)
 
   // CHECK SERVER POINTSNAME
-  let [pointsName, debugDB] = await db.findPointsName(member.guild.id)
+  const res = await db.findPointsName(member.guild.id)
+  let pointsName = res[0]
   if (!pointsName) pointsName = 'Points'
   const debugPoints = `  DEBUG: 2. app.js, pointsName: ${pointsName}`
   console.log(debugPoints)

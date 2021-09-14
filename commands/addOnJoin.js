@@ -10,7 +10,8 @@ module.exports = {
     // const regex = new RegExp(member.displayName, 'i')
 
     // check if the database already has the thing
-    const [foundThing, debugDB] = await db.findOne(member.guild.id, thingName)
+    const res = await db.findOne(member.guild.id, thingName)
+    const foundThing = res[0]
 
     // debug
     console.log('  DEBUG: 2. addOnJoin.js, foundThing: ' + foundThing)

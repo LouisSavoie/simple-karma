@@ -39,7 +39,7 @@ module.exports = {
         // if it is, send reply to message's channel with error
         // if (foundThing.karma >= 9001) {
         //   reply.capped(message, thingName, pointsName)
-          // if it isn't, increment thing's karma then send reply to the message's channel with thing's karma
+        // if it isn't, increment thing's karma then send reply to the message's channel with thing's karma
         // } else {
         // }
 

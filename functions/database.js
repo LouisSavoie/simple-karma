@@ -88,7 +88,7 @@ databaseObj.findWorst = async function (server) {
 }
 
 // FIND POINTSNAME
-databaseObj.findPointsName = async function(messageID) {
+databaseObj.findPointsName = async function (messageID) {
   const server = await Server.findOne({ ID: messageID }).exec()
 
   // debug

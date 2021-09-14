@@ -203,7 +203,7 @@ replyObj.karmaYourselfError = function (message, pointsName) {
   message.reply({
     embed: {
       color: 'RED',
-      description: `You can\'t give yourself ${pointsName}!`
+      description: `You can't give yourself ${pointsName}!`
     }
   }).catch(console.error)
 }
