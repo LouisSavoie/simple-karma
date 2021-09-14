@@ -176,7 +176,7 @@ client.on('message', async message => {
       } else if (command === 'search') {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag, pointsName)
       } else if (command === 'delete') {
-        client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag, pointsName)
         // admin commands
       } else if (command === 'adminset') {
         client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)

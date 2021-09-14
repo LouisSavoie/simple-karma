@@ -6,7 +6,7 @@ const undo = require('./undo')
 module.exports = {
   name: 'trollDelete',
   description: 'Transfers karma from user issuing the command to the thing they tried to delete.',
-  async execute (message, thingName, debugLog, debugFlag) {
+  async execute (message, thingName, debugLog, debugFlag, pointsName) {
     // check if the command issuer is the thing being deleted
     if (thingName.includes(message.member.displayName)) {
       reply.trollDeleteYourselfError(message)
@@ -33,7 +33,7 @@ module.exports = {
       if (foundUser) {
         // if user has non-positive karma throw error, else continue
         if (foundUser.karma <= 0) {
-          reply.notEnoughKarma(message)
+          reply.notEnoughKarma(message, pointsName)
         } else {
           // check if the database has the thing
           const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
@@ -46,13 +46,13 @@ module.exports = {
           // if it does, take the user's karma and give it to the thing
           if (foundThing) {
             const undoStuff = { thingName: foundThing.name, thingKarma: foundThing.karma, userName: foundUser.name, userKarma: foundUser.karma }
-            undo.execute(null, message, undoStuff, 'untroll', null, null)
+            undo.execute(null, message, undoStuff, 'untroll', null, null, null)
             foundThing.karma += foundUser.karma
             foundThing.save()
             foundUser.karma = 0
             foundUser.save()
             // then send reply to the message's channel with the bad news, lol
-            reply.deleteTrolled(message, foundUser, foundThing)
+            reply.deleteTrolled(message, foundUser, foundThing, pointsName)
             // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
           } else {
             reply.notFound(message, thingName)

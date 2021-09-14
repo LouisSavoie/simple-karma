@@ -219,11 +219,11 @@ replyObj.trollDeleteYourselfError = function (message) {
 }
 
 // ERROR: NOT ENOUGH KARMA
-replyObj.notEnoughKarma = function (message) {
+replyObj.notEnoughKarma = function (message, pointsName) {
   message.reply({
     embed: {
       color: 'RED',
-      description: 'You have insufficient karma to use this command.'
+      description: `You have insufficient ${pointsName} to use this command.`
     }
   }).catch(console.error)
 }
@@ -240,13 +240,13 @@ replyObj.userNotInDatabase = function (message, displayName) {
 }
 
 // SUCCESS: DELETE TROLLED
-replyObj.deleteTrolled = function (message, foundUser, foundThing) {
+replyObj.deleteTrolled = function (message, foundUser, foundThing, pointsName) {
   message.reply({
     embed: {
       color: 'BLUE',
       description: `**AN *"ERROR"* OCCURRED!**\n
-        **${foundUser.name}'s** karma has been transferred to **${foundThing.name}**.\n
-        **${foundThing.name}** has **${foundThing.karma}** karma.\n
+        **${foundUser.name}'s** ${pointsName} has been transferred to **${foundThing.name}**.\n
+        **${foundThing.name}** has **${foundThing.karma}** ${pointsName}.\n
         and **${foundUser.name.toUpperCase()}** has **NONE**.`
     }
   }).catch(console.error)
