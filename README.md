@@ -9,22 +9,23 @@ Commands are formatted and limited in scope such that users interact with the po
 
 ## Commands
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
-- **`sk help`**: DMs this list to you
-- **`sk new <thing>`**: Creates a new \<thing\>
+- **`sk help`**: DMs this list to you.
+- **`sk new <thing>`**: Creates a new \<thing\>.
 - **`sk search <string>`**: DMs a list of \<thing\>s with names that include the given string. Searching `*` returns all.
 - **`sk best`**: Shows a list of the best five things by points.
 - **`sk worst`**: Shows a list of the worst five things by points.
-- **`sk <thing>`**: Shows a \<thing\>'s points
-- **`sk + <thing>`**: Increments a \<thing\>'s points, if it doesn't exist it is created
-- **`sk - <thing>`**: Decrements a \<thing\>'s points, if it doesn't exist it is created
+- **`sk <thing>`**: Shows a \<thing\>'s points.
+- **`sk + <thing>`**: Increments a \<thing\>'s points, if it doesn't exist it is created.
+- **`sk - <thing>`**: Decrements a \<thing\>'s points, if it doesn't exist it is created.
 - **`sk delete <thing>`**: Deletes a \<thing\>. Only bad people do this.
 
 **Admin Commands**
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
-- **`sk adminset <thing> <value>`**: Sets a \<thing\>'s points to the \<value\>
-- **`sk adminrename <thing> <value>`**: Renames a \<thing\> to the \<value\>
-- **`sk admindelete <thing>`**: Deletes a \<thing\>
-- **`sk undo`**: Undoes the last command that changed a thing
+- **`sk adminset <thing> <value>`**: Sets a \<thing\>'s points to the \<value\>.
+- **`sk adminrename <thing> <value>`**: Renames a \<thing\> to the \<value\>.
+- **`sk admindelete <thing>`**: Deletes a \<thing\>.
+- **`sk undo`**: Undoes the last command that changed a thing.
+- **`sk namepoints <name>`**: Sets the name for points to \<name\>.
 
 **Notes:**
 - *Prefix, commands, and thing names are case insensitive.*
@@ -54,6 +55,7 @@ Commands are formatted and limited in scope such that users interact with the po
 - Thing names in parentheses can have spaces. Example: `(SimpleKarma Discord Bot)` and `(@ SimpleKarma Bot)`
 - Get debug info DM'd to you
 - Undo changes
+- Rename the points for your server
 
 ## Future Scope
 
