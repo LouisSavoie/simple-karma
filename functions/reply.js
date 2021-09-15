@@ -332,6 +332,16 @@ replyObj.noUndoCase = function (message) {
   }).catch(console.error)
 }
 
+// INFO: NO NEXTUNDO
+replyObj.noUndoNext = function (message) {
+  message.reply({
+    embed: {
+      color: 'GREY',
+      description: 'There are no more commands to undo.'
+    }
+  }).catch(console.error)
+}
+
 // INFO: NEXT UNDO
 replyObj.nextUndo = function (message, undo) {
   if (undo.command === 'untroll') {
