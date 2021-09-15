@@ -34,7 +34,8 @@ module.exports = {
         '**`sk adminset <thing> <value>`**: Sets a thing\'s points to the value',
         '**`sk adminrename <thing> <value>`**: Renames a thing to the value',
         '**`sk admindelete <thing>`**: Deletes a thing',
-        '**`sk undo`**: Undoes the last command that changed a thing'
+        '**`sk undo`**: Undoes the last command that changed a thing',
+        '**`sk namepoints <name>`**: Sets the name for points to the name.'
       ])
     }
 

@@ -52,7 +52,11 @@ module.exports = {
               console.log('  DEBUG: undo.js: reached default case')
               reply.noUndoCase(message)
           }
-          if (undos[message.guild.id].length) reply.nextUndo(message, undos[message.guild.id][undos[message.guild.id].length - 1])
+          if (undos[message.guild.id].length) {
+            reply.nextUndo(message, undos[message.guild.id][undos[message.guild.id].length - 1])
+          } else {
+            reply.noUndoNext(message)
+          }
         } else {
           reply.noUndoCase(message)
         }
