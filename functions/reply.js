@@ -22,9 +22,12 @@ replyObj.thingsFound = function (message, char, foundThings, pointsName) {
     text += `\n**${thing.name}**: ${thing.karma}`
   })
 
-  message.author.send([
-        `${text}`
-  ]).catch(console.error)
+  if (text.length > 2000) {
+    const splitText = text.match(/(.|[\r\n]){1,n}/g)
+    splitText.forEach(text => message.author.send([`${text}`]).catch(console.error))
+  } else {
+    message.author.send([`${text}`]).catch(console.error)
+  }
 }
 
 // SUCCESS: BEST FOUND
