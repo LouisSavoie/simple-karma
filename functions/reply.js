@@ -22,9 +22,18 @@ replyObj.thingsFound = function (message, char, foundThings, pointsName) {
     text += `\n**${thing.name}**: ${thing.karma}`
   })
 
+  text += text.substring(64) + text.substring(64)
+  console.log(`DEBUG: text length: ${text.length}`)
+
   if (text.length > 2000) {
-    const splitText = text.match(/(.|[\r\n]){1,n}/g)
-    splitText.forEach(text => message.author.send([`${text}`]).catch(console.error))
+    const splitText = text.match(/(.+\n|\n){1,50}/g)
+    splitText.forEach((text, index) => {
+      if (index === 0) {
+        message.author.send([`${text}`]).catch(console.error)
+      } else {
+        message.author.send([`.\n${text}`]).catch(console.error)
+      }
+    })
   } else {
     message.author.send([`${text}`]).catch(console.error)
   }
