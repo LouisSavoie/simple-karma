@@ -178,10 +178,10 @@ client.on('message', async message => {
       } else if (command === 'delete') {
         client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag, pointsName)
         // admin commands
-      } else if (command === 'adminset') {
-        client.commands.get('adminSet').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
-      } else if (command === 'adminrename') {
-        client.commands.get('adminRename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
+      } else if (command === 'set') {
+        client.commands.get('set').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
+      } else if (command === 'rename') {
+        client.commands.get('rename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
       } else if (command === 'admindelete') {
         client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false, true)
       } else if (command === 'namepoints') {
