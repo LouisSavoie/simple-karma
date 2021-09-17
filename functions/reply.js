@@ -22,9 +22,6 @@ replyObj.thingsFound = function (message, char, foundThings, pointsName) {
     text += `\n**${thing.name}**: ${thing.karma}`
   })
 
-  text += text.substring(64) + text.substring(64)
-  console.log(`DEBUG: text length: ${text.length}`)
-
   if (text.length > 2000) {
     const splitText = text.match(/(.+\n|\n){1,50}/g)
     splitText.forEach((text, index) => {
