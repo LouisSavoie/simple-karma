@@ -82,6 +82,11 @@ client.on('message', async message => {
   let value = argsArray[2]
 
   // args transformations
+  if (getThingName === 'search )') {
+    command = 'search'
+    thingName = ')'
+    getThingName = 'search'
+  }
   if (command) {
     command = command.toLowerCase()
   }

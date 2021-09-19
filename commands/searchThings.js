@@ -6,9 +6,31 @@ module.exports = {
   name: 'searchThings',
   description: 'DMs list of things with names containing a string',
   async execute (message, char, debugLog, debugFlag, pointsName) {
-    // if char is '*', return all
-    if (char === '*') {
+    // filter for regex special chars
+    if (char.includes('*')) {
       char = ''
+    } else if (char.includes('-')) {
+      char = '\-'
+    } else if (char.includes('.')) {
+      char = '\\.'
+    } else if (char.includes('+')) {
+      char = '\\+'
+    } else if (char.includes('?')) {
+      char = '\\?'
+    } else if (char.includes('$')) {
+      char = '\\$'
+    } else if (char.includes('{')) {
+      char = '\\{'
+    } else if (char.includes('}')) {
+      char = '\\}'
+    } else if (char.includes('(')) {
+      char = '\\('
+    } else if (char.includes(')')) {
+      char = '\\)'
+    } else if (char.includes('^')) {
+      char = '\\^'
+    } else if (char.includes('|')) {
+      char = '\\|'
     }
 
     // Search the database for things with names containing with the character

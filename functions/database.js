@@ -28,9 +28,9 @@ databaseObj.findOne = async function (server, thingName) {
 
 // FIND THINGS
 databaseObj.find = async function (server, char) {
-  const regex = new RegExp(char, 'i')
+  const regex = new RegExp(char, 'g')
   // Search the database for things with names containing with the character
-  const foundThings = await Thing.find({ server: server, name: regex })
+  const foundThings = await Thing.find({ server: server, nameLower: regex })
 
   // debug
   const debugDB = `
