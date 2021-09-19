@@ -34,6 +34,7 @@ replyObj.thingsFound = function (message, char, foundThings, pointsName) {
   } else {
     message.author.send([`${text}`]).catch(console.error)
   }
+  return text.length
 }
 
 // SUCCESS: BEST FOUND

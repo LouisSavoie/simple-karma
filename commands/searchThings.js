@@ -37,7 +37,7 @@ module.exports = {
     const [foundThings, debugDB] = await db.find(message.guild.id, char)
 
     // debug
-    const debug = `  DEBUG: 2. searchThings.js, foundThing: ${foundThings}`
+    let debug = `  DEBUG: 2. searchThings.js, foundThing: ${foundThings.length}`
     console.log(debug)
 
     // if no things are found, send reply with error
@@ -45,7 +45,10 @@ module.exports = {
       reply.noThingsFound(message, char)
       // if things found, send DM to the message's author with things' karma
     } else {
-      reply.thingsFound(message, char, foundThings, pointsName)
+      const textLength = reply.thingsFound(message, char, foundThings, pointsName)
+      const debugReply = `  DEBUG: 3. searchThings.js, reply text.length: ${textLength}`
+      console.log(debugReply)
+      debug += debugReply
     }
 
     // if debugFlag, DM debug

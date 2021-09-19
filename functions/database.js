@@ -35,7 +35,7 @@ databaseObj.find = async function (server, char) {
   // debug
   const debugDB = `
   === find in Database ===
-  DEBUG: 1. database.js, foundThings: ${foundThings}`
+  DEBUG: 1. database.js, foundThings: ${foundThings.length}`
   console.log(debugDB)
 
   // if success, return the things
