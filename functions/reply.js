@@ -13,11 +13,10 @@ replyObj.found = function (message, foundThing, pointsName) {
 
 // SUCCESS: THINGS FOUND
 replyObj.thingsFound = function (message, char, foundThings, pointsName) {
+  let text = `.\nThings containing **${char}**:\n**Name**: ${pointsName}\n--------------------`
   if (char === '') {
-    char = '*'
+    text = `.\nAll things:\n**Name**: ${pointsName}\n--------------------`
   }
-
-  let text = `.\nThings containing **${char}**:\n\n**Name**: ${pointsName}\n--------------------`
   foundThings.forEach(thing => {
     text += `\n**${thing.name}**: ${thing.karma}`
   })
