@@ -8,7 +8,7 @@ module.exports = {
   async execute (message, char, debugLog, debugFlag, pointsName) {
     // filter for regex special chars
     if (char.includes('-')) {
-      char = '\-'
+      char = '\\-'
     } else if (char.includes('.')) {
       char = '\\.'
     } else if (char.includes('+')) {
