@@ -7,9 +7,7 @@ module.exports = {
   description: 'DMs list of things with names containing a string',
   async execute (message, char, debugLog, debugFlag, pointsName) {
     // filter for regex special chars
-    if (char.includes('*')) {
-      char = ''
-    } else if (char.includes('-')) {
+    if (char.includes('-')) {
       char = '\-'
     } else if (char.includes('.')) {
       char = '\\.'
@@ -31,6 +29,8 @@ module.exports = {
       char = '\\^'
     } else if (char.includes('|')) {
       char = '\\|'
+    } else if (char.includes('*')) {
+      char = ''
     }
 
     // Search the database for things with names containing with the character
