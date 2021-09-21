@@ -20,7 +20,11 @@ module.exports = {
       foundThing.karma -= 1
       foundThing.save()
       reply.found(message, foundThing, pointsName)
-      if (addUndoFlag) undo.execute(null, message, foundThing, 'increment', null, null, pointsName)
+      if (addUndoFlag) {
+        debugLog += '\n' + debugDB + '\n' + debug
+        undo.execute(null, message, foundThing, 'increment', debugLog, debugFlag, null)
+        debugFlag = false
+      }
       // if debugFlag, DM debug
       if (debugFlag) {
         message.author.send([
