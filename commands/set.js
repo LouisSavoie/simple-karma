@@ -34,7 +34,11 @@ module.exports = {
           foundThing.save()
           reply.found(message, foundThing, pointsName)
           foundThing.value = oldKarma
-          if (addUndoFlag) undo.execute(null, message, foundThing, 'set', null, null, pointsName)
+          if (addUndoFlag) {
+            debugLog += '\n' + debugDB + '\n' + debug
+            undo.execute(null, message, foundThing, 'set', debugLog, debugFlag, null)
+            debugFlag = false
+          }
         }
       } else {
         reply.notANumber(message, value)

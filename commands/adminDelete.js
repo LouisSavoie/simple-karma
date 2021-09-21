@@ -35,7 +35,11 @@ module.exports = {
 
         if (res === 1) {
           reply.thingDeleted(message, foundThing.name)
-          if (addUndoFlag) undo.execute(null, message, foundThing, 'create', null, null, null)
+          if (addUndoFlag) {
+            debugLog += '\n' + debugDB + '\n' + debug
+            undo.execute(null, message, foundThing, 'create', debugLog, debugFlag, null)
+            debugFlag = false
+          }
         } else {
           reply.thingNotDeleted(message, foundThing.name)
         }

@@ -14,6 +14,11 @@ module.exports = {
 
     if (commands === null) {
       undos[message.guild.id].push({ thing: thing, command: undoCommand })
+      const debugUndo = `  DEBUG: 3. undo.js, undo created: ${JSON.stringify(undos[message.guild.id][undos[message.guild.id].length - 1])}`
+      console.log(debugUndo)
+      debugLog += debugUndo
+      // if debugFlag, DM debug
+      if (debugFlag) message.author.send([debugLog])
     } else {
       if (message.member.hasPermission('ADMINISTRATOR')) {
         if (undos[message.guild.id].length) {
@@ -38,15 +43,15 @@ module.exports = {
               break
             case 'rename':
               // console.log(`  DEBUG: undo.js: reached rename case for ${undo.thing.name}`)
-              commands.get('adminRename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
+              commands.get('rename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
               break
             case 'set':
               // console.log(`  DEBUG: undo.js: reached set case for ${undo.thing.name}`)
-              commands.get('adminSet').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
+              commands.get('set').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
               break
             case 'untroll':
-              commands.get('adminSet').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName)
-              commands.get('adminSet').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName)
+              commands.get('set').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName)
+              commands.get('set').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName)
               break
             default:
               console.log('  DEBUG: undo.js: reached default case')
