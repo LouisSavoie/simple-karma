@@ -30,7 +30,11 @@ module.exports = {
         foundThing.save()
         reply.found(message, foundThing, pointsName)
         foundThing.value = thingName
-        if (addUndoFlag) undo.execute(null, message, foundThing, 'rename', null, null, pointsName)
+        if (addUndoFlag) {
+          debugLog += '\n' + debugDB + '\n' + debug
+          undo.execute(null, message, foundThing, 'rename', debugLog, debugFlag, null)
+          debugFlag = false
+        }
       }
       // if message author does not have permission, send error reply
     } else {
