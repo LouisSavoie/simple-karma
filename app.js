@@ -33,7 +33,7 @@ let debugFlag = false
 // <prefix> <getThingName>
 
 // COMMAND PREFIX
-const prefix = 'sk '
+const prefix = process.env.PREFIX
 
 // MESSAGE HANDLER
 client.on('message', async message => {
@@ -236,9 +236,6 @@ client.on('ready', () => {
 
   // SET STATUS
   client.user.setActivity('"sk help"', { type: 'WATCHING' })
-
-  // Status for testing
-  // client.user.setActivity('"TESTING"', {})
 })
 
 // LOGIN
