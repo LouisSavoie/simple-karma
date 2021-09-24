@@ -1,7 +1,6 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-
-# Simple Karma
+# <img src="simpleKarma.png" alt="" width="22"/>SimpleKarma
 
 SimpleKarma is a Discord bot used to award "things" points. Things can be users, concepts, physical or digital objects, brands, or whatever you want!
 
