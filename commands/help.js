@@ -21,8 +21,8 @@ module.exports = {
       '*- Thing names in parentheses can have spaces.*',
       '*- User Thing names with spaces must have a space between the @ and the rest of the name.*',
       '*  - Example: `(@ Joe User)` for `@Joe User`*',
-      '*- Add `debug` anywhere in the command to have debug info DM\'d to you.*',
-      'Please report any bugs or issues on [here on GitHub](https://github.com/LouisSavoie/simple-karma/issues).',
+      '*- Add `debug` anywhere in any command to have debug info DM\'d to you.*',
+      'Please report any bugs or issues [here on GitHub](https://github.com/LouisSavoie/simple-karma/issues).',
       'When reporting bugs in commands, please re-run the command with `debug` and include the DM you get in your bug report. Thanks!'
     ])
 
