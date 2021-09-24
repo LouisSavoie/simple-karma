@@ -58,15 +58,30 @@ Commands are formatted and limited in scope such that users interact with the po
 
 ## Future Scope
 
-- adminPlus and adminMinus commands
-- add users as botAdmin so they can use admin commands without being a discord admin
-- delete all for server admin command
-- add all users of server command
-- multi-newThing command
-- singular and plural points
-- support server
-- allow command arguments in any order
-- toggle allowing negative points
+## Info Update:
+New info section in this README and for the help command including helpful info such as:
+- Bot invitation
+- Link to this repo
+- Issues Reporting
+- Support Discord server
+- Link to SKs author's portfolio
+- Donations
+- help and readme now include bot info in a new info section
+
+### Admin Update:
+1. Add users as botAdmin so they can use admin commands without being a Discord admin
+2. Add <value> and subtract <value> admin commands
+3. Delete all things admin command
+4. Add all users admin command
+5. Multi-new admin command
+6. Toggle allowing negative points admin command
+7. Toggle allowing trolldelete admin command
+
+### Points Update:
+1. Points names can be prefix or suffix
+2. Singular and plural points names
+
+...and other non-feature codebase updates. Ya'know, dev stuff.
 
 ~~*All caught up, hurrah!*~~
 
