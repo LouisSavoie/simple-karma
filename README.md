@@ -2,9 +2,7 @@
 
 # <img src="simpleKarma.png" alt="" width="22"/>SimpleKarma
 
-SimpleKarma is a Discord bot used to award "things" points. Things can be users, concepts, physical or digital objects, brands, or whatever you want!
-
-Commands are formatted and limited in scope such that users interact with the points databases very deliberately.
+SimpleKarma is a Discord bot used to award things points. You can call the points anything, like Karma, Kudos, or just Points, and things can be users, concepts, physical or digital objects, brands, or whatever you want!
 
 ## Commands
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
@@ -73,4 +71,12 @@ Commands are formatted and limited in scope such that users interact with the po
 
 ~~*All caught up, hurrah!*~~
 
-If you have any suggestions for Future Scope features or Current Scope feature improvements, please fill out an issue and start the title with `Suggestion: `. Thanks :D
+## Links
+
+- [Invite SK to your server!](https://discord.com/api/oauth2/authorize?client_id=831293373913890856&permissions=0&scope=bot)
+- [Support Discord Server](https://discord.gg/EyTxcAQbtC): Try out SK, talk to other server Admins or myslef!
+- [My Portfolio Website](www.louissavoie.com)
+- [Issues or suggestions](https://github.com/LouisSavoie/simple-karma/issues): Please inclued either `Issue: ` or `Suggestion: ` in your title, thanks!
+- [Donations welcome!](https://www.paypal.com/donate?business=2MV2PUZGP3XLC&no_recurring=1&item_name=SimpleKarma&currency_code=USD)
+
+  ![Donations QR Code](./paypalQRCode.png)
