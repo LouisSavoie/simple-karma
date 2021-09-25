@@ -75,8 +75,8 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 
 - [Invite SK to your server!](https://discord.com/api/oauth2/authorize?client_id=831293373913890856&permissions=0&scope=bot)
 - [Support Discord Server](https://discord.gg/EyTxcAQbtC): Try out SK, talk to other server Admins or myslef!
-- [My Portfolio Website](www.louissavoie.com)
 - [Issues or suggestions](https://github.com/LouisSavoie/simple-karma/issues): Please inclued either `Issue: ` or `Suggestion: ` in your title, thanks!
+- [My Portfolio Website](www.louissavoie.com)
 - [Donations welcome!](https://www.paypal.com/donate?business=2MV2PUZGP3XLC&no_recurring=1&item_name=SimpleKarma&currency_code=USD)
 
   ![Donations QR Code](./paypalQRCode.png)
