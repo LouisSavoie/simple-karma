@@ -1,11 +1,8 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+# <img src="simpleKarma.png" alt="" width="22"/>SimpleKarma
 
-# Simple Karma
-
-SimpleKarma is a Discord bot used to award "things" points. Things can be users, concepts, physical or digital objects, brands, or whatever you want!
-
-Commands are formatted and limited in scope such that users interact with the points databases very deliberately.
+SimpleKarma is a Discord bot used to award things points. You can call the points anything, like Karma, Kudos, or just Points, and things can be users, concepts, physical or digital objects, brands, or whatever you want!
 
 ## Commands
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
@@ -32,43 +29,54 @@ Commands are formatted and limited in scope such that users interact with the po
 - *Thing names in parentheses can have spaces.*
 - *User Thing names with spaces must have a space between the @ and the rest of the name.*
   - *Example: `(@ Joe User)` for `@Joe User`*
-- *Add `debug` anywhere in the command to have debug info DM'd to them.*
+- *Add `debug` anywhere in any command to have debug info DM'd to you.*
 
 ## Current Scope
+- Create things
+- Show things
+- Show top 5 things
+- Show bottom 5 things
+- Search for things by partial name
+- Increment a thing's points
+- Decrement a thing's points
+- Set a thing's points
+- Rename a thing
+- Delete a thing
+- Undo commands
+- Customize points name
+- Auto-add user as thing on join
+- Admin only commands
 - Help documentation
 - Persistent cloud database
-- Add new things to the database
-- Things are specific to a Discord server
-- Increment / decrement a thing's points
-- You cant give yourself points
-- Show a thing's points
-- Search the database for things
-- Searching `*` returns all
-- List the best things
-- list the worst things
-- Get trolled trying to delete a thing
-- Admin commands for users with the 'Administrator' permission
-- Set points values
-- Rename things
-- Actually delete things
-- Users are added to the database when they join the server automatically
-- Thing names in parentheses can have spaces. Example: `(SimpleKarma Discord Bot)` and `(@ SimpleKarma Bot)`
-- Get debug info DM'd to you
-- Undo changes
-- Rename the points for your server
+- Debug info
+- Support server
+- Donations ;)
 
 ## Future Scope
 
-- adminPlus and adminMinus commands
-- add users as botAdmin so they can use admin commands without being a discord admin
-- delete all for server admin command
-- add all users of server command
-- multi-newThing command
-- singular and plural points
-- support server
-- allow command arguments in any order
-- toggle allowing negative points
+### Admin Update:
+1. Add users as botAdmin so they can use admin commands without being a Discord admin
+2. Add <value> and subtract <value> admin commands
+3. Delete all things admin command
+4. Add all users admin command
+5. Multi-new admin command
+6. Toggle allowing negative points admin command
+7. Toggle allowing trolldelete admin command
+
+### Points Update:
+1. Points names can be prefix or suffix
+2. Singular and plural points names
+
+...and other non-feature codebase updates. Ya'know, dev stuff.
 
 ~~*All caught up, hurrah!*~~
 
-If you have any suggestions for Future Scope features or Current Scope feature improvements, please fill out an issue and start the title with `Suggestion: `. Thanks :D
+## Links
+
+- [Invite SK to your server!](https://discord.com/api/oauth2/authorize?client_id=831293373913890856&permissions=0&scope=bot)
+- [Support Discord Server](https://discord.gg/EyTxcAQbtC): Try out SK, talk to other server Admins or myslef!
+- [My Portfolio Website](www.louissavoie.com)
+- [Issues or suggestions](https://github.com/LouisSavoie/simple-karma/issues): Please inclued either `Issue: ` or `Suggestion: ` in your title, thanks!
+- [Donations welcome!](https://www.paypal.com/donate?business=2MV2PUZGP3XLC&no_recurring=1&item_name=SimpleKarma&currency_code=USD)
+
+  ![Donations QR Code](./paypalQRCode.png)

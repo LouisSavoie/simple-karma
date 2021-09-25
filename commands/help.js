@@ -21,8 +21,8 @@ module.exports = {
       '*- Thing names in parentheses can have spaces.*',
       '*- User Thing names with spaces must have a space between the @ and the rest of the name.*',
       '*  - Example: `(@ Joe User)` for `@Joe User`*',
-      '*- Add `debug` anywhere in the command to have debug info DM\'d to you.*',
-      'Please report any bugs or issues on [here on GitHub](https://github.com/LouisSavoie/simple-karma/issues).',
+      '*- Add `debug` anywhere in any command to have debug info DM\'d to you.*',
+      'Please report any bugs or issues [here on GitHub](https://github.com/LouisSavoie/simple-karma/issues).',
       'When reporting bugs in commands, please re-run the command with `debug` and include the DM you get in your bug report. Thanks!'
     ])
 
@@ -38,6 +38,16 @@ module.exports = {
         '**`sk namepoints <name>`**: Sets the name for points to the name.'
       ])
     }
+
+    message.author.send([
+      '.',
+      '__**Links**__:',
+      '**Invite SK to your server!**: <https://discord.com/api/oauth2/authorize?client_id=831293373913890856&permissions=0&scope=bot>',
+      '**Support Discord Server**: <https://discord.gg/EyTxcAQbtC>: Try out SK, talk to other server Admins or myslef!',
+      '**My Portfolio Website**: <https://www.louissavoie.com>',
+      '**Issues or suggestions**: <https://github.com/LouisSavoie/simple-karma/issues>: Please inclued either `Issue: ` or `Suggestion: ` in your title, thanks!',
+      '**Donations welcome!**: <https://www.paypal.com/donate?business=2MV2PUZGP3XLC&no_recurring=1&item_name=SimpleKarma&currency_code=USD>'
+    ])
 
     // if debugFlag, DM debug
     if (debugFlag) {
