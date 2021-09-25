@@ -39,6 +39,16 @@ module.exports = {
       ])
     }
 
+    message.author.send([
+      '.',
+      '__**Links**__:',
+      '**Invite SK to your server!**: <https://discord.com/api/oauth2/authorize?client_id=831293373913890856&permissions=0&scope=bot>',
+      '**Support Discord Server**: <https://discord.gg/EyTxcAQbtC>: Try out SK, talk to other server Admins or myslef!',
+      '**My Portfolio Website**: <https://www.louissavoie.com>',
+      '**Issues or suggestions**: <https://github.com/LouisSavoie/simple-karma/issues>: Please inclued either `Issue: ` or `Suggestion: ` in your title, thanks!',
+      '**Donations welcome!**: <https://www.paypal.com/donate?business=2MV2PUZGP3XLC&no_recurring=1&item_name=SimpleKarma&currency_code=USD>'
+    ])
+
     // if debugFlag, DM debug
     if (debugFlag) {
       message.author.send([
