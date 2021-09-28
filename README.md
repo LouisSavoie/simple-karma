@@ -12,8 +12,8 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 - **`sk best`**: Shows a list of the best five things by points.
 - **`sk worst`**: Shows a list of the worst five things by points.
 - **`sk <thing>`**: Shows a \<thing\>'s points.
-- **`sk + <thing>`**: Increments a \<thing\>'s points, if it doesn't exist it is created.
-- **`sk - <thing>`**: Decrements a \<thing\>'s points, if it doesn't exist it is created.
+- **`sk + <thing>`**: Increments a \<thing\>'s points. If it doesn't exist, it is created.
+- **`sk - <thing>`**: Decrements a \<thing\>'s points. If it doesn't exist, it is created.
 - **`sk delete <thing>`**: Deletes a \<thing\>. Only bad people do this.
 
 **Admin Commands**
@@ -27,7 +27,7 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 **Notes:**
 - *Prefix, commands, and thing names are case insensitive.*
 - *Thing names in parentheses can have spaces.*
-- *User Thing names with spaces must have a space between the @ and the rest of the name.*
+- *User Thing names with spaces must have a space between the `@` and the rest of the name.*
   - *Example: `(@ Joe User)` for `@Joe User`*
 - *Add `debug` anywhere in any command to have debug info DM'd to you.*
 
@@ -74,8 +74,8 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 ## Links
 
 - [Invite SK to your server!](https://discord.com/api/oauth2/authorize?client_id=831293373913890856&permissions=0&scope=bot)
-- [Support Discord Server](https://discord.gg/EyTxcAQbtC): Try out SK, talk to other server Admins or myslef!
-- [Issues or suggestions](https://github.com/LouisSavoie/simple-karma/issues): Please inclued either `Issue: ` or `Suggestion: ` in your title, thanks!
+- [Support Discord Server](https://discord.gg/EyTxcAQbtC): Try out SK, talk to other server Admins or myself!
+- [Issues or suggestions](https://github.com/LouisSavoie/simple-karma/issues): Please include either `Issue: ` or `Suggestion: ` in your title, thanks!
 - [My Portfolio Website](www.louissavoie.com)
 - [Donations welcome!](https://www.paypal.com/donate?business=2MV2PUZGP3XLC&no_recurring=1&item_name=SimpleKarma&currency_code=USD)
 
