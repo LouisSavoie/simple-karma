@@ -390,5 +390,21 @@ replyObj.serverNotCreated = function (message) {
   }).catch(console.error)
 }
 
+// SEND DEBUG
+replyObj.sendDebug = function (message, debugLog) {
+  if (debugLog.length > 2000) {
+    const splitText = debugLog.match(/(.+\n|\n){1,50}/g)
+    splitText.forEach((text, index) => {
+      if (index === 0) {
+        message.author.send([`${text}`]).catch(console.error)
+      } else {
+        message.author.send([`.\n${text}`]).catch(console.error)
+      }
+    })
+  } else {
+    message.author.send([`${debugLog}`]).catch(console.error)
+  }
+}
+
 //  Export reply object
 module.exports = replyObj
