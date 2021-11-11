@@ -7,8 +7,6 @@ module.exports = {
   execute (message, debugLog, debugFlag) {
     reply.unknownCommand(message)
     // if debugFlag, DM debug
-    if (debugFlag) {
-      reply.sendDebug(message, debugLog)
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }
