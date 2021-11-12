@@ -14,10 +14,9 @@ module.exports = {
 
     if (commands === null) {
       undos[message.guild.id].push({ thing: thing, command: undoCommand })
-      const debugUndo = `\n  DEBUG: 3. undo.js, undo created: ${JSON.stringify(undos[message.guild.id][undos[message.guild.id].length - 1])}`
+      const debugUndo = `  DEBUG: 3. undo.js, undo created: ${JSON.stringify(undos[message.guild.id][undos[message.guild.id].length - 1])}`
       console.log(debugUndo)
-      debugLog += debugUndo
-      // if debugFlag, DM debug
+      debugLog += '\n' + debugUndo
       if (debugFlag) reply.sendDebug(message, debugLog)
     } else {
       if (message.member.hasPermission('ADMINISTRATOR')) {
