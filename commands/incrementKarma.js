@@ -18,6 +18,7 @@ module.exports = {
       // debug
       const debug = `  DEBUG: 2. incrementKarma.js, foundThing: ${foundThing}`
       console.log(debug)
+      debugLog += '\n' + debugDB + '\n' + debug
 
       // if thing is found, increment thing's karma then send reply to the message's channel with thing's karma
       if (foundThing) {
@@ -25,18 +26,10 @@ module.exports = {
         foundThing.save()
         reply.found(message, foundThing, pointsName)
         if (addUndoFlag) {
-          debugLog += '\n' + debugDB + '\n' + debug
           undo.execute(null, message, foundThing, 'decrement', debugLog, debugFlag, null)
           debugFlag = false
         }
-        // if debugFlag, DM debug
-        if (debugFlag) {
-          message.author.send([
-            debugLog,
-            debugDB,
-            debug
-          ])
-        }
+        if (debugFlag) reply.sendDebug(message, debugLog)
 
         // ARCHIVED KARMA CAPPED CODE: SAVE FOR FUTURE RE-IMPLEMENTATION
         // if it does, check if the thing's karma is over 9000
@@ -49,7 +42,6 @@ module.exports = {
 
         // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
       } else {
-        debugLog += '\n' + debugDB + '\n' + debug
         reply.notFoundCreated(message, thingName)
         newThing.execute(message, thingName, debugLog, debugFlag, { karma: 1 }, true)
       }
