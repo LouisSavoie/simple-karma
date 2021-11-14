@@ -62,8 +62,8 @@ client.on('message', async message => {
   if (!pointsName) pointsName = 'Points'
   const debugPoints = `  DEBUG: 2. app.js, pointsName: ${pointsName}`
   console.log(debugPoints)
-  debugLog += debugDB
-  debugLog += debugPoints
+  debugLog += '\n' + debugDB
+  debugLog += '\n' + debugPoints
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
@@ -152,7 +152,7 @@ client.on('message', async message => {
   DEBUG: debugFlag: ${debugFlag}`
 
   console.log(debugArgs)
-  debugLog += debugArgs
+  debugLog += '\n' + debugArgs
 
   // BANNED CHARACTERS REGEX
   const bannedCharsRegex = /[`\\]/g
