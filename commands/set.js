@@ -7,10 +7,6 @@ module.exports = {
   name: 'set',
   description: 'Sets karma for a thing to a given value',
   async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName) {
-    // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
-    let debugDB = ''
-    let debug = ''
-
     // if the message author has permission, proceed
     if (message.member.hasPermission('ADMINISTRATOR') || undoFlag) {
       value = parseInt(value, 10)
@@ -18,11 +14,12 @@ module.exports = {
       if (!isNaN(value)) {
         // check if the database has the thing
         const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
-        debugDB += debugDBThing
+        debugLog += '\n' + debugDBThing
 
         // debug
-        debug += `  DEBUG: 2. set.js, foundThing: ${foundThing}`
+        let debug = `  DEBUG: 2. set.js, foundThing: ${foundThing}`
         console.log(debug)
+        debugLog += '\n' + debug
 
         // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
         if (!foundThing) {
@@ -35,7 +32,6 @@ module.exports = {
           reply.found(message, foundThing, pointsName)
           foundThing.value = oldKarma
           if (addUndoFlag) {
-            debugLog += '\n' + debugDB + '\n' + debug
             undo.execute(null, message, foundThing, 'set', debugLog, debugFlag, null)
             debugFlag = false
           }
@@ -47,14 +43,6 @@ module.exports = {
     } else {
       reply.noPermission(message)
     }
-
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send([
-        debugLog,
-        debugDB,
-        debug
-      ])
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }
