@@ -7,19 +7,16 @@ module.exports = {
   name: 'adminDelete',
   description: 'Deletes a thing',
   async execute (message, thingName, debugLog, debugFlag, undoFlag, addUndoFlag) {
-    // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
-    let debugDB = ''
-    let debug = ''
-
     // if the message author has permission, proceed
     if (message.member.hasPermission('ADMINISTRATOR') || undoFlag) {
       // check if the database has the thing
       const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
-      debugDB += debugDBThing
+      debugLog += '\n' + debugDBThing
 
       // debug
-      debug += `  DEBUG: 2. adminDelete.js, foundThing: ${foundThing}`
-      console.log(debug)
+      const debugThing = `  DEBUG: 2. adminDelete.js, foundThing: ${foundThing}`
+      console.log(debugThing)
+      debugLog += '\n' + debugThing
 
       // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
       if (!foundThing) {
@@ -27,16 +24,16 @@ module.exports = {
         // if it does, delete it and send success reply
       } else {
         const [res, debugDBDelete] = await db.deleteOne(message.guild.id, foundThing.name)
-        debugDB += debugDBDelete
+        debugLog += '\n' + debugDBDelete
 
         // debug
-        debug += `  DEBUG: 2. adminDelete.js, res: ${res}`
-        console.log('  DEBUG: 2. adminDelete.js, res: ' + res)
+        const debugDelete = `  DEBUG: 2. adminDelete.js, res: ${res}`
+        console.log(debugDelete)
+        debugLog += '\n' + debugDelete
 
         if (res === 1) {
           reply.thingDeleted(message, foundThing.name)
           if (addUndoFlag) {
-            debugLog += '\n' + debugDB + '\n' + debug
             undo.execute(null, message, foundThing, 'create', debugLog, debugFlag, null)
             debugFlag = false
           }
@@ -48,14 +45,6 @@ module.exports = {
     } else {
       reply.noPermission(message)
     }
-
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send([
-        debugLog,
-        debugDB,
-        debug
-      ])
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }
