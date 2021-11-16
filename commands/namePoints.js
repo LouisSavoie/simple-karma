@@ -5,18 +5,15 @@ module.exports = {
   name: 'namePoints',
   description: 'Sets the name of the points for a server object',
   async execute (message, pointsName, debugLog, debugFlag) {
-    // create debugDB variable to handle DM'ing in different cases and debug variable for wider scope
-    let debugDB = ''
-    let debug = ''
-
     if (message.member.hasPermission('ADMINISTRATOR')) {
       // check if the database already has the server
       const [foundServer, debugDBThing] = await db.findServer(message.guild.id)
-      debugDB += debugDBThing
+      debugLog += '\n' + debugDBThing
 
       // debug
-      debug += `  DEBUG: 2. namePoints.js, foundServer: ${foundServer}`
+      const debug = `  DEBUG: 2. namePoints.js, foundServer: ${foundServer}`
       console.log(debug)
+      debugLog += '\n' + debug
 
       // if it does, change the name of the points then send reply confirming the change
       if (foundServer) {
@@ -36,14 +33,6 @@ module.exports = {
     } else {
       reply.noPermission(message)
     }
-
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send([
-        debugLog,
-        debugDB,
-        debug
-      ])
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }
