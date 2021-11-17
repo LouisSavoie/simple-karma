@@ -1,4 +1,3 @@
-// Require functions
 const db = require('../functions/database')
 const reply = require('../functions/reply')
 
@@ -8,10 +7,12 @@ module.exports = {
   async execute (message, debugLog, debugFlag, pointsName) {
     // get the things from the database
     const [foundThings, debugDB] = await db.findWorst(message.guild.id)
+    debugLog += '\n' + debugDB
 
     // debug
     const debug = `DEBUG: 2. worst.js, foundThings: ${foundThings}`
     console.log(debug)
+    debugLog += '\n' + debug
 
     // if things are found, reply with the things
     if (foundThings) {
@@ -20,14 +21,6 @@ module.exports = {
     } else {
       reply.worstNotFound(message)
     }
-
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send([
-        debugLog,
-        debugDB,
-        debug
-      ])
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }
