@@ -203,11 +203,17 @@ client.on('message', async message => {
       } else if (command === 'worst') {
         client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName)
       } else {
-        // if getThingName is omitted and was a valid command, send error reply
-        if (commandNamesArray.includes(getThingName)) {
+        // if thingName is omitted and was a valid command, send error reply
+        if (commandNamesArray.includes(command)) {
           client.commands.get('noThing').execute(message, debugLog, debugFlag)
         } else {
-          client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag, pointsName)
+          // could be a getThing command with debug and no thing
+          if (thingName === undefined && getThingName === undefined) {
+            client.commands.get('noThing').execute(message, debugLog, debugFlag)
+          // else it was a getThing command
+          } else {
+            client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag, pointsName)
+          }
         }
       }
     }
