@@ -197,15 +197,25 @@ replyObj.worstNotFound = function (message) {
 }
 
 // ERROR: KARMA CAPPED
-// replyObj.capped = function (message, thingName, pointsName) {
-//   message.reply({
-//     embed: {
-//       color: 'RED',
-//       description: `Thing, **${thingName}'s** ${pointsName} is already **OVER 9000**!\n
-//         **${thingName}** doesn't need anymore.`
-//     }
-//   }).catch(console.error)
-// }
+replyObj.capped = function (message, thingName, pointsName, points) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: `**${thingName}** already has **${points}** ${pointsName}!\n
+        They don't need anymore.`
+    }
+  }).catch(console.error)
+}
+
+// ERROR: VALUE TOO LARGE
+replyObj.valueTooLarge = function (message, value) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: `${value} is too large of a value.`
+    }
+  }).catch(console.error)
+}
 
 // ERROR: CAN'T GIVE KARMA TO YOURSELF
 replyObj.karmaYourselfError = function (message, pointsName) {

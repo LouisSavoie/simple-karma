@@ -23,10 +23,6 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command)
 };
 
-// CREATE DEBUG LOG
-let debugLog = ''
-let debugFlag = false
-
 // COMMAND SYNTAX
 // <prefix> <command> <thingName> <value>
 // <prefix> <command> <thingName>
@@ -39,15 +35,17 @@ const prefix = process.env.PREFIX
 client.on('message', async message => {
   // FILTER OUT MESSAGES
   // if message is a DM, it won't have the correct object methods for some commands and could cause a crash
-  // if message doesn't start with the prefix and is form a bot, return
+  // if message doesn't start with the prefix or is form a bot, ignore and return to break out
   if (!message.guild || !message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
     return
   }
 
-  // DEBUG
-  // Reset debug vars to default values
-  debugLog = ''
-  debugFlag = false
+  // CREATE DATA OBJECT
+  let data = {}
+
+  // CREATE DEBUG LOG
+  let debugLog = ''
+  let debugFlag = false
 
   const debugMsgHandler = `
   .

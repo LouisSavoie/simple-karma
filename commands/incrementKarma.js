@@ -22,29 +22,26 @@ module.exports = {
 
       // if thing is found, increment thing's karma then send reply to the message's channel with thing's karma
       if (foundThing) {
-        foundThing.karma += 1
-        foundThing.save()
-        reply.found(message, foundThing, pointsName)
-        if (addUndoFlag) {
-          undo.execute(null, message, foundThing, 'decrement', debugLog, debugFlag, null)
-          debugFlag = false
-        }
-        if (debugFlag) reply.sendDebug(message, debugLog)
-
-        // ARCHIVED KARMA CAPPED CODE: SAVE FOR FUTURE RE-IMPLEMENTATION
-        // if it does, check if the thing's karma is over 9000
+        // check if the thing's karma is or is over 1,000,000,000,000,000(one quadrillion)
         // if it is, send reply to message's channel with error
-        // if (foundThing.karma >= 9001) {
-        //   reply.capped(message, thingName, pointsName)
+        if (foundThing.karma >= 1000000000000000) {
+          reply.capped(message, thingName, pointsName, foundThing.karma)
         // if it isn't, increment thing's karma then send reply to the message's channel with thing's karma
-        // } else {
-        // }
-
-        // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
+        } else {
+          foundThing.karma += 1
+          foundThing.save()
+          reply.found(message, foundThing, pointsName)
+          if (addUndoFlag) {
+            undo.execute(null, message, foundThing, 'decrement', debugLog, debugFlag, null)
+            debugFlag = false
+          }
+        }
+      // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
       } else {
         reply.notFoundCreated(message, thingName)
         newThing.execute(message, thingName, debugLog, debugFlag, { karma: 1 }, true)
       }
     }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }

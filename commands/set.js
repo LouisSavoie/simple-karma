@@ -12,29 +12,33 @@ module.exports = {
       value = parseInt(value, 10)
       // check if value is a number
       if (!isNaN(value)) {
-        // check if the database has the thing
-        const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
-        debugLog += '\n' + debugDBThing
+        if (value <= 1000000000000000) {
+          // check if the database has the thing
+          const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
+          debugLog += '\n' + debugDBThing
 
-        // debug
-        let debug = `  DEBUG: 2. set.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
-        console.log(debug)
-        debugLog += '\n' + debug
+          // debug
+          let debug = `  DEBUG: 2. set.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
+          console.log(debug)
+          debugLog += '\n' + debug
 
-        // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
-        if (!foundThing) {
-          reply.notFound(message, thingName)
-          // if it does, set the karma to the value and send success reply
-        } else {
-          const oldKarma = foundThing.karma
-          foundThing.karma = value
-          foundThing.save()
-          reply.found(message, foundThing, pointsName)
-          foundThing.value = oldKarma
-          if (addUndoFlag) {
-            undo.execute(null, message, foundThing, 'set', debugLog, debugFlag, null)
-            debugFlag = false
+          // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
+          if (!foundThing) {
+            reply.notFound(message, thingName)
+            // if it does, set the karma to the value and send success reply
+          } else {
+            const oldKarma = foundThing.karma
+            foundThing.karma = value
+            foundThing.save()
+            reply.found(message, foundThing, pointsName)
+            foundThing.value = oldKarma
+            if (addUndoFlag) {
+              undo.execute(null, message, foundThing, 'set', debugLog, debugFlag, null)
+              debugFlag = false
+            }
           }
+        } else {
+          reply.valueTooLarge(message, value)
         }
       } else {
         reply.notANumber(message, value)
