@@ -26,7 +26,7 @@ module.exports = {
           switch (undo.command) {
             case 'delete':
               // console.log(`  DEBUG: undo.js: reached delete case for ${undo.thing.name}`)
-              commands.get('adminDelete').execute(message, undo.thing.name, debugLog, debugFlag, true, false)
+              commands.get('adminDelete').execute(message, undo.thing.name, debugLog, debugFlag, pointsName, true, false)
               break
             case 'create':
               // console.log(`  DEBUG: undo.js: reached create case for ${undo.thing.name}`)

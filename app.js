@@ -180,15 +180,13 @@ client.on('message', async message => {
         client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === 'search') {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag, pointsName)
-      } else if (command === 'delete') {
-        client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag, pointsName)
         // admin commands
       } else if (command === 'set') {
         client.commands.get('set').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
       } else if (command === 'rename') {
         client.commands.get('rename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
-      } else if (command === 'admindelete') {
-        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false, true)
+      } else if (command === 'delete') {
+        client.commands.get('delete').execute(message, thingName, debugLog, debugFlag, pointsName, false, true)
       } else if (command === 'namepoints') {
         client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag)
       } else {
