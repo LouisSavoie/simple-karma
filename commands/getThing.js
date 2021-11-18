@@ -8,10 +8,12 @@ module.exports = {
   async execute (message, thingName, debugLog, debugFlag, pointsName) {
     // check if the database has the thing
     const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
+    debugLog += '\n' + debugDB
 
     // debug
     const debug = `  DEBUG: 2. getThing.js, thing: ${foundThing}`
     console.log(debug)
+    debugLog += '\n' + debug
 
     // if it does, reply with the thing
     if (foundThing) {
@@ -20,14 +22,6 @@ module.exports = {
     } else {
       reply.notFound(message, thingName)
     }
-
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send([
-        debugLog,
-        debugDB,
-        debug
-      ])
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }
