@@ -11,7 +11,7 @@ module.exports = {
       debugLog += '\n' + debugDBThing
 
       // debug
-      const debug = `  DEBUG: 2. namePoints.js, foundServer: ${foundServer}`
+      const debug = `  DEBUG: 2. namePoints.js, foundServer: ${foundServer ? foundServer.ID : foundServer}`
       console.log(debug)
       debugLog += '\n' + debug
 

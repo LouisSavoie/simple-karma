@@ -10,7 +10,7 @@ module.exports = {
     debugLog += '\n' + debugDB
 
     // debug
-    const debug = `DEBUG: 2. best.js, foundThings: ${foundThings}`
+    const debug = `DEBUG: 2. best.js, foundThings: ${foundThings.length}`
     console.log(debug)
     debugLog += '\n' + debug
 

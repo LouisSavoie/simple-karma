@@ -17,7 +17,7 @@ module.exports = {
         debugLog += '\n' + debugDBThing
 
         // debug
-        let debug = `  DEBUG: 2. set.js, foundThing: ${foundThing}`
+        let debug = `  DEBUG: 2. set.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
         console.log(debug)
         debugLog += '\n' + debug
 

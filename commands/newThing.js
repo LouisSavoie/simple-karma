@@ -11,7 +11,7 @@ module.exports = {
     const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
     // debug
-    const debug = `  DEBUG: 2. newThing.js, foundThing: ${foundThing}`
+    const debug = `  DEBUG: 2. newThing.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
     console.log(debug)
     debugLog += '\n' + debugDB + '\n' + debug
 

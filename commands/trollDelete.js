@@ -17,7 +17,7 @@ module.exports = {
       debugLog += '\n' + debugDBUser
 
       // debug
-      let debug2a = `  DEBUG: 2a. trollDelete.js, foundUser: ${foundUser}`
+      let debug2a = `  DEBUG: 2a. trollDelete.js, foundUser: ${foundUser ? foundUser.name : foundUser}`
       console.log(debug2a)
       debugLog += '\n' + debug2a
 
@@ -32,7 +32,7 @@ module.exports = {
           debugLog += '\n' + debugDBThing
 
           // debug
-          let debug2b = `  DEBUG: 2b. trollDelete.js, foundThing: ${foundThing}`
+          let debug2b = `  DEBUG: 2b. trollDelete.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
           console.log(debug2b)
           debugLog += '\n' + debug2b
 

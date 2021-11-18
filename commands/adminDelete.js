@@ -14,7 +14,7 @@ module.exports = {
       debugLog += '\n' + debugDBThing
 
       // debug
-      const debugThing = `  DEBUG: 2. adminDelete.js, foundThing: ${foundThing}`
+      const debugThing = `  DEBUG: 2. adminDelete.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
       console.log(debugThing)
       debugLog += '\n' + debugThing
 

@@ -13,7 +13,7 @@ module.exports = {
       debugLog += '\n' + debugDBThing
 
       // debug
-      const debug = `  DEBUG: 2. rename.js, foundThing: ${foundThing}`
+      const debug = `  DEBUG: 2. rename.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
       console.log(debug)
       debugLog += '\n' + debug
 
