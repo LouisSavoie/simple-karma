@@ -23,10 +23,6 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command)
 };
 
-// CREATE DEBUG LOG
-let debugLog = ''
-let debugFlag = false
-
 // COMMAND SYNTAX
 // <prefix> <command> <thingName> <value>
 // <prefix> <command> <thingName>
@@ -39,15 +35,14 @@ const prefix = process.env.PREFIX
 client.on('message', async message => {
   // FILTER OUT MESSAGES
   // if message is a DM, it won't have the correct object methods for some commands and could cause a crash
-  // if message doesn't start with the prefix and is form a bot, return
+  // if message doesn't start with the prefix or is form a bot, ignore and return to break out
   if (!message.guild || !message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
     return
   }
 
-  // DEBUG
-  // Reset debug vars to default values
-  debugLog = ''
-  debugFlag = false
+  // CREATE DEBUG LOG
+  let debugLog = ''
+  let debugFlag = false
 
   const debugMsgHandler = `
   .
@@ -62,8 +57,8 @@ client.on('message', async message => {
   if (!pointsName) pointsName = 'Points'
   const debugPoints = `  DEBUG: 2. app.js, pointsName: ${pointsName}`
   console.log(debugPoints)
-  debugLog += debugDB
-  debugLog += debugPoints
+  debugLog += '\n' + debugDB
+  debugLog += '\n' + debugPoints
 
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
@@ -152,7 +147,7 @@ client.on('message', async message => {
   DEBUG: debugFlag: ${debugFlag}`
 
   console.log(debugArgs)
-  debugLog += debugArgs
+  debugLog += '\n' + debugArgs
 
   // BANNED CHARACTERS REGEX
   const bannedCharsRegex = /[`\\]/g
@@ -180,15 +175,13 @@ client.on('message', async message => {
         client.commands.get('decrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === 'search') {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag, pointsName)
-      } else if (command === 'delete') {
-        client.commands.get('trollDelete').execute(message, thingName, debugLog, debugFlag, pointsName)
         // admin commands
       } else if (command === 'set') {
         client.commands.get('set').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
       } else if (command === 'rename') {
         client.commands.get('rename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
-      } else if (command === 'admindelete') {
-        client.commands.get('adminDelete').execute(message, thingName, debugLog, debugFlag, false, true)
+      } else if (command === 'delete') {
+        client.commands.get('delete').execute(message, thingName, debugLog, debugFlag, pointsName, false, true)
       } else if (command === 'namepoints') {
         client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag)
       } else {
@@ -203,11 +196,17 @@ client.on('message', async message => {
       } else if (command === 'worst') {
         client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName)
       } else {
-        // if getThingName is omitted and was a valid command, send error reply
-        if (commandNamesArray.includes(getThingName)) {
+        // if thingName is omitted and was a valid command, send error reply
+        if (commandNamesArray.includes(command)) {
           client.commands.get('noThing').execute(message, debugLog, debugFlag)
         } else {
-          client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag, pointsName)
+          // could be a getThing command with debug and no thing
+          if (thingName === undefined && getThingName === undefined) {
+            client.commands.get('noThing').execute(message, debugLog, debugFlag)
+          // else it was a getThing command
+          } else {
+            client.commands.get('getThing').execute(message, getThingName, debugLog, debugFlag, pointsName)
+          }
         }
       }
     }

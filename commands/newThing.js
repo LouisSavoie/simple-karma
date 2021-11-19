@@ -11,13 +11,14 @@ module.exports = {
     const [foundThing, debugDB] = await db.findOne(message.guild.id, thingName)
 
     // debug
-    const debug = `  DEBUG: 2. newThing.js, foundThing: ${foundThing}`
+    const debug = `  DEBUG: 2. newThing.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
     console.log(debug)
+    debugLog += '\n' + debugDB + '\n' + debug
 
     // if it does, send reply to the massage's channel explaining so
     if (foundThing) {
       reply.thingAlreadyExists(message, foundThing)
-      // if it doesn't, create the thing then send reply to the message's channel confirming it's creation
+    // if it doesn't, create the thing then send reply to the message's channel confirming it's creation
     } else {
       let karma = 0
       if (undoThing) {
@@ -27,7 +28,6 @@ module.exports = {
       if (newThing) {
         reply.thingCreated(message, newThing)
         if (addUndoFlag) {
-          debugLog += '\n' + debugDB + '\n' + debug
           undo.execute(null, message, newThing, 'delete', debugLog, debugFlag, null)
           debugFlag = false
         }
@@ -35,14 +35,6 @@ module.exports = {
         reply.thingNotCreated(message, thingName)
       }
     }
-
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send([
-        debugLog,
-        debugDB,
-        debug
-      ])
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }

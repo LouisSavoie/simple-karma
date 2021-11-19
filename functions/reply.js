@@ -197,15 +197,25 @@ replyObj.worstNotFound = function (message) {
 }
 
 // ERROR: KARMA CAPPED
-// replyObj.capped = function (message, thingName, pointsName) {
-//   message.reply({
-//     embed: {
-//       color: 'RED',
-//       description: `Thing, **${thingName}'s** ${pointsName} is already **OVER 9000**!\n
-//         **${thingName}** doesn't need anymore.`
-//     }
-//   }).catch(console.error)
-// }
+replyObj.capped = function (message, thingName, pointsName, points) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: `**${thingName}** already has **${points}** ${pointsName}!\n
+        They don't need anymore.`
+    }
+  }).catch(console.error)
+}
+
+// ERROR: VALUE TOO LARGE
+replyObj.valueTooLarge = function (message, value) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: `${value} is too large of a value.`
+    }
+  }).catch(console.error)
+}
 
 // ERROR: CAN'T GIVE KARMA TO YOURSELF
 replyObj.karmaYourselfError = function (message, pointsName) {
@@ -388,6 +398,22 @@ replyObj.serverNotCreated = function (message) {
       description: 'A database **ERROR** ocurred and your points name was not set :('
     }
   }).catch(console.error)
+}
+
+// SEND DEBUG
+replyObj.sendDebug = function (message, debugLog) {
+  if (debugLog.length > 2000) {
+    const splitText = debugLog.match(/(.+\n|\n){1,50}/g)
+    splitText.forEach((text, index) => {
+      if (index === 0) {
+        message.author.send([`${text}`]).catch(console.error)
+      } else {
+        message.author.send([`.\n${text}`]).catch(console.error)
+      }
+    })
+  } else {
+    message.author.send([`${debugLog}`]).catch(console.error)
+  }
 }
 
 //  Export reply object

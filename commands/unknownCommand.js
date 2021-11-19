@@ -6,9 +6,6 @@ module.exports = {
   description: 'Replies that command is unknown',
   execute (message, debugLog, debugFlag) {
     reply.unknownCommand(message)
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send(debugLog)
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }

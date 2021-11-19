@@ -6,12 +6,6 @@ module.exports = {
   description: 'Replies that command does not include a thing',
   execute (message, debugLog, debugFlag) {
     reply.noThing(message)
-
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send([
-        debugLog
-      ])
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }

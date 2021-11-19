@@ -1,3 +1,5 @@
+const reply = require('../functions/reply')
+
 module.exports = {
   name: 'help',
   description: 'DMs a list of all commands.',
@@ -48,12 +50,6 @@ module.exports = {
       '**My Portfolio Website**: <https://www.louissavoie.com>',
       '**Donations welcome!**: <https://www.paypal.com/donate?business=2MV2PUZGP3XLC&no_recurring=1&item_name=SimpleKarma&currency_code=USD>'
     ])
-
-    // if debugFlag, DM debug
-    if (debugFlag) {
-      message.author.send([
-        debugLog
-      ])
-    }
+    if (debugFlag) reply.sendDebug(message, debugLog)
   }
 }

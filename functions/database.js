@@ -1,8 +1,6 @@
-// Require Mongoose Model for Things
 const Thing = require('../models/thing')
 const Server = require('../models/server')
 
-// Create find object
 const databaseObj = {}
 
 // FIND ONE THING
@@ -14,7 +12,7 @@ databaseObj.findOne = async function (server, thingName) {
   const debugDB = `
   === findOne in Database ===
   DEBUG: 1a. database.js, thingName: ${thingName.toLowerCase()}
-  DEBUG: 1b. database.js, foundThing: ${foundThing}`
+  DEBUG: 1b. database.js, foundThing: ${foundThing ? foundThing.name : foundThing}`
   console.log(debugDB)
 
   // if it does, return the thing
@@ -55,7 +53,7 @@ databaseObj.findBest = async function (server) {
   // debug
   const debugDB = `
   === find best five in Database ===
-  DEBUG: 1. database.js, foundThings: ${foundThings}`
+  DEBUG: 1. database.js, foundThings: ${foundThings.length}`
   console.log(debugDB)
 
   // if success, return the things
@@ -75,7 +73,7 @@ databaseObj.findWorst = async function (server) {
   // debug
   const debugDB = `
   === find worst five in Database ===
-  DEBUG: 1. database.js, foundThings: ${foundThings}`
+  DEBUG: 1. database.js, foundThings: ${foundThings.length}`
   console.log(debugDB)
 
   // if success, return the things
@@ -94,7 +92,7 @@ databaseObj.findPointsName = async function (messageID) {
   // debug
   const debugDB = `
   === findPointsName in Database ===
-  DEBUG: 1. database.js, server: ${server}`
+  DEBUG: 1. database.js, server: ${server ? server.ID : server}, pointsName: ${server ? server.pointsName : server}`
   console.log(debugDB)
 
   // if it does, return the thing
@@ -140,7 +138,7 @@ databaseObj.findServer = async function (id) {
   // debug
   const debugDB = `
   === findServer in Database ===
-  DEBUG: 1. database.js, foundServer: ${foundServer}`
+  DEBUG: 1. database.js, foundServer: ${foundServer ? foundServer.ID : foundServer}`
   console.log(debugDB)
 
   // if it does, return the thing

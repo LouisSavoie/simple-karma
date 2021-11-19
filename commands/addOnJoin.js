@@ -14,7 +14,7 @@ module.exports = {
     const foundThing = res[0]
 
     // debug
-    console.log('  DEBUG: 2. addOnJoin.js, foundThing: ' + foundThing)
+    console.log('  DEBUG: 2. addOnJoin.js, foundThing: ' + foundThing ? foundThing.name : foundThing)
 
     // if it does, send reply to the massage's channel explaining so
     if (foundThing) {

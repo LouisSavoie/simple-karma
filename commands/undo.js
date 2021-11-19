@@ -16,9 +16,8 @@ module.exports = {
       undos[message.guild.id].push({ thing: thing, command: undoCommand })
       const debugUndo = `  DEBUG: 3. undo.js, undo created: ${JSON.stringify(undos[message.guild.id][undos[message.guild.id].length - 1])}`
       console.log(debugUndo)
-      debugLog += debugUndo
-      // if debugFlag, DM debug
-      if (debugFlag) message.author.send([debugLog])
+      debugLog += '\n' + debugUndo
+      if (debugFlag) reply.sendDebug(message, debugLog)
     } else {
       if (message.member.hasPermission('ADMINISTRATOR')) {
         if (undos[message.guild.id].length) {
@@ -27,7 +26,7 @@ module.exports = {
           switch (undo.command) {
             case 'delete':
               // console.log(`  DEBUG: undo.js: reached delete case for ${undo.thing.name}`)
-              commands.get('adminDelete').execute(message, undo.thing.name, debugLog, debugFlag, true, false)
+              commands.get('adminDelete').execute(message, undo.thing.name, debugLog, debugFlag, pointsName, true, false)
               break
             case 'create':
               // console.log(`  DEBUG: undo.js: reached create case for ${undo.thing.name}`)
