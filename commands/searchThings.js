@@ -37,7 +37,7 @@ module.exports = {
     const [foundThings, debugDB] = await db.find(message.guild.id, char)
 
     // debug
-    let debug = `  DEBUG: 2. searchThings.js, foundThing: ${foundThings.length}`
+    const debug = `  DEBUG: 2. searchThings.js, foundThing: ${foundThings.length}`
     console.log(debug)
     debugLog += '\n' + debugDB + '\n' + debug
 

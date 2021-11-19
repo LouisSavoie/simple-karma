@@ -40,9 +40,6 @@ client.on('message', async message => {
     return
   }
 
-  // CREATE DATA OBJECT
-  let data = {}
-
   // CREATE DEBUG LOG
   let debugLog = ''
   let debugFlag = false
