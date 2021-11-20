@@ -5,7 +5,7 @@ const undos = {}
 module.exports = {
   name: 'undo',
   description: 'Tracks changes to things and can revert them',
-  async execute (commands, message, thing, undoCommand, debugLog, debugFlag, pointsName) {
+  async execute (commands, message, thing, undoCommand, debugLog, debugFlag, pointsName, supportServer) {
     // ADD SERVER TO UNDO OBJECT
     if (!(message.guild.id in undos)) {
       undos[message.guild.id] = []
@@ -19,14 +19,14 @@ module.exports = {
       debugLog += '\n' + debugUndo
       if (debugFlag) reply.sendDebug(message, debugLog)
     } else {
-      if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id == '891440040037711902') {
+      if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id == supportServer) {
         if (undos[message.guild.id].length) {
           const undo = undos[message.guild.id].pop()
           // console.log(`  DEBUG: undo.js: popped undo object: ${undo.thing.name} ${undo.command}`)
           switch (undo.command) {
             case 'delete':
               // console.log(`  DEBUG: undo.js: reached delete case for ${undo.thing.name}`)
-              commands.get('adminDelete').execute(message, undo.thing.name, debugLog, debugFlag, pointsName, true, false)
+              commands.get('delete').execute(message, undo.thing.name, debugLog, debugFlag, pointsName, true, false, supportServer)
               break
             case 'create':
               // console.log(`  DEBUG: undo.js: reached create case for ${undo.thing.name}`)
@@ -42,15 +42,15 @@ module.exports = {
               break
             case 'rename':
               // console.log(`  DEBUG: undo.js: reached rename case for ${undo.thing.name}`)
-              commands.get('rename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
+              commands.get('rename').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName, supportServer)
               break
             case 'set':
               // console.log(`  DEBUG: undo.js: reached set case for ${undo.thing.name}`)
-              commands.get('set').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName)
+              commands.get('set').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName, supportServer)
               break
             case 'untroll':
-              commands.get('set').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName)
-              commands.get('set').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName)
+              commands.get('set').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName, supportServer)
+              commands.get('set').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName, supportServer)
               break
             default:
               console.log('  DEBUG: undo.js: reached default case')

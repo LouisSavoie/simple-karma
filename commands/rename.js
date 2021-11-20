@@ -5,9 +5,9 @@ const undo = require('./undo')
 module.exports = {
   name: 'rename',
   description: 'Renames a thing',
-  async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName) {
+  async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName, supportServer) {
     // if the message author has permission, proceed
-    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id == '891440040037711902' || undoFlag) {
+    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id == supportServer || undoFlag) {
       // check if the database has the thing
       const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
       debugLog += '\n' + debugDBThing

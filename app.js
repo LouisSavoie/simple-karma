@@ -164,7 +164,7 @@ client.on('message', async message => {
     client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
   } else {
     if (command === 'undo') {
-      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag, pointsName)
+      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag, pointsName, process.env.SUPPORTSERVER)
     } else if (thingName) {
       // if the args include a thingName, check these commands
       if (command === 'new') {
@@ -177,13 +177,13 @@ client.on('message', async message => {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag, pointsName)
         // admin commands
       } else if (command === 'set') {
-        client.commands.get('set').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
+        client.commands.get('set').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName, process.env.SUPPORTSERVER)
       } else if (command === 'rename') {
-        client.commands.get('rename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
+        client.commands.get('rename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName, process.env.SUPPORTSERVER)
       } else if (command === 'delete') {
-        client.commands.get('delete').execute(message, thingName, debugLog, debugFlag, pointsName, false, true)
+        client.commands.get('delete').execute(message, thingName, debugLog, debugFlag, pointsName, false, true, process.env.SUPPORTSERVER)
       } else if (command === 'namepoints') {
-        client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag, process.env.SUPPORTSERVER)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }
