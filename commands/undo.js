@@ -19,7 +19,7 @@ module.exports = {
       debugLog += '\n' + debugUndo
       if (debugFlag) reply.sendDebug(message, debugLog)
     } else {
-      if (message.member.hasPermission('ADMINISTRATOR')) {
+      if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id == '891440040037711902') {
         if (undos[message.guild.id].length) {
           const undo = undos[message.guild.id].pop()
           // console.log(`  DEBUG: undo.js: popped undo object: ${undo.thing.name} ${undo.command}`)

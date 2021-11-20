@@ -7,7 +7,7 @@ module.exports = {
   description: 'Renames a thing',
   async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName) {
     // if the message author has permission, proceed
-    if (message.member.hasPermission('ADMINISTRATOR') || undoFlag) {
+    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id == '891440040037711902' || undoFlag) {
       // check if the database has the thing
       const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
       debugLog += '\n' + debugDBThing
