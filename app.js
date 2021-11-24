@@ -85,6 +85,10 @@ client.on('message', async message => {
   if (command) {
     command = command.toLowerCase()
   }
+  if ((command = 'best' || command == 'worst') && thingName) {
+    value = thingName
+    thingName = undefined
+  }
   // remove Discord's zero width space char form User thingName
   if (thingName && thingName.startsWith('@') && thingName.charCodeAt(1) === 8203) {
     thingName = thingName.slice(0, 1) + thingName.slice(2)
@@ -192,7 +196,7 @@ client.on('message', async message => {
       if (command === 'help') {
         client.commands.get('help').execute(message, debugLog, debugFlag)
       } else if (command === 'best') {
-        client.commands.get('best').execute(message, debugLog, debugFlag, pointsName)
+        client.commands.get('best').execute(message, debugLog, debugFlag, pointsName, value)
       } else if (command === 'worst') {
         client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName)
       } else {

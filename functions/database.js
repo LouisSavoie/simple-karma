@@ -46,9 +46,9 @@ databaseObj.find = async function (server, char) {
 }
 
 // FIND BEST
-databaseObj.findBest = async function (server) {
+databaseObj.findBest = async function (server, value) {
   // Search the database for best five karma
-  const foundThings = await Thing.find({ server: server }).sort({ karma: -1 }).limit(5)
+  const foundThings = await Thing.find({ server: server }).sort({ karma: -1 }).limit(value)
 
   // debug
   const debugDB = `

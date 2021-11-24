@@ -37,9 +37,9 @@ replyObj.thingsFound = function (message, char, foundThings, pointsName) {
 }
 
 // SUCCESS: BEST FOUND
-replyObj.bestFound = function (message, foundThings, pointsName) {
+replyObj.bestFound = function (message, foundThings, pointsName, value) {
   let num = 1
-  let text = `__**BEST FIVE ${pointsName.toUpperCase()}**__:`
+  let text = `__**BEST ${value} by ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
     text += `\n${num}. **${thing.name}**: ${thing.karma}`
     num++
