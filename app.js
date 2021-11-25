@@ -85,7 +85,7 @@ client.on('message', async message => {
   if (command) {
     command = command.toLowerCase()
   }
-  if ((command = 'best' || command == 'worst') && thingName) {
+  if ((command == 'best' || command == 'worst') && thingName) {
     value = thingName
     thingName = undefined
   }
@@ -198,7 +198,7 @@ client.on('message', async message => {
       } else if (command === 'best') {
         client.commands.get('best').execute(message, debugLog, debugFlag, pointsName, value)
       } else if (command === 'worst') {
-        client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName)
+        client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName, value)
       } else {
         // if thingName is omitted and was a valid command, send error reply
         if (commandNamesArray.includes(command)) {

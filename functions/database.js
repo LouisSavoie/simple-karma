@@ -52,7 +52,7 @@ databaseObj.findBest = async function (server, value) {
 
   // debug
   const debugDB = `
-  === find best five in Database ===
+  === find best ${value} in Database ===
   DEBUG: 1. database.js, foundThings: ${foundThings.length}`
   console.log(debugDB)
 
@@ -68,11 +68,11 @@ databaseObj.findBest = async function (server, value) {
 // FIND WORST
 databaseObj.findWorst = async function (server) {
   // Search the database for worst five karma
-  const foundThings = await Thing.find({ server: server }).sort({ karma: 1 }).limit(5)
+  const foundThings = await Thing.find({ server: server }).sort({ karma: 1 }).limit(value)
 
   // debug
   const debugDB = `
-  === find worst five in Database ===
+  === find worst ${value} in Database ===
   DEBUG: 1. database.js, foundThings: ${foundThings.length}`
   console.log(debugDB)
 

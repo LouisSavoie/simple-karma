@@ -54,9 +54,9 @@ replyObj.bestFound = function (message, foundThings, pointsName, value) {
 }
 
 // SUCCESS: WORST FOUND
-replyObj.worstFound = function (message, foundThings, pointsName) {
+replyObj.worstFound = function (message, foundThings, pointsName, value) {
   let num = 1
-  let text = `__**WORST FIVE ${pointsName.toUpperCase()}**__:`
+  let text = `__**WORST ${value} by ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
     text += `\n${num}. **${thing.name}**: ${thing.karma}`
     num++
