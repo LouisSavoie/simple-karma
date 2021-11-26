@@ -25,6 +25,8 @@ module.exports = {
       } else {
         reply.bestNotFound(message)
       }
+    } else {
+      reply.notANumber(message)
     }
     if (debugFlag) reply.sendDebug(message, debugLog)
   }

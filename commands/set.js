@@ -41,7 +41,7 @@ module.exports = {
           reply.valueTooLarge(message, value)
         }
       } else {
-        reply.notANumber(message, value)
+        reply.notANumber(message)
       }
       // if message author does not have permission, send error reply
     } else {

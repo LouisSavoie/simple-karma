@@ -302,7 +302,7 @@ replyObj.noPermission = function (message) {
 }
 
 // ERROR: NOT A NUMBER
-replyObj.notANumber = function (message, value) {
+replyObj.notANumber = function (message) {
   message.reply({
     embed: {
       color: 'RED',
