@@ -217,6 +217,19 @@ replyObj.valueTooLarge = function (message, value) {
   }).catch(console.error)
 }
 
+// ERROR: VALUE ZERO
+replyObj.valueZero = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'So... you want 0 results?',
+      image:{
+        url: 'https://c.tenor.com/tEEjB0RnxyAAAAAC/puppet-awkward.gif'
+      }
+    }
+  }).catch(console.error)
+}
+
 // ERROR: CAN'T GIVE KARMA TO YOURSELF
 replyObj.karmaYourselfError = function (message, pointsName) {
   message.reply({
