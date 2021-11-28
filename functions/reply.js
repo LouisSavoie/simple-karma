@@ -223,7 +223,7 @@ replyObj.valueZero = function (message) {
     embed: {
       color: 'RED',
       description: 'So... you want 0 results?',
-      image:{
+      image: {
         url: 'https://c.tenor.com/tEEjB0RnxyAAAAAC/puppet-awkward.gif'
       }
     }

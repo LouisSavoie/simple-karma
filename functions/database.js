@@ -66,7 +66,7 @@ databaseObj.findBest = async function (server, value) {
 }
 
 // FIND WORST
-databaseObj.findWorst = async function (server) {
+databaseObj.findWorst = async function (server, value) {
   // Search the database for worst five karma
   const foundThings = await Thing.find({ server: server }).sort({ karma: 1 }).limit(value)
 

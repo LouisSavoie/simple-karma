@@ -85,7 +85,7 @@ client.on('message', async message => {
   if (command) {
     command = command.toLowerCase()
   }
-  if ((command == 'best' || command == 'worst') && thingName) {
+  if ((command === 'best' || command === 'worst') && thingName) {
     value = thingName
     thingName = undefined
   }

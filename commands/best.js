@@ -6,10 +6,10 @@ module.exports = {
   description: 'Displays the things with the highest points',
   async execute (message, debugLog, debugFlag, pointsName, value) {
     // check if a value was given
-    value == undefined ? value = 5 : value = parseInt(value, 10)
+    value === undefined ? value = 5 : value = parseInt(value, 10)
     // check if value is a number
     if (!isNaN(value)) {
-      if (value != 0) {
+      if (value !== 0) {
         // get the things from the database
         const [foundThings, debugDB] = await db.findBest(message.guild.id, value)
         debugLog += '\n' + debugDB
