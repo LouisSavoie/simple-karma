@@ -6,9 +6,9 @@ const undo = require('./undo')
 module.exports = {
   name: 'set',
   description: 'Sets karma for a thing to a given value',
-  async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName) {
+  async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName, supportServer) {
     // if the message author has permission, proceed
-    if (message.member.hasPermission('ADMINISTRATOR') || undoFlag) {
+    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag) {
       value = parseInt(value, 10)
       // check if value is a number
       if (!isNaN(value)) {
@@ -41,7 +41,7 @@ module.exports = {
           reply.valueTooLarge(message, value)
         }
       } else {
-        reply.notANumber(message, value)
+        reply.notANumber(message)
       }
       // if message author does not have permission, send error reply
     } else {

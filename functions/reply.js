@@ -37,9 +37,9 @@ replyObj.thingsFound = function (message, char, foundThings, pointsName) {
 }
 
 // SUCCESS: BEST FOUND
-replyObj.bestFound = function (message, foundThings, pointsName) {
+replyObj.bestFound = function (message, foundThings, pointsName, value) {
   let num = 1
-  let text = `__**BEST FIVE ${pointsName.toUpperCase()}**__:`
+  let text = `__**BEST ${value} by ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
     text += `\n${num}. **${thing.name}**: ${thing.karma}`
     num++
@@ -54,9 +54,9 @@ replyObj.bestFound = function (message, foundThings, pointsName) {
 }
 
 // SUCCESS: WORST FOUND
-replyObj.worstFound = function (message, foundThings, pointsName) {
+replyObj.worstFound = function (message, foundThings, pointsName, value) {
   let num = 1
-  let text = `__**WORST FIVE ${pointsName.toUpperCase()}**__:`
+  let text = `__**WORST ${value} by ${pointsName.toUpperCase()}**__:`
   foundThings.forEach(thing => {
     text += `\n${num}. **${thing.name}**: ${thing.karma}`
     num++
@@ -217,6 +217,19 @@ replyObj.valueTooLarge = function (message, value) {
   }).catch(console.error)
 }
 
+// ERROR: VALUE ZERO
+replyObj.valueZero = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'So... you want 0 results?',
+      image: {
+        url: 'https://c.tenor.com/tEEjB0RnxyAAAAAC/puppet-awkward.gif'
+      }
+    }
+  }).catch(console.error)
+}
+
 // ERROR: CAN'T GIVE KARMA TO YOURSELF
 replyObj.karmaYourselfError = function (message, pointsName) {
   message.reply({
@@ -302,7 +315,7 @@ replyObj.noPermission = function (message) {
 }
 
 // ERROR: NOT A NUMBER
-replyObj.notANumber = function (message, value) {
+replyObj.notANumber = function (message) {
   message.reply({
     embed: {
       color: 'RED',

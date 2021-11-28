@@ -85,6 +85,10 @@ client.on('message', async message => {
   if (command) {
     command = command.toLowerCase()
   }
+  if ((command === 'best' || command === 'worst') && thingName) {
+    value = thingName
+    thingName = undefined
+  }
   // remove Discord's zero width space char form User thingName
   if (thingName && thingName.startsWith('@') && thingName.charCodeAt(1) === 8203) {
     thingName = thingName.slice(0, 1) + thingName.slice(2)
@@ -164,7 +168,7 @@ client.on('message', async message => {
     client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
   } else {
     if (command === 'undo') {
-      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag, pointsName)
+      client.commands.get('undo').execute(client.commands, message, null, null, debugLog, debugFlag, pointsName, process.env.SUPPORTSERVER)
     } else if (thingName) {
       // if the args include a thingName, check these commands
       if (command === 'new') {
@@ -177,13 +181,13 @@ client.on('message', async message => {
         client.commands.get('searchThings').execute(message, thingName, debugLog, debugFlag, pointsName)
         // admin commands
       } else if (command === 'set') {
-        client.commands.get('set').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
+        client.commands.get('set').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName, process.env.SUPPORTSERVER)
       } else if (command === 'rename') {
-        client.commands.get('rename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName)
+        client.commands.get('rename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName, process.env.SUPPORTSERVER)
       } else if (command === 'delete') {
-        client.commands.get('delete').execute(message, thingName, debugLog, debugFlag, pointsName, false, true)
+        client.commands.get('delete').execute(message, thingName, debugLog, debugFlag, pointsName, false, true, process.env.SUPPORTSERVER)
       } else if (command === 'namepoints') {
-        client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag)
+        client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag, process.env.SUPPORTSERVER)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }
@@ -192,9 +196,9 @@ client.on('message', async message => {
       if (command === 'help') {
         client.commands.get('help').execute(message, debugLog, debugFlag)
       } else if (command === 'best') {
-        client.commands.get('best').execute(message, debugLog, debugFlag, pointsName)
+        client.commands.get('best').execute(message, debugLog, debugFlag, pointsName, value)
       } else if (command === 'worst') {
-        client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName)
+        client.commands.get('worst').execute(message, debugLog, debugFlag, pointsName, value)
       } else {
         // if thingName is omitted and was a valid command, send error reply
         if (commandNamesArray.includes(command)) {
