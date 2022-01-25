@@ -17,7 +17,7 @@ module.exports = {
       '*- Thing names in parentheses can have spaces.*',
       '*- User Thing names with spaces must have a space between the `@` and the rest of the name.*',
       '  *- Example: `(@ Joe User)` for `@Joe User`*',
-      '*- Add `debug` anywhere in any command to have debug info DM\'d to you.*',
+      '*- Add `debug` anywhere in any command to have debug info DM\'d to you.*'
     ])
 
     message.reply([
