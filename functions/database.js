@@ -1,5 +1,6 @@
 const Thing = require('../models/thing')
 const Server = require('../models/server')
+const Admin = require('../models/admin')
 
 const databaseObj = {}
 
