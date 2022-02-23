@@ -105,6 +105,27 @@ databaseObj.findPointsName = async function (messageID) {
   }
 }
 
+// FIND ADMIN
+databaseObj.findAdmin = async function (server, adminID) {
+  // check if the database has the admin
+  const foundThing = await Admin.findOne({ server: server, adminID: adminID }).exec()
+
+  // debug
+  const debugDB = `
+  === findAdmin in Database ===
+  DEBUG: 1a. database.js, adminID: ${adminID}
+  DEBUG: 1b. database.js, foundAdmin: ${foundAdmin ? foundAdmin.adminName : foundAdmin}`
+  console.log(debugDB)
+
+  // if it does, return the admin
+  if (foundAdmin) {
+    return [foundAdmin, debugDB]
+    // if it doesn't, return null
+  } else {
+    return [null, debugDB]
+  }
+}
+
 // CREATE THING
 databaseObj.create = async function (server, thingName, karma) {
   const newThing = await Thing.create({ server: server, name: thingName, nameLower: thingName.toLowerCase(), karma: karma })

@@ -23,7 +23,7 @@ module.exports = {
       } else {
         const newAdmin = await db.hire(message.guild.id, adminName, adminID)
         if (newAdmin) {
-          reply.AdminHired(message, newAdmin)
+          reply.adminHired(message, newAdmin)
           if (addUndoFlag) {
             undo.execute(null, message, newAdmin, 'fire', debugLog, debugFlag, null)
             debugFlag = false
