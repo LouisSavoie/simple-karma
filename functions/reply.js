@@ -429,5 +429,16 @@ replyObj.sendDebug = function (message, debugLog) {
   }
 }
 
+// ERROR: ADMIN ALREADY HIRED
+replyObj.adminAlreadyHired = function (message, foundAdmin) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'Admin, **' + foundAdmin.adminName + '**, already hired!'
+    }
+  }).catch(console.error)
+}
+
+
 //  Export reply object
 module.exports = replyObj
