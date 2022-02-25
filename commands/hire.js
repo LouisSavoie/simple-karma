@@ -21,7 +21,7 @@ module.exports = {
         reply.adminAlreadyHired(message, foundAdmin)
       // if it doesn't, hire the admin then send reply to the message's channel confirming it's employment
       } else {
-        const newAdmin = await db.hire(message.guild.id, adminName, adminID)
+        const newAdmin = await db.hire(message.guild.id, adminID, adminName)
         if (newAdmin) {
           reply.adminHired(message, newAdmin)
           if (addUndoFlag) {

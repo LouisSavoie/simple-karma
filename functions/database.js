@@ -185,5 +185,18 @@ databaseObj.createServer = async function (id, pointsName) {
   }
 }
 
+// CREATE THING
+databaseObj.hire = async function (serverID, adminID, adminName) {
+  const newThing = await Admin.create({ serverID: serverID, adminID: adminID, adminName: adminName })
+
+  // if it hire is successful, return the admin
+  if (newAdmin) {
+    return newAdmin
+    // if the hire fails, return null
+  } else {
+    return null
+  }
+}
+
 //  Export find object
 module.exports = databaseObj
