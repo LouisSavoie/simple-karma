@@ -185,9 +185,9 @@ databaseObj.createServer = async function (id, pointsName) {
   }
 }
 
-// CREATE THING
+// HIRE ADMIN
 databaseObj.hire = async function (serverID, adminID, adminName) {
-  const newThing = await Admin.create({ serverID: serverID, adminID: adminID, adminName: adminName })
+  const newAdmin = await Admin.create({ serverID: serverID, adminID: adminID, adminName: adminName })
 
   // if it hire is successful, return the admin
   if (newAdmin) {
