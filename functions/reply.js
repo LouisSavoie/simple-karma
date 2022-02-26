@@ -439,6 +439,16 @@ replyObj.adminAlreadyHired = function (message, foundAdmin) {
   }).catch(console.error)
 }
 
+// SUCCESS: ADMIN HIRED
+replyObj.adminHired = function (message, newAdmin) {
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: `New Admin, **${newAdmin.adminName}**, has been hired!`
+    }
+  }).catch(console.error)
+}
+
 
 //  Export reply object
 module.exports = replyObj
