@@ -449,6 +449,15 @@ replyObj.adminHired = function (message, newAdmin) {
   }).catch(console.error)
 }
 
+// ERROR: ADMIN COULD NOT BE HIRED
+replyObj.adminNotHired = function (message, adminName) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and admin, **' + adminName + '**, was not hired :('
+    }
+  }).catch(console.error)
+}
 
 //  Export reply object
 module.exports = replyObj
