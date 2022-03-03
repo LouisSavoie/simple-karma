@@ -16,7 +16,7 @@ module.exports = {
       console.log(debug)
       debugLog += '\n' + debugDB + '\n' + debug
 
-      // if it does't, send reply to message's channel with error and instructions for how to hire the admin
+      // if it does't, send reply to message's channel with error
       if (!foundAdmin) {
         reply.adminNotFound(message, adminName)
       // if it does, fire the admin then send reply to the message's channel confirming it's termination
