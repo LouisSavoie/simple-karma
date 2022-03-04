@@ -198,5 +198,18 @@ databaseObj.hire = async function (serverID, adminID, adminName) {
   }
 }
 
+// FIRE ADMIN
+databaseObj.fire = async function (serverID, adminID) {
+  const res = await Thing.deleteOne({ serverID: serverID, adminID: adminID })
+
+  // debug
+  const debugDB = `
+  === fire from Database ===
+  DEBUG: 1. database.js, res: ${res.ok}`
+  console.log(debugDB)
+
+  return [res.ok, debugDB]
+}
+
 //  Export find object
 module.exports = databaseObj
