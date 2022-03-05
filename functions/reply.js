@@ -469,5 +469,15 @@ replyObj.adminNotFound = function (message, adminName) {
   }).catch(console.error)
 }
 
+// SUCCESS: ADMIN FIRED
+replyObj.adminFired = function (message, adminName) {
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: `Admin, **${adminName}**, has been fired!`
+    }
+  }).catch(console.error)
+}
+
 //  Export reply object
 module.exports = replyObj
