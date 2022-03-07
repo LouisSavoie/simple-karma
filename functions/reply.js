@@ -479,5 +479,15 @@ replyObj.adminFired = function (message, adminName) {
   }).catch(console.error)
 }
 
+// ERROR: ADMIN NOT FIRED
+replyObj.adminNotFired = function (message, adminName) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and admin, **' + adminName + '**, was not fired :('
+    }
+  }).catch(console.error)
+}
+
 //  Export reply object
 module.exports = replyObj
