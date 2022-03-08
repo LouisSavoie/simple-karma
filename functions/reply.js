@@ -474,7 +474,8 @@ replyObj.adminFired = function (message, adminName) {
   message.reply({
     embed: {
       color: 'BLUE',
-      description: `Admin, **${adminName}**, has been fired!`
+      description: `Admin, **@${adminName}**, has been fired!\n
+      https://tenor.com/view/fired-office-michael-scott-the-gif-22021313`
     }
   }).catch(console.error)
 }
