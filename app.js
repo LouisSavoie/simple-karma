@@ -191,6 +191,8 @@ client.on('message', async message => {
         client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag, process.env.SUPPORTSERVER)
       } else if (command === 'hire') {
         client.commands.get('hire').execute(message, thingName, mentionID, debugLog, debugFlag, true, process.env.SUPPORTSERVER)
+      }else if (command === 'fire') {
+        client.commands.get('fire').execute(message, thingName, mentionID, debugLog, debugFlag, true, process.env.SUPPORTSERVER)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }
