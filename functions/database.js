@@ -106,9 +106,9 @@ databaseObj.findPointsName = async function (messageID) {
 }
 
 // FIND ADMIN
-databaseObj.findAdmin = async function (server, adminID) {
+databaseObj.findAdmin = async function (serverID, adminID) {
   // check if the database has the admin
-  const foundAdmin = await Admin.findOne({ server: server, adminID: adminID }).exec()
+  const foundAdmin = await Admin.findOne({ serverID: serverID, adminID: adminID }).exec()
 
   // debug
   const debugDB = `
