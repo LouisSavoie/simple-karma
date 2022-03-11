@@ -200,7 +200,7 @@ databaseObj.hire = async function (serverID, adminID, adminName) {
 
 // FIRE ADMIN
 databaseObj.fire = async function (serverID, adminID) {
-  const res = await Thing.deleteOne({ serverID: serverID, adminID: adminID })
+  const res = await Admin.deleteOne({ serverID: serverID, adminID: adminID })
 
   // debug
   const debugDB = `
