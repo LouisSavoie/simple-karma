@@ -52,6 +52,12 @@ module.exports = {
               commands.get('set').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName, supportServer)
               commands.get('set').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName, supportServer)
               break
+            case 'hire':
+              commands.get('hire').execute(message, undo.thing.adminName, undo.thing.adminID, debugLog, debugFlag, false, supportServer)
+              break
+            case 'fire':
+              commands.get('fire').execute(message, undo.thing.adminName, undo.thing.adminID, debugLog, debugFlag, false, supportServer)
+              break
             default:
               console.log('  DEBUG: undo.js: reached default case')
               reply.noUndoCase(message)
