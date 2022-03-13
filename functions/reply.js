@@ -441,6 +441,7 @@ replyObj.adminAlreadyHired = function (message, foundAdmin) {
 
 // SUCCESS: ADMIN HIRED
 replyObj.adminHired = function (message, newAdmin) {
+  message.channel.send(`<@${newAdmin.adminID}>`)
   message.reply({
     embed: {
       color: 'BLUE',
@@ -470,14 +471,14 @@ replyObj.adminNotFound = function (message, adminName) {
 }
 
 // SUCCESS: ADMIN FIRED
-replyObj.adminFired = function (message, adminName) {
+replyObj.adminFired = function (message, admin) {
   message.reply({
     embed: {
       color: 'BLUE',
-      description: `Admin, **@${adminName}**, has been fired!\n
-      https://tenor.com/view/fired-office-michael-scott-the-gif-22021313`
+      description: `Admin, **${admin.adminName}**, has been fired!`
     }
   }).catch(console.error)
+  message.channel.send(`<@${admin.adminID}>\nhttps://tenor.com/view/fired-office-michael-scott-the-gif-22021313`)
 }
 
 // ERROR: ADMIN NOT FIRED

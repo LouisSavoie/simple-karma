@@ -30,7 +30,7 @@ module.exports = {
         debugLog += '\n' + debugFire
 
         if (res === 1) {
-          reply.adminFired(message, foundAdmin.adminName)
+          reply.adminFired(message, foundAdmin)
           if (addUndoFlag) {
             undo.execute(null, message, foundAdmin, 'hire', debugLog, debugFlag, null)
             debugFlag = false
