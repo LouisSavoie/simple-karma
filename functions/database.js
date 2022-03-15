@@ -211,5 +211,26 @@ databaseObj.fire = async function (serverID, adminID) {
   return [res.ok, debugDB]
 }
 
+// IS ADMIN
+databaseObj.isAdmin = async function (serverID, adminID) {
+  // check if the database has the admin
+  const foundAdmin = await Admin.findOne({ serverID: serverID, adminID: adminID }).exec()
+
+  // debug
+  const debugDB = `
+  === isAdmin in Database ===
+  DEBUG: 1a. database.js, adminID: ${adminID}
+  DEBUG: 1b. database.js, foundAdmin: ${foundAdmin ? foundAdmin.adminName : foundAdmin}`
+  console.log(debugDB)
+
+  // if it does, return true
+  if (foundAdmin) {
+    return [true, debugDB]
+    // if it doesn't, return false
+  } else {
+    return [false, debugDB]
+  }
+}
+
 //  Export find object
 module.exports = databaseObj
