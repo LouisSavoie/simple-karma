@@ -383,6 +383,13 @@ replyObj.nextUndo = function (message, undo) {
         description: 'Next undo will **' + undo.command + ' ' + undo.thing.thingName + '** and **' + undo.command + ' ' + undo.thing.userName + '**.'
       }
     }).catch(console.error)
+  } else if (undo.command === 'fire' || undo.command === 'hire') {
+    message.reply({
+      embed: {
+        color: 'GREY',
+        description: 'Next undo will **' + undo.command + ' ' + undo.thing.adminName + '**.'
+      }
+    }).catch(console.error)
   } else {
     message.reply({
       embed: {

@@ -1,3 +1,4 @@
+const db = require('../functions/database')
 const reply = require('../functions/reply')
 // Undo Object, keys are guild.id, values are arrays of undo objects for the keys server
 const undos = {}
@@ -19,7 +20,9 @@ module.exports = {
       debugLog += '\n' + debugUndo
       if (debugFlag) reply.sendDebug(message, debugLog)
     } else {
-      if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer) {
+      const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
+      debugLog += '\n' + debugIsAdmin
+      if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || isAdmin) {
         if (undos[message.guild.id].length) {
           const undo = undos[message.guild.id].pop()
           // console.log(`  DEBUG: undo.js: popped undo object: ${undo.thing.name} ${undo.command}`)
