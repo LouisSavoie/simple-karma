@@ -7,7 +7,9 @@ module.exports = {
   description: 'Deletes a thing for admins, or trolls the regular user',
   async execute (message, thingName, debugLog, debugFlag, pointsName, undoFlag, addUndoFlag, supportServer) {
     // if the message author has permission, proceed
-    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag) {
+    const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
+    debugLog += '\n' + debugIsAdmin
+    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag || isAdmin) {
       // check if the database has the thing
       const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
       debugLog += '\n' + debugDBThing
