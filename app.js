@@ -36,9 +36,11 @@ client.on('message', async message => {
   // FILTER OUT MESSAGES
   // if message is a DM, it won't have the correct object methods for some commands and could cause a crash
   // if message doesn't start with the prefix or is form a bot, ignore and return to break out
-  if (!message.guild || !message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
+  if (!message.guild || !message.content.toLowerCase().startsWith(prefix) || (message.author.id === client.user.id)) {
     return
   }
+
+  console.log(message.author.id, client.user.id)
 
   // CREATE DEBUG LOG
   let debugLog = ''
