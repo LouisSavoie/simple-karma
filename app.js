@@ -77,7 +77,7 @@ client.on('message', async message => {
   let thingName = argsArray[1]
   let getThingName = argsArray[0]
   let value = argsArray[2]
-  let mentionID = message.mentions.users.firstKey()
+  const mentionID = message.mentions.users.firstKey()
 
   // args transformations
   if (getThingName === 'search )') {
@@ -193,7 +193,7 @@ client.on('message', async message => {
         client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag, process.env.SUPPORTSERVER)
       } else if (command === 'hire') {
         client.commands.get('hire').execute(message, thingName, mentionID, debugLog, debugFlag, true, process.env.SUPPORTSERVER)
-      }else if (command === 'fire') {
+      } else if (command === 'fire') {
         client.commands.get('fire').execute(message, thingName, mentionID, debugLog, debugFlag, true, process.env.SUPPORTSERVER)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
