@@ -8,7 +8,9 @@ module.exports = {
   description: 'Sets karma for a thing to a given value',
   async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName, supportServer) {
     // if the message author has permission, proceed
-    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag) {
+    const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
+    debugLog += '\n' + debugIsAdmin
+    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag || isAdmin) {
       value = parseInt(value, 10)
       // check if value is a number
       if (!isNaN(value)) {

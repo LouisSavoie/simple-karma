@@ -7,7 +7,9 @@ module.exports = {
   description: 'Renames a thing',
   async execute (message, thingName, value, debugLog, debugFlag, undoFlag, addUndoFlag, pointsName, supportServer) {
     // if the message author has permission, proceed
-    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag) {
+    const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
+    debugLog += '\n' + debugIsAdmin
+    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag || isAdmin) {
       // check if the database has the thing
       const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
       debugLog += '\n' + debugDBThing

@@ -1,3 +1,4 @@
+const db = require('../functions/database')
 const reply = require('../functions/reply')
 // Undo Object, keys are guild.id, values are arrays of undo objects for the keys server
 const undos = {}
@@ -19,7 +20,9 @@ module.exports = {
       debugLog += '\n' + debugUndo
       if (debugFlag) reply.sendDebug(message, debugLog)
     } else {
-      if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer) {
+      const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
+      debugLog += '\n' + debugIsAdmin
+      if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || isAdmin) {
         if (undos[message.guild.id].length) {
           const undo = undos[message.guild.id].pop()
           // console.log(`  DEBUG: undo.js: popped undo object: ${undo.thing.name} ${undo.command}`)
@@ -51,6 +54,12 @@ module.exports = {
             case 'untroll':
               commands.get('set').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName, supportServer)
               commands.get('set').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName, supportServer)
+              break
+            case 'hire':
+              commands.get('hire').execute(message, undo.thing.adminName, undo.thing.adminID, debugLog, debugFlag, false, supportServer)
+              break
+            case 'fire':
+              commands.get('fire').execute(message, undo.thing.adminName, undo.thing.adminID, debugLog, debugFlag, false, supportServer)
               break
             default:
               console.log('  DEBUG: undo.js: reached default case')

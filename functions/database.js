@@ -1,5 +1,6 @@
 const Thing = require('../models/thing')
 const Server = require('../models/server')
+const Admin = require('../models/admin')
 
 const databaseObj = {}
 
@@ -104,6 +105,27 @@ databaseObj.findPointsName = async function (messageID) {
   }
 }
 
+// FIND ADMIN
+databaseObj.findAdmin = async function (serverID, adminID) {
+  // check if the database has the admin
+  const foundAdmin = await Admin.findOne({ serverID: serverID, adminID: adminID }).exec()
+
+  // debug
+  const debugDB = `
+  === findAdmin in Database ===
+  DEBUG: 1a. database.js, adminID: ${adminID}
+  DEBUG: 1b. database.js, foundAdmin: ${foundAdmin ? foundAdmin.adminName : foundAdmin}`
+  console.log(debugDB)
+
+  // if it does, return the admin
+  if (foundAdmin) {
+    return [foundAdmin, debugDB]
+    // if it doesn't, return null
+  } else {
+    return [null, debugDB]
+  }
+}
+
 // CREATE THING
 databaseObj.create = async function (server, thingName, karma) {
   const newThing = await Thing.create({ server: server, name: thingName, nameLower: thingName.toLowerCase(), karma: karma })
@@ -160,6 +182,53 @@ databaseObj.createServer = async function (id, pointsName) {
     // if the creation fails, return null
   } else {
     return null
+  }
+}
+
+// HIRE ADMIN
+databaseObj.hire = async function (serverID, adminID, adminName) {
+  const newAdmin = await Admin.create({ serverID: serverID, adminID: adminID, adminName: adminName })
+
+  // if it hire is successful, return the admin
+  if (newAdmin) {
+    return newAdmin
+    // if the hire fails, return null
+  } else {
+    return null
+  }
+}
+
+// FIRE ADMIN
+databaseObj.fire = async function (serverID, adminID) {
+  const res = await Admin.deleteOne({ serverID: serverID, adminID: adminID })
+
+  // debug
+  const debugDB = `
+  === fire from Database ===
+  DEBUG: 1. database.js, res: ${res.ok}`
+  console.log(debugDB)
+
+  return [res.ok, debugDB]
+}
+
+// IS ADMIN
+databaseObj.isAdmin = async function (serverID, adminID) {
+  // check if the database has the admin
+  const foundAdmin = await Admin.findOne({ serverID: serverID, adminID: adminID }).exec()
+
+  // debug
+  const debugDB = `
+  === isAdmin in Database ===
+  DEBUG: 1a. database.js, adminID: ${adminID}
+  DEBUG: 1b. database.js, foundAdmin: ${foundAdmin ? foundAdmin.adminName : foundAdmin}`
+  console.log(debugDB)
+
+  // if it does, return true
+  if (foundAdmin) {
+    return [true, debugDB]
+    // if it doesn't, return false
+  } else {
+    return [false, debugDB]
   }
 }
 

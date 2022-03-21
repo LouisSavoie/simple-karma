@@ -383,6 +383,13 @@ replyObj.nextUndo = function (message, undo) {
         description: 'Next undo will **' + undo.command + ' ' + undo.thing.thingName + '** and **' + undo.command + ' ' + undo.thing.userName + '**.'
       }
     }).catch(console.error)
+  } else if (undo.command === 'fire' || undo.command === 'hire') {
+    message.reply({
+      embed: {
+        color: 'GREY',
+        description: 'Next undo will **' + undo.command + ' ' + undo.thing.adminName + '**.'
+      }
+    }).catch(console.error)
   } else {
     message.reply({
       embed: {
@@ -427,6 +434,68 @@ replyObj.sendDebug = function (message, debugLog) {
   } else {
     message.author.send([`${debugLog}`]).catch(console.error)
   }
+}
+
+// ERROR: ADMIN ALREADY HIRED
+replyObj.adminAlreadyHired = function (message, foundAdmin) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'Admin, **' + foundAdmin.adminName + '**, already hired!'
+    }
+  }).catch(console.error)
+}
+
+// SUCCESS: ADMIN HIRED
+replyObj.adminHired = function (message, newAdmin) {
+  message.channel.send(`<@${newAdmin.adminID}>`)
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: `New Admin, **${newAdmin.adminName}**, has been hired!`
+    }
+  }).catch(console.error)
+}
+
+// ERROR: ADMIN COULD NOT BE HIRED
+replyObj.adminNotHired = function (message, adminName) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and admin, **' + adminName + '**, was not hired :('
+    }
+  }).catch(console.error)
+}
+
+// ERROR: ADMIN NOT FOUND
+replyObj.adminNotFound = function (message, adminName) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: `**${adminName}** doesn't work here!`
+    }
+  }).catch(console.error)
+}
+
+// SUCCESS: ADMIN FIRED
+replyObj.adminFired = function (message, admin) {
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: `Admin, **${admin.adminName}**, has been fired!`
+    }
+  }).catch(console.error)
+  message.channel.send(`<@${admin.adminID}>\nhttps://tenor.com/view/fired-office-michael-scott-the-gif-22021313`)
+}
+
+// ERROR: ADMIN NOT FIRED
+replyObj.adminNotFired = function (message, adminName) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and admin, **' + adminName + '**, was not fired :('
+    }
+  }).catch(console.error)
 }
 
 //  Export reply object

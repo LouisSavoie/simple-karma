@@ -36,9 +36,11 @@ client.on('message', async message => {
   // FILTER OUT MESSAGES
   // if message is a DM, it won't have the correct object methods for some commands and could cause a crash
   // if message doesn't start with the prefix or is form a bot, ignore and return to break out
-  if (!message.guild || !message.content.toLowerCase().startsWith(prefix) || message.author.bot) {
+  if (!message.guild || !message.content.toLowerCase().startsWith(prefix) || (message.author.id === client.user.id)) {
     return
   }
+
+  console.log(message.author.id, client.user.id)
 
   // CREATE DEBUG LOG
   let debugLog = ''
@@ -75,6 +77,7 @@ client.on('message', async message => {
   let thingName = argsArray[1]
   let getThingName = argsArray[0]
   let value = argsArray[2]
+  const mentionID = message.mentions.users.firstKey()
 
   // args transformations
   if (getThingName === 'search )') {
@@ -188,6 +191,10 @@ client.on('message', async message => {
         client.commands.get('delete').execute(message, thingName, debugLog, debugFlag, pointsName, false, true, process.env.SUPPORTSERVER)
       } else if (command === 'namepoints') {
         client.commands.get('namePoints').execute(message, thingName, debugLog, debugFlag, process.env.SUPPORTSERVER)
+      } else if (command === 'hire') {
+        client.commands.get('hire').execute(message, thingName, mentionID, debugLog, debugFlag, true, process.env.SUPPORTSERVER)
+      } else if (command === 'fire') {
+        client.commands.get('fire').execute(message, thingName, mentionID, debugLog, debugFlag, true, process.env.SUPPORTSERVER)
       } else {
         client.commands.get('unknownCommand').execute(message, debugLog, debugFlag)
       }

@@ -5,7 +5,9 @@ module.exports = {
   name: 'namePoints',
   description: 'Sets the name of the points for a server object',
   async execute (message, pointsName, debugLog, debugFlag, supportServer) {
-    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer) {
+    const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
+    debugLog += '\n' + debugIsAdmin
+    if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || isAdmin) {
       // check if the database already has the server
       const [foundServer, debugDBThing] = await db.findServer(message.guild.id)
       debugLog += '\n' + debugDBThing
