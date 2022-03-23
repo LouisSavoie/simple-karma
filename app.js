@@ -65,7 +65,7 @@ client.on('message', async message => {
   // COMMAND ARGS PROCESSING
   // remove the prefix from the message, convert mentions to plain strings,
   // split the arguments into an array by spaces, allow things with spaces between parens
-  const argsArray = message.cleanContent.slice(prefix.length).split(/(?!\(.*)\s(?![^(]*?\))/g)
+  const argsArray = message.cleanContent.slice(prefix.length).split(/(?!\(.*)\s+(?![^(]*?\))/g)
 
   if (argsArray.includes('debug')) {
     argsArray.splice(argsArray.indexOf('debug'), 1)
