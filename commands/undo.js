@@ -52,9 +52,13 @@ module.exports = {
               commands.get('set').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName, supportServer)
               break
             case 'add':
-            // console.log(`  DEBUG: undo.js: reached add case for ${undo.thing.name}`)
-            commands.get('add').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName, supportServer)
-            break
+              // console.log(`  DEBUG: undo.js: reached add case for ${undo.thing.name}`)
+              commands.get('add').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName, supportServer)
+              break
+            case 'subtract':
+              // console.log(`  DEBUG: undo.js: reached subtract case for ${undo.thing.name}`)
+              commands.get('subtract').execute(message, undo.thing.name, undo.thing.value, debugLog, debugFlag, true, false, pointsName, supportServer)
+              break
             case 'untroll':
               commands.get('set').execute(message, undo.thing.thingName, undo.thing.thingKarma, debugLog, debugFlag, true, false, pointsName, supportServer)
               commands.get('set').execute(message, undo.thing.userName, undo.thing.userKarma, debugLog, debugFlag, true, false, pointsName, supportServer)

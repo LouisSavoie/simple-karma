@@ -26,6 +26,7 @@ module.exports = {
       '**`sk fire <@user>`**: Removes the mentioned user as an admin for SK',
       '**`sk set <thing> <value>`**: Sets a thing\'s points to the value',
       '**`sk add <thing> <value>`**: Adds the value to a thing\'s points',
+      '**`sk subtract <thing> <value>`**: Subtracts the value from a thing\'s points',
       '**`sk rename <thing> <value>`**: Renames a thing to the value',
       '**`sk delete <thing>`**: Deletes a thing',
       '**`sk undo`**: Undoes the last command that changed a thing',

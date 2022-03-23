@@ -187,6 +187,8 @@ client.on('message', async message => {
         client.commands.get('set').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName, process.env.SUPPORTSERVER)
       } else if (command === 'add') {
         client.commands.get('add').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName, process.env.SUPPORTSERVER)
+      } else if (command === 'subtract') {
+        client.commands.get('subtract').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName, process.env.SUPPORTSERVER)
       } else if (command === 'rename') {
         client.commands.get('rename').execute(message, thingName, value, debugLog, debugFlag, false, true, pointsName, process.env.SUPPORTSERVER)
       } else if (command === 'delete') {
