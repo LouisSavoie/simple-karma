@@ -14,7 +14,6 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 - **`sk <thing>`**: Shows a \<thing\>'s points.
 - **`sk + <thing>`**: Increments a \<thing\>'s points. If it doesn't exist, it is created.
 - **`sk - <thing>`**: Decrements a \<thing\>'s points. If it doesn't exist, it is created.
-- **`sk delete <thing>`**: Deletes a \<thing\>. Only bad people do this.
 
 **Admin Commands**
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
@@ -24,7 +23,7 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 - **`sk add <thing> <value>`**: Adds the \<value\> to a \<thing\>'s points.
 - **`sk subtract <thing> <value>`**: Subtracts the \<value\> from a \<thing\>'s points.
 - **`sk rename <thing> <value>`**: Renames a \<thing\> to the \<value\>.
-- **`sk admindelete <thing>`**: Deletes a \<thing\>.
+- **`sk delete <thing>`**: Deletes a \<thing\>.
 - **`sk undo`**: Undoes the last command that changed a thing.
 - **`sk namepoints <name>`**: Sets the name for points to \<name\>.
 
