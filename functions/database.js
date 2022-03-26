@@ -152,6 +152,19 @@ databaseObj.deleteOne = async function (server, thingName) {
   return [res.ok, debugDB]
 }
 
+// DELETE ALL
+databaseObj.deleteAll = async function (server) {
+  const res = await Thing.deleteMany({ server: server })
+
+  // debug
+  const debugDB = `
+  === deleteOne from Database ===
+  DEBUG: 1. database.js, res: ${res.deletedCount}`
+  console.log(debugDB)
+
+  return [res.deletedCount, debugDB]
+}
+
 // FIND SERVER
 databaseObj.findServer = async function (id) {
   // check if the database has the thing

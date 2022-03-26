@@ -19,7 +19,7 @@ module.exports = {
         console.log(debugDelete)
         debugLog += '\n' + debugDelete
 
-        if (res === 1) {
+        if (res > 0) {
           reply.allDeleted(message)
         } else {
           reply.allNotDeleted(message)
