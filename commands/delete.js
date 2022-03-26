@@ -20,7 +20,7 @@ module.exports = {
         debugLog += '\n' + debugDelete
 
         if (res > 0) {
-          reply.allDeleted(message)
+          reply.allDeleted(message, res)
         } else {
           reply.allNotDeleted(message)
         }
