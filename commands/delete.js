@@ -10,7 +10,7 @@ module.exports = {
     const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
     debugLog += '\n' + debugIsAdmin
     if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag || isAdmin) {
-      if (thingName === "*") {
+      if (thingName === '*') {
         const [res, debugDBDeleteAll] = await db.deleteAll(message.guild.id)
         debugLog += '\n' + debugDBDeleteAll
 
