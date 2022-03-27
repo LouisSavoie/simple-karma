@@ -10,36 +10,52 @@ module.exports = {
     const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
     debugLog += '\n' + debugIsAdmin
     if (message.member.hasPermission('ADMINISTRATOR') || message.guild.id === supportServer || undoFlag || isAdmin) {
-      // check if the database has the thing
-      const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
-      debugLog += '\n' + debugDBThing
-
-      // debug
-      const debugThing = `  DEBUG: 2. delete.js (admin), foundThing: ${foundThing ? foundThing.name : foundThing}`
-      console.log(debugThing)
-      debugLog += '\n' + debugThing
-
-      // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
-      if (!foundThing) {
-        reply.notFound(message, thingName)
-        // if it does, delete it and send success reply
-      } else {
-        const [res, debugDBDelete] = await db.deleteOne(message.guild.id, foundThing.name)
-        debugLog += '\n' + debugDBDelete
+      if (thingName === '*') {
+        const [res, debugDBDeleteAll] = await db.deleteAll(message.guild.id)
+        debugLog += '\n' + debugDBDeleteAll
 
         // debug
         const debugDelete = `  DEBUG: 2. delete.js (admin), res: ${res}`
         console.log(debugDelete)
         debugLog += '\n' + debugDelete
 
-        if (res === 1) {
-          reply.thingDeleted(message, foundThing.name)
-          if (addUndoFlag) {
-            undo.execute(null, message, foundThing, 'create', debugLog, debugFlag, null)
-            debugFlag = false
-          }
+        if (res > 0) {
+          reply.allDeleted(message, res)
         } else {
-          reply.thingNotDeleted(message, foundThing.name)
+          reply.allNotDeleted(message)
+        }
+      } else {
+        // check if the database has the thing
+        const [foundThing, debugDBThing] = await db.findOne(message.guild.id, thingName)
+        debugLog += '\n' + debugDBThing
+
+        // debug
+        const debugThing = `  DEBUG: 2. delete.js (admin), foundThing: ${foundThing ? foundThing.name : foundThing}`
+        console.log(debugThing)
+        debugLog += '\n' + debugThing
+
+        // if it doesn't, send reply to message's channel with error and instructions for how to create the thing
+        if (!foundThing) {
+          reply.notFound(message, thingName)
+          // if it does, delete it and send success reply
+        } else {
+          const [res, debugDBDelete] = await db.deleteOne(message.guild.id, foundThing.name)
+          debugLog += '\n' + debugDBDelete
+
+          // debug
+          const debugDelete = `  DEBUG: 2. delete.js (admin), res: ${res}`
+          console.log(debugDelete)
+          debugLog += '\n' + debugDelete
+
+          if (res === 1) {
+            reply.thingDeleted(message, foundThing.name)
+            if (addUndoFlag) {
+              undo.execute(null, message, foundThing, 'create', debugLog, debugFlag, null)
+              debugFlag = false
+            }
+          } else {
+            reply.thingNotDeleted(message, foundThing.name)
+          }
         }
       }
     // if message author does not have permission, send error reply, run trollDelete code

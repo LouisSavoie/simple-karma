@@ -334,12 +334,32 @@ replyObj.thingDeleted = function (message, thingName) {
   }).catch(console.error)
 }
 
+// SUCCESS: ALL DELETED
+replyObj.allDeleted = function (message, count) {
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: 'All **' + count + '** things have been deleted.'
+    }
+  }).catch(console.error)
+}
+
 // ERROR: THING COULD NOT BE DELETED
 replyObj.thingNotDeleted = function (message, thingName) {
   message.reply({
     embed: {
       color: 'RED',
       description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not deleted :('
+    }
+  }).catch(console.error)
+}
+
+// ERROR: ALL COULD NOT BE DELETED
+replyObj.allNotDeleted = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and no things was not deleted :('
     }
   }).catch(console.error)
 }
