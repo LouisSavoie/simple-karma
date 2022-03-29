@@ -175,7 +175,11 @@ client.on('message', async message => {
     } else if (thingName) {
       // if the args include a thingName, check these commands
       if (command === 'new') {
-        client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
+        if (thingsArray.length() != 0) { //TODO: detect if thingName is * or includes [] then make thingName an array of thing objects
+          client.commands.get('newMulti').execute(message, thingsArray, debugLog, debugFlag, true)
+        } else {
+          client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
+        }
       } else if (command === '+') {
         client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === '-') {
