@@ -21,7 +21,7 @@ module.exports = {
 
       // if any of them does, send reply to the massage's channel explaining so
       if (foundThings.length() == thingsArray.length()) {
-        reply.thingsAlreadyExists(message)
+        reply.thingsAlreadyExist(message)
       // if it doesn't, create the things then send reply to the message's channel confirming their creation
       } else {
         const newThingsRes = await db.createThings(message.guild.id, thingsArray)

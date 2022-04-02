@@ -80,6 +80,16 @@ replyObj.thingAlreadyExists = function (message, foundThing) {
   }).catch(console.error)
 }
 
+// ERROR: THING ALREADY EXISTS
+replyObj.thingsAlreadyExist = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'Some of those things already exist!'
+    }
+  }).catch(console.error)
+}
+
 // STATUS: THING ALREADY EXISTS ON JOIN
 replyObj.thingAlreadyExistsOnJoin = function (member, foundThing, pointsName) {
   member.guild.channels.cache.find(i => i.name === 'general').send({
@@ -101,7 +111,7 @@ replyObj.thingCreated = function (message, newThing) {
   }).catch(console.error)
 }
 
-// SUCCESS: THINGs CREATED
+// SUCCESS: THINGS CREATED
 replyObj.thingsCreated = function (message) {
   message.reply({
     embed: {
