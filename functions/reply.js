@@ -101,6 +101,16 @@ replyObj.thingCreated = function (message, newThing) {
   }).catch(console.error)
 }
 
+// SUCCESS: THINGs CREATED
+replyObj.thingsCreated = function (message) {
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: `New things has been created!`
+    }
+  }).catch(console.error)
+}
+
 // SUCCESS: THING CREATED ON JOIN
 replyObj.thingCreatedOnJoin = function (member, newThing) {
   member.guild.channels.cache.find(i => i.name === 'general').send({
