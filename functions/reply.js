@@ -144,6 +144,16 @@ replyObj.thingNotCreated = function (message, thingName) {
   }).catch(console.error)
 }
 
+// ERROR: THINGS COULD NOT BE CREATED
+replyObj.thingsNotCreated = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and the things were not created :('
+    }
+  }).catch(console.error)
+}
+
 // ERROR: THING COULD NOT BE CREATED ON JOIN
 replyObj.thingNotCreatedOnJoin = function (member, thingName) {
   member.guild.channels.cache.find(i => i.name === 'general').send({
