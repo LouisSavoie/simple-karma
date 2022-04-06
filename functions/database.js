@@ -46,6 +46,28 @@ databaseObj.find = async function (server, char) {
   }
 }
 
+// FIND MULTI
+databaseObj.findMulti = async function (server, thingsArray) {
+  // Search the database for things from server
+  const foundThings = await Thing.find({ server: server })
+
+  // debug
+  const debugDB = `
+  === find in Database ===
+  DEBUG: 1. database.js, foundThings: ${foundThings.length}`
+  console.log(debugDB)
+
+  // find things from thingsArray in foundThings
+  let foundThingsBool = false
+  foundThings.forEach(thing => {
+    if (thingsArray.includes(thing.name)) {
+      foundThingsBool = true
+    }
+  })
+
+  return [foundThingsBool, debugDB]
+}
+
 // FIND BEST
 databaseObj.findBest = async function (server, value) {
   // Search the database for best five karma

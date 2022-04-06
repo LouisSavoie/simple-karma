@@ -19,8 +19,8 @@ module.exports = {
       console.log(debug)
       debugLog += '\n' + debugDB + '\n' + debug
 
-      // if any of them does, send reply to the massage's channel explaining so
-      if (foundThings.length() == thingsArray.length()) {
+      // if it does, send reply to the massage's channel explaining so
+      if (foundThings == true) {
         reply.thingsAlreadyExist(message)
       // if it doesn't, create the things then send reply to the message's channel confirming their creation
       } else {
