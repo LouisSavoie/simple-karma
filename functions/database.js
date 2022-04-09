@@ -59,10 +59,12 @@ databaseObj.findMulti = async function (server, thingsArray) {
 
   // find things from thingsArray in foundThings
   let foundThingsBool = false
-  foundThings.forEach(thing => {
-    if (thingsArray.includes(thing.name)) {
-      foundThingsBool = true
-    }
+  foundThings.forEach(foundThing => {
+    thingsArray.forEach(newThing => {
+      if (foundThing.nameLower === newThing.nameLower) {
+        foundThingsBool = true
+      }
+    })
   })
 
   return [foundThingsBool, debugDB]

@@ -78,7 +78,7 @@ client.on('message', async message => {
   let getThingName = argsArray[0]
   let value = argsArray[2]
   const mentionID = message.mentions.users.firstKey()
-  let thingsArray = []
+  const thingsArray = []
 
   // args transformations
   if (getThingName === 'search )') {
@@ -96,7 +96,11 @@ client.on('message', async message => {
 
   // create thingsArray from thingName with [] for newMulti
   if (command === 'new' && thingName.includes('[') && thingName.includes(']')) {
-    thingsArray.push(...thingName.slice(1,-1).split(','))
+    const thingsNamesArray = []
+    thingsNamesArray.push(...thingName.slice(1, -1).split(','))
+    thingsNamesArray.forEach(thing => {
+      thingsArray.push({ server: message.guild.id, name: thing, nameLower: thing.toLowerCase(), karma: 0 })
+    })
   }
 
   // remove Discord's zero width space char form User thingName
@@ -182,8 +186,8 @@ client.on('message', async message => {
     } else if (thingName) {
       // if the args include a thingName, check these commands
       if (command === 'new') {
-        if (thingsArray.length != 0) { //TODO: detect if thingName is * or includes [] then make thingName an array of thing objects
-          client.commands.get('newMulti').execute(message, thingsArray, debugLog, debugFlag, true)
+        if (thingsArray.length !== 0) { // TODO: detect if thingName is * then make thingName an array of thing objects
+          client.commands.get('newMulti').execute(message, thingsArray, debugLog, debugFlag, false, true, process.env.SUPPORTSERVER)
         } else {
           client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
         }

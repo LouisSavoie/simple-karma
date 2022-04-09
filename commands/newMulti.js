@@ -6,7 +6,7 @@ const reply = require('../functions/reply')
 module.exports = {
   name: 'newMulti',
   description: 'Creates multiple new things',
-  async execute (message, thingsArray, debugLog, debugFlag, addUndoFlag) {
+  async execute (message, thingsArray, debugLog, debugFlag, undoFlag, addUndoFlag, supportServer) {
     // if the message author has permission, proceed
     const [isAdmin, debugIsAdmin] = await db.isAdmin(message.guild.id, message.member.id)
     debugLog += '\n' + debugIsAdmin
@@ -20,7 +20,7 @@ module.exports = {
       debugLog += '\n' + debugDB + '\n' + debug
 
       // if it does, send reply to the massage's channel explaining so
-      if (foundThings == true) {
+      if (foundThings) {
         reply.thingsAlreadyExist(message)
       // if it doesn't, create the things then send reply to the message's channel confirming their creation
       } else {

@@ -116,7 +116,7 @@ replyObj.thingsCreated = function (message) {
   message.reply({
     embed: {
       color: 'BLUE',
-      description: `New things has been created!`
+      description: 'New things has been created!'
     }
   }).catch(console.error)
 }
