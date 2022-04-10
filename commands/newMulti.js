@@ -24,7 +24,7 @@ module.exports = {
         reply.thingsAlreadyExist(message)
       // if it doesn't, create the things then send reply to the message's channel confirming their creation
       } else {
-        const newThingsRes = await db.createThings(message.guild.id, thingsArray)
+        const newThingsRes = await db.createThings(thingsArray)
         if (newThingsRes) {
           reply.thingsCreated(message)
           if (addUndoFlag) {

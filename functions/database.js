@@ -163,6 +163,19 @@ databaseObj.create = async function (server, thingName, karma) {
   }
 }
 
+// CREATE THINGS
+databaseObj.createThings = async function (thingsArray) {
+  const newThings = await Thing.create(thingsArray)
+
+  // if it creation is successful, return the things
+  if (newThings) {
+    return newThings
+    // if the creation fails, return null
+  } else {
+    return null
+  }
+}
+
 // DELETE THING
 databaseObj.deleteOne = async function (server, thingName) {
   const res = await Thing.deleteOne({ server: server, name: thingName })
