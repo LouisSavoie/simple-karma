@@ -80,6 +80,16 @@ replyObj.thingAlreadyExists = function (message, foundThing) {
   }).catch(console.error)
 }
 
+// ERROR: THING ALREADY EXISTS
+replyObj.thingsAlreadyExist = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'Some of those things already exist!'
+    }
+  }).catch(console.error)
+}
+
 // STATUS: THING ALREADY EXISTS ON JOIN
 replyObj.thingAlreadyExistsOnJoin = function (member, foundThing, pointsName) {
   member.guild.channels.cache.find(i => i.name === 'general').send({
@@ -97,6 +107,16 @@ replyObj.thingCreated = function (message, newThing) {
     embed: {
       color: 'BLUE',
       description: `New thing, **${newThing.name}**, has been created!`
+    }
+  }).catch(console.error)
+}
+
+// SUCCESS: THINGS CREATED
+replyObj.thingsCreated = function (message) {
+  message.reply({
+    embed: {
+      color: 'BLUE',
+      description: 'New things has been created!'
     }
   }).catch(console.error)
 }
@@ -120,6 +140,16 @@ replyObj.thingNotCreated = function (message, thingName) {
     embed: {
       color: 'RED',
       description: 'A database **ERROR** ocurred and thing, **' + thingName + '**, was not created :('
+    }
+  }).catch(console.error)
+}
+
+// ERROR: THINGS COULD NOT BE CREATED
+replyObj.thingsNotCreated = function (message) {
+  message.reply({
+    embed: {
+      color: 'RED',
+      description: 'A database **ERROR** ocurred and the things were not created :('
     }
   }).catch(console.error)
 }

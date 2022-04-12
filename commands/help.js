@@ -24,6 +24,7 @@ module.exports = {
       '__**ADMIN Commands:**__ (Requires Server Admin Permissions)',
       '**`sk hire <@user>`**: Sets the mentioned user as an admin for SK',
       '**`sk fire <@user>`**: Removes the mentioned user as an admin for SK',
+      '**`sk new [<array>,<of>,<things>]`**: Creates multiple things from a comma separated list inside square brackets. (Currently NOT undoable, does not accept names with spaces)',
       '**`sk set <thing> <value>`**: Sets a thing\'s points to the value',
       '**`sk add <thing> <value>`**: Adds the value to a thing\'s points',
       '**`sk subtract <thing> <value>`**: Subtracts the value from a thing\'s points',

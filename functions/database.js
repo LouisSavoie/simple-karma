@@ -46,6 +46,30 @@ databaseObj.find = async function (server, char) {
   }
 }
 
+// FIND MULTI
+databaseObj.findMulti = async function (server, thingsArray) {
+  // Search the database for things from server
+  const foundThings = await Thing.find({ server: server })
+
+  // debug
+  const debugDB = `
+  === find in Database ===
+  DEBUG: 1. database.js, foundThings: ${foundThings.length}`
+  console.log(debugDB)
+
+  // find things from thingsArray in foundThings
+  let foundThingsBool = false
+  foundThings.forEach(foundThing => {
+    thingsArray.forEach(newThing => {
+      if (foundThing.nameLower === newThing.nameLower) {
+        foundThingsBool = true
+      }
+    })
+  })
+
+  return [foundThingsBool, debugDB]
+}
+
 // FIND BEST
 databaseObj.findBest = async function (server, value) {
   // Search the database for best five karma
@@ -133,6 +157,19 @@ databaseObj.create = async function (server, thingName, karma) {
   // if it creation is successful, return the thing
   if (newThing) {
     return newThing
+    // if the creation fails, return null
+  } else {
+    return null
+  }
+}
+
+// CREATE THINGS
+databaseObj.createThings = async function (thingsArray) {
+  const newThings = await Thing.create(thingsArray)
+
+  // if it creation is successful, return the things
+  if (newThings) {
+    return newThings
     // if the creation fails, return null
   } else {
     return null

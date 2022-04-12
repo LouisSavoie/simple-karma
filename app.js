@@ -78,6 +78,7 @@ client.on('message', async message => {
   let getThingName = argsArray[0]
   let value = argsArray[2]
   const mentionID = message.mentions.users.firstKey()
+  const thingsArray = []
 
   // args transformations
   if (getThingName === 'search )') {
@@ -92,6 +93,16 @@ client.on('message', async message => {
     value = thingName
     thingName = undefined
   }
+
+  // create thingsArray from thingName with [] for newMulti
+  if (command === 'new' && thingName.includes('[') && thingName.includes(']')) {
+    const thingsNamesArray = []
+    thingsNamesArray.push(...thingName.slice(1, -1).split(','))
+    thingsNamesArray.forEach(thing => {
+      thingsArray.push({ server: message.guild.id, name: thing, nameLower: thing.toLowerCase(), karma: 0 })
+    })
+  }
+
   // remove Discord's zero width space char form User thingName
   if (thingName && thingName.startsWith('@') && thingName.charCodeAt(1) === 8203) {
     thingName = thingName.slice(0, 1) + thingName.slice(2)
@@ -175,7 +186,11 @@ client.on('message', async message => {
     } else if (thingName) {
       // if the args include a thingName, check these commands
       if (command === 'new') {
-        client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
+        if (thingsArray.length !== 0) { // TODO: detect if thingName is * then make thingName an array of thing objects
+          client.commands.get('newMulti').execute(message, thingsArray, debugLog, debugFlag, false, true, process.env.SUPPORTSERVER)
+        } else {
+          client.commands.get('newThing').execute(message, thingName, debugLog, debugFlag, null, true)
+        }
       } else if (command === '+') {
         client.commands.get('incrementKarma').execute(message, thingName, debugLog, debugFlag, true, pointsName)
       } else if (command === '-') {

@@ -19,6 +19,7 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 - Syntax: \<prefix\> \<command\> \<thing\>(optional)
 - **`sk hire <@user>`**: Sets the mentioned user as an admin for SK.
 - **`sk fire <@user>`**: Removes the mentioned user as an admin for SK.
+- **`sk new [<array>,<of>,<things>]`**: Creates multiple things from a comma separated list inside square brackets. (Currently NOT undoable, does not accept names with spaces)
 - **`sk set <thing> <value>`**: Sets a \<thing\>'s points to the \<value\>.
 - **`sk add <thing> <value>`**: Adds the \<value\> to a \<thing\>'s points.
 - **`sk subtract <thing> <value>`**: Subtracts the \<value\> from a \<thing\>'s points.
@@ -37,18 +38,18 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 ## Current Scope
 - Create things
 - Show things
-- Show top 5 things
-- Show bottom 5 things
+- Show top/bottom things
 - Search for things by partial name
-- Increment a thing's points
-- Decrement a thing's points
+- Increment/Decrement a thing's points
 - Set a thing's points
+- Add/subtract a value to/from a thing's points
 - Rename a thing
-- Delete a thing
+- Delete things
 - Undo commands
 - Customize points name
 - Auto-add user as thing on join
 - Admin only commands
+- Add server members as bot admins
 - Help documentation
 - Persistent cloud database
 - Debug info
@@ -57,18 +58,11 @@ SimpleKarma is a Discord bot used to award things points. You can call the point
 
 ## Future Scope
 
-### Admin Update:
-1. Add users as botAdmin so they can use admin commands without being a Discord admin
-2. Add <value> and subtract <value> admin commands
-3. Delete all things admin command
-4. Add all users admin command
-5. Multi-new admin command
-6. Toggle allowing negative points admin command
-7. Toggle allowing trolldelete admin command
-
-### Points Update:
-1. Points names can be prefix or suffix
-2. Singular and plural points names
+1. Add all users admin command
+2. Toggle allowing negative points admin command
+3. Toggle allowing trolldelete admin command
+4. Points names can be prefix or suffix
+5. Singular and plural points names
 
 ...and other non-feature codebase updates. Ya'know, dev stuff.
 
